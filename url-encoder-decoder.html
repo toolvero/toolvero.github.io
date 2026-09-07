@@ -42,16 +42,47 @@
 </div></main>
 <footer><div class="container">Toolvero · Free tools for SysAdmins & DevOps</div></footer>
 <script>
-function setMode(mode){encodeBtn.className=mode==='encode'?'':'secondary';decodeBtn.className=mode==='decode'?'':'secondary';}
+const inputEl = document.getElementById('input');
+const outputEl = document.getElementById('output');
+const statusEl = document.getElementById('status');
+const encodeBtnEl = document.getElementById('encodeBtn');
+const decodeBtnEl = document.getElementById('decodeBtn');
+
+function setMode(mode){
+  encodeBtnEl.className = mode === 'encode' ? '' : 'secondary';
+  decodeBtnEl.className = mode === 'decode' ? '' : 'secondary';
+}
+function setStatus(message, type='ok'){
+  statusEl.className = 'result' + (type ? ' ' + type : '');
+  statusEl.textContent = message;
+}
 function encodeURL(){
- try{output.value=encodeURIComponent(input.value);setMode('encode');status.className='result ok';status.textContent='Encoded successfully.'}
- catch(e){status.className='result error';status.textContent='Unable to encode input.'}
+  try {
+    outputEl.value = encodeURIComponent(inputEl.value);
+    setMode('encode');
+    setStatus('Encoded successfully.');
+  } catch(e) {
+    setStatus('Unable to encode input.', 'error');
+  }
 }
 function decodeURL(){
- try{output.value=decodeURIComponent(input.value);setMode('decode');status.className='result ok';status.textContent='Decoded successfully.'}
- catch(e){status.className='result error';status.textContent='Invalid percent-encoded input.'}
+  try {
+    outputEl.value = decodeURIComponent(inputEl.value);
+    setMode('decode');
+    setStatus('Decoded successfully.');
+  } catch(e) {
+    setStatus('Invalid percent-encoded input.', 'error');
+  }
 }
-function loadExample(){input.value='https://example.com/search?q=hello world&lang=en';encodeURL();}
-function clearAll(){input.value='';output.value='';setMode('encode');status.className='result';status.textContent='Ready.';}
+function loadExample(){
+  inputEl.value='https://example.com/search?q=hello world&lang=en';
+  encodeURL();
+}
+function clearAll(){
+  inputEl.value='';
+  outputEl.value='';
+  setMode('encode');
+  setStatus('Ready.', '');
+}
 </script>
 </body></html>

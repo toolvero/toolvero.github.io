@@ -36,4 +36,4 @@ V1.5.1 replaces unreliable remote HTTP/TLS checks with fully functional local an
 
 V1.5.2 fixes the SSL Certificate Expiry Checker demo by replacing the invalid sample with a real parseable X.509 certificate.
 
-V1.6.2 adds YAML/JSON Converter, Kubernetes Resource Converter, URL Encoder/Decoder and Common Ports Reference. Total: 22 tools.
+V1.6.3 adds YAML/JSON Converter, Kubernetes Resource Converter, URL Encoder/Decoder and Common Ports Reference. Total: 22 tools.

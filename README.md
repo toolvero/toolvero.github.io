@@ -1,22 +1,18 @@
 # Toolvero
 
-Free tools for SysAdmins & DevOps.
+Free browser-based tools for SysAdmins, DevOps engineers and developers.
 
-Herramientas incluidas:
+Live site: https://toolvero.github.io/
 
-- Subnet Calculator
-- Cron Generator personalizado
+## Tools
+- IPv4 Subnet Calculator
+- Cron Expression Generator
 - Linux Permissions Calculator
-- Base64 Encode / Decode
-- SHA-256 Generator
+- Base64 Encoder / Decoder
+- SHA-256 Hash Generator
 - JSON Formatter / Validator
 - Unix Timestamp Converter
 - UUID v4 Generator
 
-## GitHub Pages
-
-Este repositorio está preparado para publicarse como sitio de organización:
-
-toolvero.github.io
-
-Todos los archivos web deben permanecer en la raíz del repositorio.
+This release adds English-first SEO copy, canonical URLs, internal navigation,
+robots.txt, sitemap.xml and a favicon.

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DNS Lookup | Toolvero</title>
+<meta name="description" content="Free DNS lookup for A, AAAA, MX, TXT, CNAME and NS records using DNS-over-HTTPS.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://toolvero.github.io/dns-lookup.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script src="common.js"></script>
+
+</head>
+<body>
+<header class="site-header">
+  <div class="container nav">
+    <div class="brand-wrap"><a class="logo" href="index.html">T</a><a class="brand" href="index.html">Toolvero</a></div>
+    <div class="nav-links">
+      <a href="index.html#networking">Networking</a><a href="index.html#automation">Linux & Automation</a>
+      <a href="index.html#security">Security</a><a href="index.html#developer">Developer</a>
+      <button id="themeToggle" class="theme-btn" onclick="toggleTheme()">🌙 Dark</button>
+    </div>
+  </div>
+</header>
+<main class="container"><div class="tool-wrap">
+<div class="breadcrumb"><a href="index.html">← Back to tools</a></div>
+<div class="tool-card">
+<h1>DNS Lookup</h1>
+<p class="kicker">Query public DNS records using DNS-over-HTTPS. Unlike most Toolvero tools, this sends the domain name and DNS record type to Google's public DNS service.</p>
+<div class="cols-2"><label>Domain<input id="domain" value="example.com" placeholder="example.com"></label><label>Record type<select id="type"><option>A</option><option>AAAA</option><option>MX</option><option>TXT</option><option>CNAME</option><option>NS</option></select></label></div>
+<div class="actions"><button onclick="lookup()">Lookup DNS</button><button class="secondary" onclick="copyText(document.getElementById('out').innerText,'copyMsg')">Copy result</button></div>
+<div id="out" class="result">Enter a domain and run a lookup.</div><p id="copyMsg" class="small"></p>
+<div class="seo-copy"><h2>DNS-over-HTTPS lookup</h2><p>This tool queries DNS records through a public HTTPS resolver so it can work from a static GitHub Pages site. Do not enter confidential internal hostnames.</p></div>
+</div>
+</div></main>
+<footer><div class="container">Toolvero · Free tools for SysAdmins & DevOps</div></footer>
+<script>
+async function lookup(){
+ const d=domain.value.trim().replace(/^https?:\/\//,'').split('/')[0], t=type.value;
+ if(!/^[a-z0-9.-]+$/i.test(d)){out.textContent='Enter a valid public domain name.';return;}
+ out.textContent='Looking up '+t+' records…';
+ try{
+  const r=await fetch('https://dns.google/resolve?name='+encodeURIComponent(d)+'&type='+encodeURIComponent(t),{headers:{accept:'application/dns-json'}});
+  if(!r.ok)throw 0; const j=await r.json();
+  if(!j.Answer||!j.Answer.length){out.textContent='No '+t+' answers returned. DNS status: '+j.Status;return;}
+  out.innerHTML='<strong>'+d+' — '+t+'</strong><br>'+j.Answer.map(a=>'TTL '+a.TTL+' · '+esc(String(a.data))).join('<br>');
+ }catch(e){out.textContent='DNS lookup failed. Try again later.';}
+}
+function esc(s){return s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
+</script>
+</body></html>

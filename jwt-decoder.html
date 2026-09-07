@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JWT Decoder | Toolvero</title>
+<meta name="description" content="Free JWT decoder for inspecting token headers, payloads and expiration locally in your browser.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://toolvero.github.io/jwt-decoder.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script src="common.js"></script>
+
+</head>
+<body>
+<header class="site-header">
+  <div class="container nav">
+    <div class="brand-wrap"><a class="logo" href="index.html">T</a><a class="brand" href="index.html">Toolvero</a></div>
+    <div class="nav-links">
+      <a href="index.html#networking">Networking</a><a href="index.html#automation">Linux & Automation</a>
+      <a href="index.html#security">Security</a><a href="index.html#developer">Developer</a>
+      <button id="themeToggle" class="theme-btn" onclick="toggleTheme()">🌙 Dark</button>
+    </div>
+  </div>
+</header>
+<main class="container"><div class="tool-wrap">
+<div class="breadcrumb"><a href="index.html">← Back to tools</a></div>
+<div class="tool-card">
+<h1>JWT Decoder</h1>
+<p class="kicker">Decode JWT header and payload locally in your browser. This tool does not verify the token signature.</p>
+<label>JWT token<textarea id="jwt" placeholder="eyJhbGciOi..."></textarea></label>
+<div class="actions"><button onclick="decodeJWT()">Decode JWT</button><button class="secondary" onclick="loadJWT()">Load example</button><button class="ghost" onclick="clearJWT()">Clear</button></div>
+<div class="cols-2">
+  <div><h3>Header</h3><div id="headerOut" class="result">—</div></div>
+  <div><h3>Payload</h3><div id="payloadOut" class="result">—</div></div>
+</div>
+<div id="jwtInfo" class="result">Token information will appear here.</div>
+<div class="seo-copy"><h2>What is a JWT decoder?</h2><p>JWTs contain Base64URL-encoded header and payload sections. Decoding is not the same as signature verification, so never treat decoded claims as trusted without verifying the signature.</p></div>
+</div>
+</div></main>
+<footer><div class="container">Toolvero · Free tools for SysAdmins & DevOps</div></footer>
+<script>
+function b64url(s){s=s.replace(/-/g,'+').replace(/_/g,'/');while(s.length%4)s+='=';return decodeURIComponent(Array.prototype.map.call(atob(s),c=>'%'+('00'+c.charCodeAt(0).toString(16)).slice(-2)).join(''));}
+function decodeJWT(){
+ try{
+  const parts=document.getElementById('jwt').value.trim().split('.');
+  if(parts.length<2) throw 0;
+  const h=JSON.parse(b64url(parts[0])), p=JSON.parse(b64url(parts[1]));
+  document.getElementById('headerOut').innerHTML='<pre>'+esc(JSON.stringify(h,null,2))+'</pre>';
+  document.getElementById('payloadOut').innerHTML='<pre>'+esc(JSON.stringify(p,null,2))+'</pre>';
+  let info='Decoded locally. Signature NOT verified.';
+  if(p.exp){const d=new Date(p.exp*1000);info+=' Expiration: '+d.toLocaleString()+(Date.now()>p.exp*1000?' (expired)':'');}
+  document.getElementById('jwtInfo').textContent=info;
+ }catch(e){document.getElementById('jwtInfo').textContent='Invalid JWT.';}
+}
+function esc(s){return s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
+function loadJWT(){document.getElementById('jwt').value='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0b29sdmVyby1kZW1vIiwibmFtZSI6IlRvb2x2ZXJvIFVzZXIiLCJpYXQiOjE3ODg3NjgwMDB9.demo-signature';decodeJWT();}
+function clearJWT(){document.getElementById('jwt').value='';document.getElementById('headerOut').textContent='—';document.getElementById('payloadOut').textContent='—';document.getElementById('jwtInfo').textContent='Token information will appear here.';}
+</script>
+</body></html>

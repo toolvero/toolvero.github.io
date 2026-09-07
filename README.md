@@ -24,3 +24,6 @@ Certificate Decoder and CSR Decoder include safe built-in demo data via a Load e
 
 
 V1.3 adds a professional homepage, instant tool search, popular tools, dark/light theme, upgraded navigation and copy actions.
+
+
+V1.4 adds DNS Lookup, IP/CIDR Converter, JWT Decoder, Password Generator, and unique search-result counting.

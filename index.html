@@ -50,7 +50,7 @@
   <div class="search-box">
     <span class="search-icon">⌕</span>
     <input id="toolSearch" type="search" placeholder="Search tools — e.g. cron, SSL, JSON, subnet..." oninput="filterTools()">
-    <span id="searchCount" class="search-count">10 tools</span>
+    <span id="searchCount" class="search-count">14 tools</span>
   </div>
 </div>
 
@@ -69,6 +69,8 @@
 
   <div class="section-title-row" id="networking"><h2>Networking</h2><span>IP & network utilities</span></div>
   <div class="grid">
+    <a class="card tool-item" data-search="dns lookup checker a aaaa mx txt cname ns networking" href="dns-lookup.html"><div class="icon">🔎</div><h3>DNS Lookup</h3><p>Query A, AAAA, MX, TXT, CNAME and NS records.</p><span class="tag">Networking</span></a>
+    <a class="card tool-item" data-search="ip cidr converter subnet mask wildcard binary ipv4 networking" href="ip-cidr-converter.html"><div class="icon">🔢</div><h3>IP / CIDR Converter</h3><p>Convert CIDR, subnet masks, wildcard masks and binary IPv4.</p><span class="tag">Networking</span></a>
     <a class="card tool-item" data-search="subnet ipv4 cidr network broadcast mask hosts networking" href="subnet.html"><div class="icon">🌐</div><h3>Subnet Calculator</h3><p>Calculate network, subnet mask, broadcast, usable range and host count.</p><span class="tag">Networking</span></a>
   </div>
 
@@ -80,6 +82,8 @@
 
   <div class="section-title-row" id="security"><h2>Security & Encoding</h2><span>Certificates, hashes & encoding</span></div>
   <div class="grid">
+    <a class="card tool-item" data-search="jwt decoder json web token header payload security developer" href="jwt-decoder.html"><div class="icon">🎟️</div><h3>JWT Decoder</h3><p>Decode JWT headers, payloads and expiration locally.</p><span class="tag">Security</span></a>
+    <a class="card tool-item" data-search="password generator random secure security crypto" href="password-generator.html"><div class="icon">🔑</div><h3>Password Generator</h3><p>Generate secure customizable passwords locally.</p><span class="tag">Security</span></a>
     <a class="card tool-item" data-search="ssl tls x509 certificate decoder pem subject issuer security" href="certificate-decoder.html"><div class="icon">📜</div><h3>Certificate Decoder</h3><p>Inspect X.509 subject, issuer, validity dates and extensions.</p><span class="tag">Security</span></a>
     <a class="card tool-item" data-search="csr pkcs10 certificate signing request decoder security san" href="csr-decoder.html"><div class="icon">🔏</div><h3>CSR Decoder</h3><p>Inspect PKCS#10 certificate signing requests before issuance.</p><span class="tag">Security</span></a>
     <a class="card tool-item" data-search="base64 encode decode text encoding" href="base64.html"><div class="icon">🔤</div><h3>Base64</h3><p>Encode and decode Base64 text directly in your browser.</p><span class="tag">Encoding</span></a>
@@ -107,22 +111,20 @@
 function filterTools(){
   const q=(document.getElementById('toolSearch').value||'').trim().toLowerCase();
   const items=[...document.querySelectorAll('.tool-item')];
-  let visible=0;
+  const visibleHrefs=new Set();
   items.forEach(item=>{
     const hay=(item.dataset.search+' '+item.innerText).toLowerCase();
     const show=!q || hay.includes(q);
     item.classList.toggle('hidden-card',!show);
-    if(show) visible++;
+    if(show) visibleHrefs.add(item.getAttribute('href'));
   });
-  document.getElementById('searchCount').textContent = q ? `${visible} matches` : '10 tools';
-
+  document.getElementById('searchCount').textContent = q ? `${visibleHrefs.size} matches` : '14 tools';
   const groups=[...document.querySelectorAll('main .grid')];
   groups.forEach(grid=>{
     const cards=[...grid.querySelectorAll('.tool-item')];
     grid.style.display = cards.some(c=>!c.classList.contains('hidden-card')) ? 'grid' : 'none';
   });
-
-  document.getElementById('emptyState').style.display = visible ? 'none' : 'block';
+  document.getElementById('emptyState').style.display = visibleHrefs.size ? 'none' : 'block';
 }
 </script>
 </body>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IP / CIDR Converter | Toolvero</title>
+<meta name="description" content="Convert IPv4 addresses, CIDR prefixes, subnet masks, wildcard masks and binary notation.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://toolvero.github.io/ip-cidr-converter.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script src="common.js"></script>
+
+</head>
+<body>
+<header class="site-header">
+  <div class="container nav">
+    <div class="brand-wrap"><a class="logo" href="index.html">T</a><a class="brand" href="index.html">Toolvero</a></div>
+    <div class="nav-links">
+      <a href="index.html#networking">Networking</a><a href="index.html#automation">Linux & Automation</a>
+      <a href="index.html#security">Security</a><a href="index.html#developer">Developer</a>
+      <button id="themeToggle" class="theme-btn" onclick="toggleTheme()">🌙 Dark</button>
+    </div>
+  </div>
+</header>
+<main class="container"><div class="tool-wrap">
+<div class="breadcrumb"><a href="index.html">← Back to tools</a></div>
+<div class="tool-card">
+<h1>IP / CIDR Converter</h1>
+<p class="kicker">Convert IPv4 addresses, subnet masks, wildcard masks, binary notation and CIDR prefixes.</p>
+<div class="cols-2"><label>IPv4 address<input id="ip" value="192.168.1.10"></label><label>CIDR prefix<input id="cidr" type="number" min="0" max="32" value="24"></label></div>
+<div class="actions"><button onclick="convert()">Convert</button><button class="secondary" onclick="copyText(document.getElementById('out').innerText,'copyMsg')">Copy result</button></div>
+<div id="out" class="result"></div><p id="copyMsg" class="small"></p>
+<div class="seo-copy"><h2>IPv4 CIDR conversion</h2><p>Quickly translate CIDR prefixes into subnet and wildcard masks and inspect the binary representation of an IPv4 address.</p></div>
+</div>
+</div></main>
+<footer><div class="container">Toolvero · Free tools for SysAdmins & DevOps</div></footer>
+<script>
+function convert(){
+ const a=ip.value.trim().split('.').map(Number), c=Number(cidr.value);
+ if(a.length!==4||a.some(x=>!Number.isInteger(x)||x<0||x>255)||c<0||c>32){out.textContent='Enter a valid IPv4 address and CIDR prefix (0–32).';return;}
+ const maskNum=c===0?0:(0xffffffff << (32-c))>>>0;
+ const oct=n=>[(n>>>24)&255,(n>>>16)&255,(n>>>8)&255,n&255].join('.');
+ const wild=(~maskNum)>>>0;
+ const bin=a.map(x=>x.toString(2).padStart(8,'0')).join('.');
+ out.innerHTML='<strong>IP:</strong> '+a.join('.')+'<br><strong>CIDR:</strong> /'+c+'<br><strong>Subnet mask:</strong> '+oct(maskNum)+'<br><strong>Wildcard mask:</strong> '+oct(wild)+'<br><strong>Binary IP:</strong> '+bin;
+}
+convert();
+</script>
+</body></html>

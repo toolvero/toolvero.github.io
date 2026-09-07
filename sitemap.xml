@@ -28,6 +28,12 @@
     <loc>https://toolvero.github.io/dns-lookup.html</loc>
   </url>
   <url>
+    <loc>https://toolvero.github.io/dns-propagation-checker.html</loc>
+  </url>
+  <url>
+    <loc>https://toolvero.github.io/docker-compose-validator.html</loc>
+  </url>
+  <url>
     <loc>https://toolvero.github.io/docker-run-to-compose.html</loc>
   </url>
   <url>
@@ -35,6 +41,15 @@
   </url>
   <url>
     <loc>https://toolvero.github.io/guide-cidr-explained.html</loc>
+  </url>
+  <url>
+    <loc>https://toolvero.github.io/guide-dns-records.html</loc>
+  </url>
+  <url>
+    <loc>https://toolvero.github.io/guide-http-security-headers.html</loc>
+  </url>
+  <url>
+    <loc>https://toolvero.github.io/guide-kubernetes-resources.html</loc>
   </url>
   <url>
     <loc>https://toolvero.github.io/guide-linux-chmod.html</loc>
@@ -52,13 +67,22 @@
     <loc>https://toolvero.github.io/http-headers-checker.html</loc>
   </url>
   <url>
+    <loc>https://toolvero.github.io/http-status-codes.html</loc>
+  </url>
+  <url>
     <loc>https://toolvero.github.io/ip-cidr-converter.html</loc>
   </url>
   <url>
     <loc>https://toolvero.github.io/ip-in-cidr.html</loc>
   </url>
   <url>
+    <loc>https://toolvero.github.io/ipv4-range-calculator.html</loc>
+  </url>
+  <url>
     <loc>https://toolvero.github.io/ipv6-compressor.html</loc>
+  </url>
+  <url>
+    <loc>https://toolvero.github.io/json-csv-converter.html</loc>
   </url>
   <url>
     <loc>https://toolvero.github.io/json.html</loc>
@@ -68,6 +92,9 @@
   </url>
   <url>
     <loc>https://toolvero.github.io/kubernetes-resource-converter.html</loc>
+  </url>
+  <url>
+    <loc>https://toolvero.github.io/mac-address-formatter.html</loc>
   </url>
   <url>
     <loc>https://toolvero.github.io/password-generator.html</loc>

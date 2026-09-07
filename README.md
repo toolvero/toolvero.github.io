@@ -1,31 +1,37 @@
-# Toolvero v2.0
+# Toolvero v2.1 — Expansion Release
 
-Guides & Content release built on v1.9.
+## New tools (6)
+- DNS Propagation Checker (multi-resolver comparison; no false global-propagation claim)
+- MAC Address Formatter & Validator
+- IPv4 Range Calculator
+- HTTP Status Codes Reference
+- JSON ↔ CSV Converter
+- Docker Compose Validator (lightweight pre-check; explicitly not full spec validation)
 
-## New
-- Technical Guides landing page (`guides.html`)
-- CIDR Explained guide
-- Linux chmod Explained guide
-- SSL/TLS Certificates Explained guide
-- Compact Technical Guides section on the homepage
-- Guides link in global footer
-- Article/CollectionPage structured data on guide pages
-- Canonical URLs, descriptions and Open Graph metadata on guide pages
-- Sitemap updated to 34 public URLs
+## New guides (3)
+- DNS Records Explained
+- HTTP Security Headers Explained
+- Kubernetes CPU & Memory Requests and Limits Explained
 
-## Cleanup
-- Removes legacy generic `More Toolvero tools` blocks where the old markup can be identified.
-- Keeps the contextual `Related Toolvero tools` links introduced in v1.9.
-- Existing 26 tools, GA4, About, Privacy and Contact remain intact.
+Toolvero now contains 32 tools and 6 technical guides.
+The sitemap contains 43 public URLs.
+
+## Important design decisions
+- Browser-only/static GitHub Pages architecture retained.
+- DNS propagation uses public DNS-over-HTTPS and clearly states its limits.
+- Compose Validator does not pretend to replace `docker compose config`.
+- Existing GA4, SEO metadata, About, Privacy, Contact and contextual links remain.
 
 Suggested commit:
-`Release Toolvero v2.0 - Technical guides and content discovery`
+`Release Toolvero v2.1 - New tools and technical guides`
 
-## Post-deploy tests
-1. Open `/guides.html`.
-2. Open each of the 3 guides.
-3. Test every tool button inside the guides.
-4. Open `/subnet.html` and verify its contextual related links remain.
-5. Confirm the homepage Technical Guides section looks compact.
-6. Open `/sitemap.xml` and confirm guide URLs are present.
-7. Check GA4 Realtime while navigating guides and tools.
+## Spot tests
+1. Homepage: verify 32 tools and Technical Guides.
+2. DNS Propagation Checker: example.com / A.
+3. MAC formatter: 00:1A:2B:3C:4D:5E → Cisco should be 001A.2B3C.4D5E.
+4. IPv4 range: 192.168.1.10 to 192.168.1.50 → 41 addresses; covering CIDR 192.168.1.0/26.
+5. HTTP status: search 404.
+6. JSON ↔ CSV: use the included sample.
+7. Compose Validator: use the included sample; then remove `services:` and re-test.
+8. Open guides.html and one new guide.
+9. Open sitemap.xml.

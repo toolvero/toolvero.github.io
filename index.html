@@ -51,7 +51,7 @@
   <div class="search-box">
     <span class="search-icon">⌕</span>
     <input id="toolSearch" type="search" placeholder="Search tools — e.g. cron, SSL, JSON, subnet..." oninput="filterTools()">
-    <span id="searchCount" class="search-count">26 tools</span>
+    <span id="searchCount" class="search-count">32 tools</span>
   </div>
 </div>
 
@@ -110,16 +110,20 @@
     <a class="card tool-item" data-search="uuid v4 generator guid identifier developer" href="uuid.html"><div class="icon">🆔</div><h3>UUID Generator</h3><p>Generate one or multiple UUID v4 identifiers instantly.</p><span class="tag">Developer</span></a>
   </div>
 
-  <div id="emptyState" class="empty">No tools match your search.</div>
+  <div id="emptyState" class="empty">No tools match your search.
+<a class="card tool-card-search" data-category="networking" data-search="dns propagation checker resolver doh ttl" href="dns-propagation-checker.html"><div class="icon">🌐</div><h3>DNS Propagation Checker</h3><p>Compare current DNS answers from public resolvers.</p><span class="tag">Networking</span></a>
+<a class="card tool-card-search" data-category="networking" data-search="mac address formatter validator cisco" href="mac-address-formatter.html"><div class="icon">🔗</div><h3>MAC Address Formatter</h3><p>Validate and normalize common MAC address formats.</p><span class="tag">Networking</span></a>
+<a class="card tool-card-search" data-category="networking" data-search="ipv4 range calculator cidr addresses" href="ipv4-range-calculator.html"><div class="icon">📐</div><h3>IPv4 Range Calculator</h3><p>Count an IPv4 range and find a covering CIDR.</p><span class="tag">Networking</span></a>
+<a class="card tool-card-search" data-category="developer" data-search="http status codes 404 500 reference" href="http-status-codes.html"><div class="icon">📡</div><h3>HTTP Status Codes</h3><p>Search common HTTP response codes and meanings.</p><span class="tag">Developer</span></a>
+<a class="card tool-card-search" data-category="developer" data-search="json csv converter data" href="json-csv-converter.html"><div class="icon">⇄</div><h3>JSON ↔ CSV</h3><p>Convert flat JSON arrays and CSV tables locally.</p><span class="tag">Developer</span></a>
+<a class="card tool-card-search" data-category="developer" data-search="docker compose yaml validator" href="docker-compose-validator.html"><div class="icon">🐳</div><h3>Docker Compose Validator</h3><p>Run a lightweight structural check on Compose YAML.</p><span class="tag">Developer</span></a>
+
+</div>
 
   
 <section class="home-guides">
   <div class="section-title-row"><h2>Technical Guides</h2><a href="guides.html">View all guides →</a></div>
-  <div class="guide-grid">
-<a class="guide-card" href="guide-cidr-explained.html"><span class="kicker">Networking</span><h2>CIDR Explained</h2><p>/24, /16, subnet masks, network boundaries and usable hosts with practical IPv4 examples.</p></a>
-<a class="guide-card" href="guide-linux-chmod.html"><span class="kicker">Linux</span><h2>Linux chmod Explained</h2><p>Understand 755, 644, rwx notation and how Linux file permissions map to numeric modes.</p></a>
-<a class="guide-card" href="guide-ssl-certificates.html"><span class="kicker">Security</span><h2>SSL/TLS Certificates Explained</h2><p>CSR, X.509, SAN, expiration, certificate chains and a practical troubleshooting checklist.</p></a>
-</div>
+  <div class="guide-grid"><a class="guide-card" href="guide-cidr-explained.html"><span class="kicker">NETWORKING</span><h2>CIDR Explained</h2><p>/24, /16, subnet masks, network boundaries and usable hosts.</p></a><a class="guide-card" href="guide-linux-chmod.html"><span class="kicker">LINUX</span><h2>Linux chmod Explained</h2><p>755, 644, rwx notation and practical file permissions.</p></a><a class="guide-card" href="guide-ssl-certificates.html"><span class="kicker">SECURITY</span><h2>SSL/TLS Certificates Explained</h2><p>CSR, X.509, SAN, expiration and certificate chains.</p></a><a class="guide-card" href="guide-dns-records.html"><span class="kicker">NETWORKING</span><h2>DNS Records Explained</h2><p>A, AAAA, CNAME, MX, TXT, NS, TTL and troubleshooting.</p></a><a class="guide-card" href="guide-http-security-headers.html"><span class="kicker">SECURITY</span><h2>HTTP Security Headers Explained</h2><p>CSP, HSTS and common browser security headers.</p></a><a class="guide-card" href="guide-kubernetes-resources.html"><span class="kicker">DEVOPS</span><h2>Kubernetes Resources Explained</h2><p>CPU, millicores, Mi, Gi, requests and limits.</p></a></div>
 </section>
 
 <div class="seo-copy">
@@ -142,7 +146,7 @@ function filterTools(){
     item.classList.toggle('hidden-card',!show);
     if(show) visibleHrefs.add(item.getAttribute('href'));
   });
-  document.getElementById('searchCount').textContent = q ? `${visibleHrefs.size} matches` : '26 tools';
+  document.getElementById('searchCount').textContent = q ? `${visibleHrefs.size} matches` : '32 tools';
   const groups=[...document.querySelectorAll('main .grid')];
   groups.forEach(grid=>{
     const cards=[...grid.querySelectorAll('.tool-item')];

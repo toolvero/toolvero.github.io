@@ -16,10 +16,18 @@
 
 </head>
 <body>
-<header>
+<header class="site-header">
   <div class="container nav">
-    <a href="index.html" class="brand">Toolvero</a>
-    <small>Herramientas gratuitas para SysAdmins y DevOps</small>
+    <div class="brand-wrap">
+      <a class="logo" href="index.html">T</a>
+      <a class="brand" href="index.html">Toolvero</a>
+    </div>
+    <div class="nav-links">
+      <a href="index.html#networking">Networking</a>
+      <a href="index.html#security">Security</a>
+      <a href="index.html#developer">Developer</a>
+      <button id="themeToggle" class="theme-btn" onclick="toggleTheme()">🌙 Dark</button>
+    </div>
   </div>
 </header>
 <main class="container">
@@ -33,9 +41,9 @@
 <div class="actions">
 <button onclick="encode64()">Codificar</button>
 <button class="secondary" onclick="decode64()">Decodificar</button>
-<button class="ghost" onclick="document.getElementById('txt').value=''">Limpiar</button>
+<button class="ghost" onclick="copyText(document.getElementById('out').textContent,'copyMsg')">Copy result</button><button class="ghost" onclick="document.getElementById('txt').value=''">Clear</button>
 </div>
-<div id="out" class="result"></div>
+<p id="copyMsg" class="small"></p><div id="out" class="result"></div>
 </div>
 
 <div class="tool-links">

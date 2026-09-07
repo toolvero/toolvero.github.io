@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Free SysAdmin & DevOps Tools | Toolvero</title>
-<meta name="description" content="Free online tools for SysAdmins, DevOps engineers and developers: subnet calculator, cron generator, Linux permissions, Base64, SHA-256, JSON formatter, Unix timestamps and UUIDs.">
+<meta name="description" content="Free browser-based tools for SysAdmins, DevOps engineers and developers: subnet calculator, cron generator, certificate decoder, CSR decoder, Linux permissions, Base64, SHA-256, JSON, timestamps and UUIDs.">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://toolvero.github.io/">
 <meta property="og:type" content="website">
@@ -13,57 +13,117 @@
 <meta property="og:url" content="https://toolvero.github.io/">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="style.css">
+<script src="common.js"></script>
 </head>
 <body>
-<header>
+<header class="site-header">
   <div class="container nav">
-    <a class="brand" href="index.html">Toolvero</a>
-    <div class="toplinks">
+    <div class="brand-wrap">
+      <a class="logo" href="index.html">T</a>
+      <a class="brand" href="index.html">Toolvero</a>
+    </div>
+    <div class="nav-links">
       <a href="#networking">Networking</a>
-      <a href="#linux">Linux</a>
+      <a href="#automation">Linux & Automation</a>
       <a href="#security">Security</a>
       <a href="#developer">Developer</a>
+      <button id="themeToggle" class="theme-btn" onclick="toggleTheme()">🌙 Dark</button>
     </div>
   </div>
+
   <div class="container hero">
-    <div class="badge">100% Free · No Sign-up</div>
-    <h1>Free Tools for SysAdmins & DevOps</h1>
-    <p>Fast browser-based utilities for networking, Linux, security and development. No account and no installation required.</p>
+    <div class="hero-grid">
+      <div>
+        <div class="badge">⚡ 100% Free · No Sign-up</div>
+        <h1>Tools that get out of your way.</h1>
+        <p>Fast browser-based utilities for SysAdmins, DevOps engineers and developers. Networking, Linux, security and developer tools without accounts or unnecessary setup.</p>
+      </div>
+      <div class="hero-panel">
+        <strong>Built for quick technical work</strong>
+        <div>✓ No registration<br>✓ Works on GitHub Pages<br>✓ Most tools run locally in your browser<br>✓ Growing collection of infrastructure utilities</div>
+      </div>
+    </div>
   </div>
 </header>
 
+<div class="container search-wrap">
+  <div class="search-box">
+    <span class="search-icon">⌕</span>
+    <input id="toolSearch" type="search" placeholder="Search tools — e.g. cron, SSL, JSON, subnet..." oninput="filterTools()">
+    <span id="searchCount" class="search-count">10 tools</span>
+  </div>
+</div>
+
 <main class="container">
-  <h2 class="category" id="networking">Networking</h2>
-  <div class="grid">
-    <a class="card" href="subnet.html"><div class="icon">🌐</div><h3>Subnet Calculator</h3><p>Calculate network, subnet mask, broadcast, usable range and host count.</p></a>
+
+  <div class="section-title-row">
+    <h2>Popular tools</h2>
+    <span>Quick access</span>
+  </div>
+  <div class="grid" id="popularGrid">
+    <a class="card popular tool-item" data-search="subnet ipv4 cidr networking calculator" href="subnet.html"><div class="icon">🌐</div><h3>Subnet Calculator</h3><p>Calculate network, mask, broadcast and usable hosts.</p><span class="tag">Networking</span></a>
+    <a class="card popular tool-item" data-search="cron schedule generator linux automation" href="cron.html"><div class="icon">⏱️</div><h3>Cron Generator</h3><p>Build custom cron expressions without memorizing syntax.</p><span class="tag">Automation</span></a>
+    <a class="card popular tool-item" data-search="ssl x509 certificate decoder pem security tls" href="certificate-decoder.html"><div class="icon">📜</div><h3>Certificate Decoder</h3><p>Inspect X.509 subjects, issuers, validity and extensions.</p><span class="tag">Security</span></a>
+    <a class="card popular tool-item" data-search="json formatter validator developer minify" href="json.html"><div class="icon">🧩</div><h3>JSON Formatter</h3><p>Validate, pretty-print and minify JSON instantly.</p><span class="tag">Developer</span></a>
   </div>
 
-  <h2 class="category" id="linux">Linux & Automation</h2>
+  <div class="section-title-row" id="networking"><h2>Networking</h2><span>IP & network utilities</span></div>
   <div class="grid">
-    <a class="card" href="cron.html"><div class="icon">⏱️</div><h3>Cron Generator</h3><p>Build custom cron expressions by minute, hour, day, month and weekday.</p></a>
-    <a class="card" href="permissions.html"><div class="icon">🐧</div><h3>Linux Permissions</h3><p>Convert Linux rwx permissions to octal chmod values and back.</p></a>
+    <a class="card tool-item" data-search="subnet ipv4 cidr network broadcast mask hosts networking" href="subnet.html"><div class="icon">🌐</div><h3>Subnet Calculator</h3><p>Calculate network, subnet mask, broadcast, usable range and host count.</p><span class="tag">Networking</span></a>
   </div>
 
-  <h2 class="category" id="security">Encoding & Security</h2>
+  <div class="section-title-row" id="automation"><h2>Linux & Automation</h2><span>Shell & scheduling</span></div>
   <div class="grid">
-    <a class="card" href="certificate-decoder.html"><div class="icon">📜</div><h3>Certificate Decoder</h3><p>Inspect X.509 subject, issuer, validity dates and certificate extensions.</p></a>
-    <a class="card" href="csr-decoder.html"><div class="icon">🔏</div><h3>CSR Decoder</h3><p>Inspect PKCS#10 certificate signing requests before issuing a certificate.</p></a>
-    <a class="card" href="base64.html"><div class="icon">🔤</div><h3>Base64</h3><p>Encode and decode Base64 text directly in your browser.</p></a>
-    <a class="card" href="sha256.html"><div class="icon">🔐</div><h3>SHA-256</h3><p>Generate SHA-256 hashes locally using Web Crypto.</p></a>
+    <a class="card tool-item" data-search="cron schedule expression linux automation" href="cron.html"><div class="icon">⏱️</div><h3>Cron Generator</h3><p>Build cron expressions by minute, hour, day, month and weekday.</p><span class="tag">Automation</span></a>
+    <a class="card tool-item" data-search="linux chmod permissions rwx octal" href="permissions.html"><div class="icon">🐧</div><h3>Linux Permissions</h3><p>Convert Linux rwx permissions to octal chmod values and back.</p><span class="tag">Linux</span></a>
   </div>
 
-  <h2 class="category" id="developer">Developer Utilities</h2>
+  <div class="section-title-row" id="security"><h2>Security & Encoding</h2><span>Certificates, hashes & encoding</span></div>
   <div class="grid">
-    <a class="card" href="json.html"><div class="icon">🧩</div><h3>JSON Formatter</h3><p>Validate, pretty-print and minify JSON instantly.</p></a>
-    <a class="card" href="timestamp.html"><div class="icon">🕒</div><h3>Unix Timestamp</h3><p>Convert Unix timestamps to dates and dates back to Unix time.</p></a>
-    <a class="card" href="uuid.html"><div class="icon">🆔</div><h3>UUID Generator</h3><p>Generate one or multiple UUID v4 identifiers instantly.</p></a>
+    <a class="card tool-item" data-search="ssl tls x509 certificate decoder pem subject issuer security" href="certificate-decoder.html"><div class="icon">📜</div><h3>Certificate Decoder</h3><p>Inspect X.509 subject, issuer, validity dates and extensions.</p><span class="tag">Security</span></a>
+    <a class="card tool-item" data-search="csr pkcs10 certificate signing request decoder security san" href="csr-decoder.html"><div class="icon">🔏</div><h3>CSR Decoder</h3><p>Inspect PKCS#10 certificate signing requests before issuance.</p><span class="tag">Security</span></a>
+    <a class="card tool-item" data-search="base64 encode decode text encoding" href="base64.html"><div class="icon">🔤</div><h3>Base64</h3><p>Encode and decode Base64 text directly in your browser.</p><span class="tag">Encoding</span></a>
+    <a class="card tool-item" data-search="sha256 hash digest security crypto" href="sha256.html"><div class="icon">🔐</div><h3>SHA-256</h3><p>Generate SHA-256 hashes locally using Web Crypto.</p><span class="tag">Security</span></a>
   </div>
+
+  <div class="section-title-row" id="developer"><h2>Developer utilities</h2><span>Everyday development helpers</span></div>
+  <div class="grid">
+    <a class="card tool-item" data-search="json formatter validator minify developer" href="json.html"><div class="icon">🧩</div><h3>JSON Formatter</h3><p>Validate, pretty-print and minify JSON instantly.</p><span class="tag">Developer</span></a>
+    <a class="card tool-item" data-search="unix timestamp epoch date converter time developer" href="timestamp.html"><div class="icon">🕒</div><h3>Unix Timestamp</h3><p>Convert Unix timestamps to dates and dates back to Unix time.</p><span class="tag">Developer</span></a>
+    <a class="card tool-item" data-search="uuid v4 generator guid identifier developer" href="uuid.html"><div class="icon">🆔</div><h3>UUID Generator</h3><p>Generate one or multiple UUID v4 identifiers instantly.</p><span class="tag">Developer</span></a>
+  </div>
+
+  <div id="emptyState" class="empty">No tools match your search.</div>
 
   <div class="seo-copy">
-    <h2>Simple utilities, no unnecessary accounts</h2>
-    <p>Toolvero is a growing collection of free tools for system administrators, DevOps engineers and developers. Most utilities run directly in your browser, keeping common infrastructure tasks quick and simple.</p>
+    <h2>Practical tools, without the clutter</h2>
+    <p>Toolvero is a growing collection of free utilities for infrastructure, security and software work. The goal is simple: open a tool, solve the task and move on.</p>
   </div>
 </main>
+
 <footer><div class="container">Toolvero · Free tools for SysAdmins & DevOps</div></footer>
+
+<script>
+function filterTools(){
+  const q=(document.getElementById('toolSearch').value||'').trim().toLowerCase();
+  const items=[...document.querySelectorAll('.tool-item')];
+  let visible=0;
+  items.forEach(item=>{
+    const hay=(item.dataset.search+' '+item.innerText).toLowerCase();
+    const show=!q || hay.includes(q);
+    item.classList.toggle('hidden-card',!show);
+    if(show) visible++;
+  });
+  document.getElementById('searchCount').textContent = q ? `${visible} matches` : '10 tools';
+
+  const groups=[...document.querySelectorAll('main .grid')];
+  groups.forEach(grid=>{
+    const cards=[...grid.querySelectorAll('.tool-item')];
+    grid.style.display = cards.some(c=>!c.classList.contains('hidden-card')) ? 'grid' : 'none';
+  });
+
+  document.getElementById('emptyState').style.display = visible ? 'none' : 'block';
+}
+</script>
 </body>
 </html>

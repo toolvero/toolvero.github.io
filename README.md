@@ -21,3 +21,6 @@ robots.txt, sitemap.xml and a favicon.
 
 
 Certificate Decoder and CSR Decoder include safe built-in demo data via a Load example button.
+
+
+V1.3 adds a professional homepage, instant tool search, popular tools, dark/light theme, upgraded navigation and copy actions.

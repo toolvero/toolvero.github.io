@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Free SysAdmin & DevOps Tools | Toolvero</title>
-<meta name="description" content="Free browser-based tools for SysAdmins, DevOps engineers and developers: subnet calculator, cron generator, certificate decoder, CSR decoder, Linux permissions, Base64, SHA-256, JSON, timestamps and UUIDs.">
+<meta name="description" content="Free browser-based tools for SysAdmins, DevOps engineers and developers: subnet and CIDR tools, IPv6, Docker, Kubernetes, certificates, hashes, JSON, YAML and more.">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://toolvero.github.io/">
 <meta property="og:type" content="website">
@@ -50,7 +50,7 @@
   <div class="search-box">
     <span class="search-icon">⌕</span>
     <input id="toolSearch" type="search" placeholder="Search tools — e.g. cron, SSL, JSON, subnet..." oninput="filterTools()">
-    <span id="searchCount" class="search-count">22 tools</span>
+    <span id="searchCount" class="search-count">26 tools</span>
   </div>
 </div>
 
@@ -72,11 +72,14 @@
     <a class="card tool-item" data-search="ports tcp udp reference ssh http dns database kubernetes networking" href="common-ports.html"><div class="icon">🔌</div><h3>Common Ports</h3><p>Search common TCP and UDP ports for infrastructure services.</p><span class="tag">Networking</span></a>
     <a class="card tool-item" data-search="dns lookup checker a aaaa mx txt cname ns networking" href="dns-lookup.html"><div class="icon">🔎</div><h3>DNS Lookup</h3><p>Query A, AAAA, MX, TXT, CNAME and NS records.</p><span class="tag">Networking</span></a>
     <a class="card tool-item" data-search="ip cidr converter subnet mask wildcard binary ipv4 networking" href="ip-cidr-converter.html"><div class="icon">🔢</div><h3>IP / CIDR Converter</h3><p>Convert CIDR, subnet masks, wildcard masks and binary IPv4.</p><span class="tag">Networking</span></a>
+    <a class="card tool-item" data-search="ipv6 compress expand normalize address networking" href="ipv6-compressor.html"><div class="icon">🌍</div><h3>IPv6 Compress / Expand</h3><p>Normalize IPv6 addresses to compressed or expanded notation.</p><span class="tag">Networking</span></a>
+    <a class="card tool-item" data-search="ip in cidr checker subnet membership range ipv4 networking" href="ip-in-cidr.html"><div class="icon">🎯</div><h3>IP in CIDR Checker</h3><p>Check whether an IPv4 address belongs to a CIDR network.</p><span class="tag">Networking</span></a>
     <a class="card tool-item" data-search="subnet ipv4 cidr network broadcast mask hosts networking" href="subnet.html"><div class="icon">🌐</div><h3>Subnet Calculator</h3><p>Calculate network, subnet mask, broadcast, usable range and host count.</p><span class="tag">Networking</span></a>
   </div>
 
   <div class="section-title-row" id="automation"><h2>Linux & Automation</h2><span>Shell & scheduling</span></div>
   <div class="grid">
+    <a class="card tool-item" data-search="docker run compose converter yaml container devops automation" href="docker-run-to-compose.html"><div class="icon">🐳</div><h3>Docker Run → Compose</h3><p>Convert common docker run options into Compose YAML locally.</p><span class="tag">DevOps</span></a>
     <a class="card tool-item" data-search="kubernetes resource cpu memory millicores mi gi devops converter" href="kubernetes-resource-converter.html"><div class="icon">☸️</div><h3>Kubernetes Resources</h3><p>Convert CPU millicores and Kubernetes memory units.</p><span class="tag">DevOps</span></a>
     <a class="card tool-item" data-search="cron schedule expression linux automation" href="cron.html"><div class="icon">⏱️</div><h3>Cron Generator</h3><p>Build cron expressions by minute, hour, day, month and weekday.</p><span class="tag">Automation</span></a>
     <a class="card tool-item" data-search="linux chmod permissions rwx octal" href="permissions.html"><div class="icon">🐧</div><h3>Linux Permissions</h3><p>Convert Linux rwx permissions to octal chmod values and back.</p><span class="tag">Linux</span></a>
@@ -96,6 +99,7 @@
 
   <div class="section-title-row" id="developer"><h2>Developer utilities</h2><span>Everyday development helpers</span></div>
   <div class="grid">
+    <a class="card tool-item" data-search="env dotenv parser json environment variables developer devops" href="env-parser.html"><div class="icon">⚙️</div><h3>.env Parser</h3><p>Validate dotenv assignments and convert them to JSON locally.</p><span class="tag">Developer</span></a>
     <a class="card tool-item" data-search="yaml json converter kubernetes config devops developer" href="yaml-json-converter.html"><div class="icon">⇄</div><h3>YAML ↔ JSON</h3><p>Convert YAML and JSON configuration formats in your browser.</p><span class="tag">Developer</span></a>
     <a class="card tool-item" data-search="url encoder decoder percent encoding query string developer" href="url-encoder-decoder.html"><div class="icon">🔗</div><h3>URL Encoder / Decoder</h3><p>Encode or decode URL percent-encoded text locally.</p><span class="tag">Developer</span></a>
     <a class="card tool-item" data-search="regex regular expression tester javascript matches developer" href="regex-tester.html"><div class="icon">.*</div><h3>Regex Tester</h3><p>Test JavaScript regex patterns, flags and matches locally.</p><span class="tag">Developer</span></a>
@@ -126,7 +130,7 @@ function filterTools(){
     item.classList.toggle('hidden-card',!show);
     if(show) visibleHrefs.add(item.getAttribute('href'));
   });
-  document.getElementById('searchCount').textContent = q ? `${visibleHrefs.size} matches` : '22 tools';
+  document.getElementById('searchCount').textContent = q ? `${visibleHrefs.size} matches` : '26 tools';
   const groups=[...document.querySelectorAll('main .grid')];
   groups.forEach(grid=>{
     const cards=[...grid.querySelectorAll('.tool-item')];

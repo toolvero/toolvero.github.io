@@ -28,3 +28,16 @@ async function copyText(text, msgId) {
     if (msgId) document.getElementById(msgId).textContent = 'Could not copy automatically.';
   }
 }
+
+// Google Analytics 4 — Toolvero Web (G-Y16GMPF2PP)
+(function initAnalytics(){
+  const measurementId = 'G-Y16GMPF2PP';
+  const gtagScript = document.createElement('script');
+  gtagScript.async = true;
+  gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(measurementId);
+  document.head.appendChild(gtagScript);
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
+  window.gtag('js', new Date());
+  window.gtag('config', measurementId);
+})();

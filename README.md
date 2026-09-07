@@ -37,3 +37,6 @@ V1.5.1 replaces unreliable remote HTTP/TLS checks with fully functional local an
 V1.5.2 fixes the SSL Certificate Expiry Checker demo by replacing the invalid sample with a real parseable X.509 certificate.
 
 V1.6.3 adds YAML/JSON Converter, Kubernetes Resource Converter, URL Encoder/Decoder and Common Ports Reference. Total: 22 tools.
+
+
+V1.7 adds Google Analytics 4 (G-Y16GMPF2PP) site-wide plus four new local tools: IPv6 Compress/Expand, IP in CIDR Checker, Docker Run to Compose Converter and .env Parser/JSON Converter. Total: 26 tools.

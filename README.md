@@ -9,6 +9,8 @@ Live site: https://toolvero.github.io/
 - Cron Expression Generator
 - Linux Permissions Calculator
 - Base64 Encoder / Decoder
+- SSL Certificate Decoder
+- CSR Decoder
 - SHA-256 Hash Generator
 - JSON Formatter / Validator
 - Unix Timestamp Converter

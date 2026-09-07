@@ -17,7 +17,7 @@
 <h1>CSR Decoder</h1>
 <p class="kicker">Paste a PEM PKCS#10 Certificate Signing Request. Decoding happens in your browser.</p>
 <label>PEM CSR<textarea id="pem" style="min-height:220px" placeholder="-----BEGIN CERTIFICATE REQUEST-----&#10;...&#10;-----END CERTIFICATE REQUEST-----"></textarea></label>
-<div class="actions"><button onclick="decodeCSR()">Decode CSR</button><button class="ghost" onclick="clearAll()">Clear</button></div>
+<div class="actions"><button onclick="decodeCSR()">Decode CSR</button><button class="ghost" onclick="loadExample()">Load example</button><button class="ghost" onclick="clearAll()">Clear</button></div>
 <div id="out" class="result">CSR details will appear here.</div>
 </div>
 <div class="seo-copy"><h2>Why decode a CSR?</h2><p>A CSR contains the identity and public key submitted to a certificate authority. This tool helps verify the requested common name and other attributes before a certificate is issued.</p></div>
@@ -47,6 +47,26 @@ function decodeCSR(){
   <h3>Public key</h3><pre style="white-space:pre-wrap">${esc(pubPem)}</pre>`;
  }catch(e){out.className='result error';out.textContent='Could not decode the CSR. Make sure you pasted a valid PEM PKCS#10 certificate request.';}
 }
+const DEMO_CSR=`-----BEGIN CERTIFICATE REQUEST-----
+MIIC5jCCAc4CAQAwWjELMAkGA1UEBhMCUFkxFjAUBgNVBAoMDVRvb2x2ZXJvIERl
+bW8xFTATBgNVBAsMDERldk9wcyBUb29sczEcMBoGA1UEAwwTZGVtby50b29sdmVy
+by5sb2NhbDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAN2Xsmx1h98C
+XRkQhvv1p2PDmQ0HWlTKVO2yESV6aY5ildfVfYC9iRioj/eIaRjGOWo+3O65uKds
+CKyMbfbjCGdTF3unna49XHFuXNcHop+szeK4O6jvV1fSq9JkluPD+0PKW6HRa58M
+UIle92eTH0LzTeh+xQpkRTO8DZOHkCBKVltaeA44XXwHQXGuE/WDLE2nWkQOSUz/
+K8XiBKjDuluQacdcUvzbNpcgav3HPNJKxYCUCkuDqiatgmxkj4VOI72xUVWhmPXw
+knbDzG2J13uqkXPLM2w/FQ4brtjM2eJ1ieWeLIshqp9PUw4sO/c9+CzQXII5/JrB
+JKmGQu9636cCAwEAAaBHMEUGCSqGSIb3DQEJDjE4MDYwNAYDVR0RBC0wK4ITZGVt
+by50b29sdmVyby5sb2NhbIIUdG9vbHMudG9vbHZlcm8ubG9jYWwwDQYJKoZIhvcN
+AQELBQADggEBAAzgXQPwH2i12X8dOZJYXDEtC4J1sv5Av/UIyb4uPRgTNzIoiXkV
+ppsXXMhgIUfRKZCd/KCPsXALg8h08yZjo4vgTx9aTGmYVpheRaetWxvHS1WUuiFs
+XJ5wePgS3K4zM64n3RvNRgOPHd7tdaA4OBLddVxaDCtlkVzAGFf/F8oSq1vsXiwM
+g2+zstFVLXvNMArSYOybEi/LvlNGJwEY3NjCzjc1xVKcI5IQWSwNJmXFec+XINcv
++FMQcvurTZtt3U0fmyskPLqw+h9HpKlngVd2iSWpEeJpZYdACxRCbGd8DDPYc5QZ
+ZYNcy62KF7qnJXq4DsRFYxdvaGSbnjuXPd8=
+-----END CERTIFICATE REQUEST-----
+`;
+function loadExample(){document.getElementById("pem").value=DEMO_CSR;decodeCSR();}
 function clearAll(){document.getElementById('pem').value='';const o=document.getElementById('out');o.className='result';o.textContent='CSR details will appear here.';}
 </script>
 </body></html>

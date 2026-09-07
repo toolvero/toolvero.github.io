@@ -17,7 +17,7 @@
 <h1>SSL Certificate Decoder</h1>
 <p class="kicker">Paste a PEM encoded X.509 certificate. Decoding happens in your browser.</p>
 <label>PEM Certificate<textarea id="pem" style="min-height:220px" placeholder="-----BEGIN CERTIFICATE-----&#10;...&#10;-----END CERTIFICATE-----"></textarea></label>
-<div class="actions"><button onclick="decodeCert()">Decode Certificate</button><button class="ghost" onclick="clearAll()">Clear</button></div>
+<div class="actions"><button onclick="decodeCert()">Decode Certificate</button><button class="ghost" onclick="loadExample()">Load example</button><button class="ghost" onclick="clearAll()">Clear</button></div>
 <div id="out" class="result">Certificate details will appear here.</div>
 </div>
 <div class="seo-copy"><h2>What does this tool show?</h2><p>Inspect common X.509 certificate fields including subject, issuer, serial number, signature algorithm, validity period and extensions without uploading the certificate to a server.</p></div>
@@ -51,6 +51,30 @@ function decodeCert(){
   <h3>Extensions</h3><table><thead><tr><th>Name</th><th>Value</th></tr></thead><tbody>${exts||'<tr><td colspan="2">No extensions found</td></tr>'}</tbody></table>`;
  }catch(e){out.className='result error';out.textContent='Could not decode the certificate. Make sure you pasted a valid PEM X.509 certificate.';}
 }
+const DEMO_CERT=`-----BEGIN CERTIFICATE-----
+MIIDmTCCAoGgAwIBAgIUVMVSHc9DbeQ57q9la0EkUYq8/SwwDQYJKoZIhvcNAQEL
+BQAwWjELMAkGA1UEBhMCUFkxFjAUBgNVBAoMDVRvb2x2ZXJvIERlbW8xFTATBgNV
+BAsMDERldk9wcyBUb29sczEcMBoGA1UEAwwTZGVtby50b29sdmVyby5sb2NhbDAe
+Fw0yNjA5MDcxNzA3MTFaFw0yNzA5MDcxNzA3MTFaMFoxCzAJBgNVBAYTAlBZMRYw
+FAYDVQQKDA1Ub29sdmVybyBEZW1vMRUwEwYDVQQLDAxEZXZPcHMgVG9vbHMxHDAa
+BgNVBAMME2RlbW8udG9vbHZlcm8ubG9jYWwwggEiMA0GCSqGSIb3DQEBAQUAA4IB
+DwAwggEKAoIBAQDdl7JsdYffAl0ZEIb79adjw5kNB1pUylTtshElemmOYpXX1X2A
+vYkYqI/3iGkYxjlqPtzuubinbAisjG324whnUxd7p52uPVxxblzXB6KfrM3iuDuo
+71dX0qvSZJbjw/tDyluh0WufDFCJXvdnkx9C803ofsUKZEUzvA2Th5AgSlZbWngO
+OF18B0FxrhP1gyxNp1pEDklM/yvF4gSow7pbkGnHXFL82zaXIGr9xzzSSsWAlApL
+g6omrYJsZI+FTiO9sVFVoZj18JJ2w8xtidd7qpFzyzNsPxUOG67YzNnidYnlniyL
+IaqfT1MOLDv3Pfgs0FyCOfyawSSphkLvet+nAgMBAAGjVzBVMDQGA1UdEQQtMCuC
+E2RlbW8udG9vbHZlcm8ubG9jYWyCFHRvb2xzLnRvb2x2ZXJvLmxvY2FsMB0GA1Ud
+DgQWBBTM3rQyP6tNqU9jfu0A0m/cHRiViTANBgkqhkiG9w0BAQsFAAOCAQEAQ5zB
+uVSoGbupCpzLnt6cRRoNksnpWbTbX+dr5p/DQHo7xQd1DNeU5zpFJbcv1VS3RZws
+Om9K0Vx8g9lRqFU8gv83x/Jt6ShHzOHJutOl0Xurd01rsAQpHO/rAciN+G2SN+sF
+Hikuy1o9FfKXlnk7RkyTu9LArig9TtAPy7u0j4t2b2ydqaJsfetHpOdZg/JmX3Yl
+T78pGyVrzLXdr48vZxhz2oc/aNgUub3ZyYF2QAaB/My2aHuNhkkPJfyzyZd7RbUV
+6WQN2jbFbFBGChHrQNUbZf1HToSjB5wM5ZFXGVaBAFUS7pBGCZXuYU/19hc/yxlM
+nTG47r2X62zWRDyW+A==
+-----END CERTIFICATE-----
+`;
+function loadExample(){document.getElementById("pem").value=DEMO_CERT;decodeCert();}
 function clearAll(){document.getElementById('pem').value='';const o=document.getElementById('out');o.className='result';o.textContent='Certificate details will appear here.';}
 </script>
 </body></html>

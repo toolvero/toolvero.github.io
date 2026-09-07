@@ -18,3 +18,6 @@ Live site: https://toolvero.github.io/
 
 This release adds English-first SEO copy, canonical URLs, internal navigation,
 robots.txt, sitemap.xml and a favicon.
+
+
+Certificate Decoder and CSR Decoder include safe built-in demo data via a Load example button.

@@ -31,3 +31,5 @@ V1.4 adds DNS Lookup, IP/CIDR Converter, JWT Decoder, Password Generator, and un
 V1.4.1 refines the Password Generator with a compact length slider and aligned character-set controls.
 
 V1.5 adds Regex Tester, Hash/HMAC Generator, HTTP Headers Checker and SSL/TLS Checker pages. Live remote checks clearly disclose static-browser/API limitations.
+
+V1.5.1 replaces unreliable remote HTTP/TLS checks with fully functional local analyzers: HTTP Security Headers Analyzer and SSL Certificate Expiry Checker.

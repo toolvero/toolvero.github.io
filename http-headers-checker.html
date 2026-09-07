@@ -2,43 +2,113 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>HTTP Headers Checker | Toolvero</title>
-<meta name="description" content="Check public HTTP reachability and security-header inspection limitations from a browser.">
+<title>HTTP Security Headers Analyzer | Toolvero</title>
+<meta name="description" content="Analyze HTTP response headers locally. Paste raw headers from curl or your browser and check HSTS, CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy and Permissions-Policy.">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://toolvero.github.io/http-headers-checker.html">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="style.css">
-<script src="common.js"></script>
+<link rel="stylesheet" href="style.css"><script src="common.js"></script>
 </head>
 <body>
 <header class="site-header"><div class="container nav">
 <div class="brand-wrap"><a class="logo" href="index.html">T</a><a class="brand" href="index.html">Toolvero</a></div>
 <div class="nav-links"><a href="index.html#networking">Networking</a><a href="index.html#automation">Linux & Automation</a><a href="index.html#security">Security</a><a href="index.html#developer">Developer</a><button id="themeToggle" class="theme-btn" onclick="toggleTheme()">🌙 Dark</button></div>
 </div></header>
-<main class="container"><div class="tool-wrap"><div class="breadcrumb"><a href="index.html">← Back to tools</a></div><div class="tool-card">
 
-<h1>HTTP Headers Checker</h1>
-<p class="kicker">Inspect public HTTP response headers for a URL. This check uses an external public inspection service because browsers block direct cross-origin header inspection.</p>
-<label>Public URL<input id="url" value="https://example.com" placeholder="https://example.com"></label>
-<div class="actions"><button onclick="checkHeaders()">Check headers</button><button class="secondary" onclick="copyText(document.getElementById('out').innerText,'copyMsg')">Copy result</button></div>
-<div id="out" class="result">Enter a public HTTPS URL.</div><p id="copyMsg" class="small"></p>
-<div class="seo-copy"><h2>HTTP security headers</h2><p>Review common response headers such as Content-Type, Cache-Control, Strict-Transport-Security, Content-Security-Policy and X-Frame-Options. Only test public URLs and never submit private or internal addresses.</p></div>
+<main class="container"><div class="tool-wrap">
+<div class="breadcrumb"><a href="index.html">← Back to tools</a></div>
+<div class="tool-card">
+<h1>HTTP Security Headers Analyzer</h1>
+<p class="kicker">Paste raw HTTP response headers and get a local security-header score. No external API and no URL is sent anywhere.</p>
 
+<label>Raw response headers
+<textarea id="headers" style="min-height:240px" placeholder="HTTP/2 200&#10;content-type: text/html&#10;strict-transport-security: max-age=31536000; includeSubDomains&#10;content-security-policy: default-src 'self'"></textarea>
+</label>
+
+<div class="actions">
+<button onclick="analyzeHeaders()">Analyze headers</button>
+<button class="secondary" onclick="loadHeaderExample()">Load example</button>
+<button class="ghost" onclick="clearHeaders()">Clear</button>
+</div>
+
+<div id="score" class="result">Paste headers to begin.</div>
+<div id="headerChecks" class="result"></div>
+
+<div class="seo-copy">
+<h2>How to get response headers</h2>
+<p>On Linux, macOS or Windows with curl, run <code>curl -I https://example.com</code> and paste the output here. The analysis runs entirely in your browser.</p>
+</div>
 </div></div></main>
 <footer><div class="container">Toolvero · Free tools for SysAdmins & DevOps</div></footer>
+
 <script>
-function esc(s){return s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
-async function checkHeaders(){
- let u=url.value.trim(); if(!/^https?:\/\//i.test(u))u='https://'+u;
- try{new URL(u)}catch(e){out.textContent='Enter a valid URL.';return;}
- out.textContent='Checking public URL…';
- try{
-   const r=await fetch('https://api.allorigins.win/raw?url='+encodeURIComponent(u));
-   if(!r.ok) throw 0;
-   // A static browser cannot obtain the target server's original headers through this proxy reliably.
-   out.innerHTML='<strong>Reachability:</strong> Public page responded through the inspection proxy.<br><br><strong>Important:</strong> The current free browser-only version cannot reliably expose the origin server’s complete response headers. Toolvero will not invent header values.';
- }catch(e){
-   out.textContent='Unable to inspect this URL from the public browser service. The site may block proxies, be unavailable, or the service may be temporarily unavailable.';
- }
+const REQUIRED_HEADERS = [
+  {key:'strict-transport-security', label:'Strict-Transport-Security (HSTS)', weight:2},
+  {key:'content-security-policy', label:'Content-Security-Policy (CSP)', weight:2},
+  {key:'x-content-type-options', label:'X-Content-Type-Options', weight:1},
+  {key:'x-frame-options', label:'X-Frame-Options', weight:1},
+  {key:'referrer-policy', label:'Referrer-Policy', weight:1},
+  {key:'permissions-policy', label:'Permissions-Policy', weight:1}
+];
+
+function parseHeaders(raw){
+  const map={};
+  raw.split(/\r?\n/).forEach(line=>{
+    const i=line.indexOf(':');
+    if(i>0){
+      const k=line.slice(0,i).trim().toLowerCase();
+      const v=line.slice(i+1).trim();
+      if(k) map[k] = map[k] ? map[k] + ', ' + v : v;
+    }
+  });
+  return map;
 }
-</script></body></html>
+
+function grade(percent){
+  if(percent>=90) return 'A';
+  if(percent>=75) return 'B';
+  if(percent>=60) return 'C';
+  if(percent>=40) return 'D';
+  return 'F';
+}
+
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+function analyzeHeaders(){
+  const map=parseHeaders(document.getElementById('headers').value);
+  const max=REQUIRED_HEADERS.reduce((a,h)=>a+h.weight,0);
+  let got=0;
+  const rows=REQUIRED_HEADERS.map(h=>{
+    const present=!!map[h.key];
+    if(present) got+=h.weight;
+    return `<tr><td>${present?'✅':'❌'}</td><td>${esc(h.label)}</td><td>${present?esc(map[h.key]):'Missing'}</td></tr>`;
+  }).join('');
+
+  if(!Object.keys(map).length){
+    score.className='result error';
+    score.textContent='No valid HTTP headers were detected.';
+    headerChecks.innerHTML='';
+    return;
+  }
+
+  const pct=Math.round(got/max*100);
+  const g=grade(pct);
+  score.className='result';
+  score.innerHTML=`<strong>Security score:</strong> ${g} · ${pct}%<br><span class="small">Checks common browser-facing security headers. This is not a full web security audit.</span>`;
+  headerChecks.innerHTML=`<table><thead><tr><th></th><th>Header</th><th>Value</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+function loadHeaderExample(){
+  headers.value=`HTTP/2 200
+content-type: text/html; charset=UTF-8
+strict-transport-security: max-age=31536000; includeSubDomains
+content-security-policy: default-src 'self'
+x-content-type-options: nosniff
+x-frame-options: DENY
+referrer-policy: strict-origin-when-cross-origin
+permissions-policy: geolocation=(), camera=()`;
+  analyzeHeaders();
+}
+function clearHeaders(){headers.value='';score.className='result';score.textContent='Paste headers to begin.';headerChecks.innerHTML='';}
+</script>
+</body></html>

@@ -1,0 +1,38 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Linux chmod Explained: 755, 644, rwx and File Permissions | Toolvero</title>
+<meta name="description" content="Learn Linux chmod numeric permissions, rwx notation, 755, 644, directory permissions and safer permission practices."><meta name="robots" content="index,follow">
+<link rel="canonical" href="https://toolvero.github.io/guide-linux-chmod.html">
+<meta property="og:type" content="article"><meta property="og:title" content="Linux chmod Explained: 755, 644, rwx and File Permissions | Toolvero">
+<meta property="og:description" content="Learn Linux chmod numeric permissions, rwx notation, 755, 644, directory permissions and safer permission practices."><meta property="og:url" content="https://toolvero.github.io/guide-linux-chmod.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css"><script src="common.js"></script><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Linux chmod Explained: 755, 644, rwx and File Permissions","description":"Learn Linux chmod numeric permissions, rwx notation, 755, 644, directory permissions and safer permission practices.","mainEntityOfPage":"https://toolvero.github.io/guide-linux-chmod.html","publisher":{"@type":"Organization","name":"Toolvero","url":"https://toolvero.github.io/"}}</script>
+</head><body><header class="site-header"><div class="container nav">
+<div class="brand-wrap"><a class="logo" href="index.html">T</a><a class="brand" href="index.html">Toolvero</a></div>
+<div class="nav-links"><a href="index.html#networking">Networking</a><a href="index.html#security">Security</a><a href="index.html#developer">Developer</a><a href="guides.html">Guides</a><button id="themeToggle" class="theme-btn" onclick="toggleTheme()">🌙 Dark</button></div>
+</div></header>
+<main class="guide"><a class="back" href="guides.html">← All technical guides</a><article>
+<span class="badge">Linux guide</span>
+<h1>Linux chmod Explained: 755, 644, rwx and File Permissions</h1>
+<p class="lede">Understand owner, group and other permissions, and learn how symbolic <code>rwx</code> maps to numeric chmod values.</p>
+<h2>The three permission groups</h2>
+<p>Traditional Unix permissions are shown for three groups: the file owner, the file's group and everyone else. Each group can have read (<code>r</code>), write (<code>w</code>) and execute (<code>x</code>) permission.</p>
+<table><thead><tr><th>Permission</th><th>Letter</th><th>Numeric value</th></tr></thead>
+<tbody><tr><td>Read</td><td>r</td><td>4</td></tr><tr><td>Write</td><td>w</td><td>2</td></tr><tr><td>Execute</td><td>x</td><td>1</td></tr></tbody></table>
+<h2>Why 755 means rwxr-xr-x</h2>
+<p>Add the values within each group. <code>7 = 4+2+1</code> gives read, write and execute. <code>5 = 4+1</code> gives read and execute. Therefore <code>755</code> becomes <code>rwxr-xr-x</code>.</p>
+<pre><code>chmod 755 script.sh</code></pre>
+<p>This gives the owner read/write/execute access while group and others receive read/execute access.</p>
+<h2>Why 644 is common for regular files</h2>
+<p><code>644</code> maps to <code>rw-r--r--</code>: the owner can read and modify the file, while group and others can read it. It is a common pattern for non-executable files, but the correct permission always depends on the application's security requirements.</p>
+<pre><code>chmod 644 config.txt</code></pre>
+<div class="guide-tools"><a href="permissions.html">Linux Permissions Calculator</a><a href="cron.html">Cron Generator</a></div>
+<h2>Directories are different</h2>
+<p>On a directory, execute permission controls traversal. A user may need execute permission on each directory in a path to access files beneath it. This is why blindly applying file-style permissions recursively can break applications or expose data.</p>
+<h2>Avoid chmod 777 as a shortcut</h2>
+<p><code>777</code> grants read, write and execute permissions to owner, group and everyone else. It may make a permission error disappear, but it usually grants far more access than necessary. Identify which user or service needs access and grant the minimum appropriate permissions instead.</p>
+<h2>Symbolic chmod</h2>
+<p>Numeric mode is compact, but symbolic chmod can express targeted changes such as adding execute permission to the owner:</p>
+<pre><code>chmod u+x deploy.sh</code></pre>
+<p>Here <code>u</code> means user/owner, <code>+</code> adds a permission and <code>x</code> means execute.</p>
+</article></main>
+<footer><div class="container">Toolvero · Free tools for SysAdmins &amp; DevOps</div></footer></body></html>

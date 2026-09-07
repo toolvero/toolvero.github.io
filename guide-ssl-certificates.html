@@ -1,0 +1,38 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SSL/TLS Certificates Explained: CSR, X.509, Expiration and Troubleshooting | Toolvero</title>
+<meta name="description" content="Understand CSRs, X.509 certificates, SANs, certificate chains, validity dates and practical TLS certificate troubleshooting."><meta name="robots" content="index,follow">
+<link rel="canonical" href="https://toolvero.github.io/guide-ssl-certificates.html">
+<meta property="og:type" content="article"><meta property="og:title" content="SSL/TLS Certificates Explained: CSR, X.509, Expiration and Troubleshooting | Toolvero">
+<meta property="og:description" content="Understand CSRs, X.509 certificates, SANs, certificate chains, validity dates and practical TLS certificate troubleshooting."><meta property="og:url" content="https://toolvero.github.io/guide-ssl-certificates.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css"><script src="common.js"></script><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"SSL/TLS Certificates Explained: CSR, X.509, Expiration and Troubleshooting","description":"Understand CSRs, X.509 certificates, SANs, certificate chains, validity dates and practical TLS certificate troubleshooting.","mainEntityOfPage":"https://toolvero.github.io/guide-ssl-certificates.html","publisher":{"@type":"Organization","name":"Toolvero","url":"https://toolvero.github.io/"}}</script>
+</head><body><header class="site-header"><div class="container nav">
+<div class="brand-wrap"><a class="logo" href="index.html">T</a><a class="brand" href="index.html">Toolvero</a></div>
+<div class="nav-links"><a href="index.html#networking">Networking</a><a href="index.html#security">Security</a><a href="index.html#developer">Developer</a><a href="guides.html">Guides</a><button id="themeToggle" class="theme-btn" onclick="toggleTheme()">🌙 Dark</button></div>
+</div></header>
+<main class="guide"><a class="back" href="guides.html">← All technical guides</a><article>
+<span class="badge">Security guide</span>
+<h1>SSL/TLS Certificates Explained: CSR, X.509, Expiration and Troubleshooting</h1>
+<p class="lede">A practical overview of certificate requests, issued X.509 certificates, validity dates and the checks administrators perform during TLS troubleshooting.</p>
+<h2>What is an X.509 certificate?</h2>
+<p>An X.509 certificate binds identity information to a public key and is signed by an issuing certificate authority (CA). TLS servers present certificates so clients can validate the server identity and establish an encrypted connection.</p>
+<h2>CSR vs certificate</h2>
+<p>A certificate signing request (CSR) is created before the certificate is issued. It contains the public key and request information and is signed using the corresponding private key. The CA validates the request according to its process and returns an issued certificate.</p>
+<div class="guide-callout"><strong>Important:</strong> a CSR and a certificate can be shared during normal PKI workflows, but the private key should remain protected. Do not paste private keys into browser tools.</div>
+<div class="guide-tools"><a href="csr-decoder.html">CSR Decoder</a><a href="certificate-decoder.html">Certificate Decoder</a><a href="ssl-tls-checker.html">SSL Expiry Checker</a></div>
+<h2>Validity dates</h2>
+<p>Certificates include a validity window commonly described as <em>Not Before</em> and <em>Not After</em>. A certificate outside that period can be rejected by clients. Monitoring expiration before the Not After date is therefore an operational requirement, not just a PKI detail.</p>
+<h2>Subject, issuer and SAN</h2>
+<ul><li><strong>Subject:</strong> identifies the certificate subject.</li>
+<li><strong>Issuer:</strong> identifies the CA that signed the certificate.</li>
+<li><strong>Subject Alternative Name (SAN):</strong> carries DNS names or other identities the certificate is valid for. Modern hostname validation relies on SAN.</li></ul>
+<h2>The certificate chain</h2>
+<p>A server certificate is often validated through one or more intermediate CA certificates up to a trusted root CA. A server can have a perfectly valid leaf certificate and still fail client validation if required intermediate certificates are not presented correctly.</p>
+<h2>Practical troubleshooting checklist</h2>
+<ol><li>Confirm the requested hostname is covered by a SAN.</li><li>Check the certificate validity period.</li><li>Verify the issuer and certificate chain.</li><li>Confirm the server is presenting the intended certificate.</li><li>Check whether the client trusts the relevant CA chain.</li></ol>
+<h2>Useful OpenSSL checks</h2>
+<pre><code>openssl x509 -in certificate.pem -noout -subject -issuer -dates
+openssl req -in request.csr -noout -text</code></pre>
+<p>Toolvero's decoders provide a convenient browser view for common fields, while OpenSSL remains useful when you need deeper command-line inspection and verification.</p>
+</article></main>
+<footer><div class="container">Toolvero · Free tools for SysAdmins &amp; DevOps</div></footer></body></html>

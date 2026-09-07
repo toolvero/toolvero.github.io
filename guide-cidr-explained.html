@@ -1,0 +1,40 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CIDR Explained: /24, /16, Subnet Masks and Usable Hosts | Toolvero</title>
+<meta name="description" content="Learn IPv4 CIDR notation, subnet masks, network and broadcast addresses, usable host ranges and practical subnetting examples."><meta name="robots" content="index,follow">
+<link rel="canonical" href="https://toolvero.github.io/guide-cidr-explained.html">
+<meta property="og:type" content="article"><meta property="og:title" content="CIDR Explained: /24, /16, Subnet Masks and Usable Hosts | Toolvero">
+<meta property="og:description" content="Learn IPv4 CIDR notation, subnet masks, network and broadcast addresses, usable host ranges and practical subnetting examples."><meta property="og:url" content="https://toolvero.github.io/guide-cidr-explained.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css"><script src="common.js"></script><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"CIDR Explained: /24, /16, Subnet Masks and Usable Hosts","description":"Learn IPv4 CIDR notation, subnet masks, network and broadcast addresses, usable host ranges and practical subnetting examples.","mainEntityOfPage":"https://toolvero.github.io/guide-cidr-explained.html","publisher":{"@type":"Organization","name":"Toolvero","url":"https://toolvero.github.io/"}}</script>
+</head><body><header class="site-header"><div class="container nav">
+<div class="brand-wrap"><a class="logo" href="index.html">T</a><a class="brand" href="index.html">Toolvero</a></div>
+<div class="nav-links"><a href="index.html#networking">Networking</a><a href="index.html#security">Security</a><a href="index.html#developer">Developer</a><a href="guides.html">Guides</a><button id="themeToggle" class="theme-btn" onclick="toggleTheme()">🌙 Dark</button></div>
+</div></header>
+<main class="guide"><a class="back" href="guides.html">← All technical guides</a><article>
+<span class="badge">Networking guide</span>
+<h1>CIDR Explained: /24, /16, Subnet Masks and Usable Hosts</h1>
+<p class="lede">A practical guide to reading IPv4 CIDR notation, understanding subnet masks and calculating network boundaries.</p>
+<h2>What does /24 mean?</h2>
+<p>CIDR (Classless Inter-Domain Routing) writes an IPv4 network as an address followed by a prefix length, for example <code>192.168.1.0/24</code>. The prefix tells you how many of the 32 IPv4 bits identify the network. The remaining bits are available for addresses inside that network.</p>
+<table><thead><tr><th>CIDR</th><th>Subnet mask</th><th>Total addresses</th><th>Traditional usable hosts*</th></tr></thead>
+<tbody><tr><td>/16</td><td>255.255.0.0</td><td>65,536</td><td>65,534</td></tr>
+<tr><td>/24</td><td>255.255.255.0</td><td>256</td><td>254</td></tr>
+<tr><td>/25</td><td>255.255.255.128</td><td>128</td><td>126</td></tr>
+<tr><td>/26</td><td>255.255.255.192</td><td>64</td><td>62</td></tr>
+<tr><td>/27</td><td>255.255.255.224</td><td>32</td><td>30</td></tr>
+<tr><td>/28</td><td>255.255.255.240</td><td>16</td><td>14</td></tr></tbody></table>
+<p><small>*The familiar “minus two” rule applies to conventional IPv4 subnets that reserve network and broadcast addresses. /31 and /32 have special uses and should not be treated with that simple rule.</small></p>
+<h2>Network, broadcast and host range</h2>
+<p>For <code>192.168.1.0/24</code>, the network address is <code>192.168.1.0</code> and the broadcast address is <code>192.168.1.255</code>. In the conventional host model, addresses <code>192.168.1.1</code> through <code>192.168.1.254</code> are available to hosts.</p>
+<div class="guide-callout"><strong>Quick rule:</strong> every time the prefix grows by one bit, the address block is divided in half. A /24 has 256 addresses, a /25 has 128 and a /26 has 64.</div>
+<h2>How to check an address</h2>
+<p>If you need to know whether <code>192.168.1.50</code> belongs to <code>192.168.1.0/24</code>, compare the network portion defined by the prefix. Toolvero can perform that calculation and show the boundaries immediately.</p>
+<div class="guide-tools"><a href="subnet.html">Subnet Calculator</a><a href="ip-cidr-converter.html">IP/CIDR Converter</a><a href="ip-in-cidr.html">IP in CIDR Checker</a></div>
+<h2>Common mistakes</h2>
+<ul><li>Confusing the number of addresses with the number of conventionally usable host addresses.</li>
+<li>Assuming two IPs with similar first octets are in the same subnet without checking the prefix.</li>
+<li>Forgetting that the prefix, not the old classful A/B/C model, defines the modern network boundary.</li></ul>
+<h2>Example: splitting a /24</h2>
+<p>Splitting <code>10.10.20.0/24</code> into two equal networks produces <code>10.10.20.0/25</code> and <code>10.10.20.128/25</code>. Each block contains 128 addresses. This is the basic idea behind subnetting: borrow host bits to create additional network prefixes.</p>
+</article></main>
+<footer><div class="container">Toolvero · Free tools for SysAdmins &amp; DevOps</div></footer></body></html>

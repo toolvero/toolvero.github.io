@@ -1,42 +1,30 @@
-# Toolvero
+# Toolvero v1.8
 
-Free browser-based tools for SysAdmins, DevOps engineers and developers.
+SEO, trust and monetization-readiness release.
 
-Live site: https://toolvero.github.io/
+## Included
+- 26 existing tools preserved from v1.7
+- Google Analytics 4 retained: G-Y16GMPF2PP
+- New About page
+- New Privacy Policy
+- New Contact page
+- Shared footer links to About / Privacy / Contact
+- Improved homepage descriptive copy and internal links
+- robots.txt
+- Updated sitemap.xml with all public pages
+- Shared style.css, common.js and favicon.svg included in the package
 
-## Tools
-- IPv4 Subnet Calculator
-- Cron Expression Generator
-- Linux Permissions Calculator
-- Base64 Encoder / Decoder
-- SSL Certificate Decoder
-- CSR Decoder
-- SHA-256 Hash Generator
-- JSON Formatter / Validator
-- Unix Timestamp Converter
-- UUID v4 Generator
+## Deployment
+Upload/replace the complete contents in the GitHub Pages repository root.
 
-This release adds English-first SEO copy, canonical URLs, internal navigation,
-robots.txt, sitemap.xml and a favicon.
+Suggested commit:
+`Release Toolvero v1.8 - SEO, privacy and site trust improvements`
 
-
-Certificate Decoder and CSR Decoder include safe built-in demo data via a Load example button.
-
-
-V1.3 adds a professional homepage, instant tool search, popular tools, dark/light theme, upgraded navigation and copy actions.
-
-
-V1.4 adds DNS Lookup, IP/CIDR Converter, JWT Decoder, Password Generator, and unique search-result counting.
-
-V1.4.1 refines the Password Generator with a compact length slider and aligned character-set controls.
-
-V1.5 adds Regex Tester, Hash/HMAC Generator, HTTP Headers Checker and SSL/TLS Checker pages. Live remote checks clearly disclose static-browser/API limitations.
-
-V1.5.1 replaces unreliable remote HTTP/TLS checks with fully functional local analyzers: HTTP Security Headers Analyzer and SSL Certificate Expiry Checker.
-
-V1.5.2 fixes the SSL Certificate Expiry Checker demo by replacing the invalid sample with a real parseable X.509 certificate.
-
-V1.6.3 adds YAML/JSON Converter, Kubernetes Resource Converter, URL Encoder/Decoder and Common Ports Reference. Total: 22 tools.
-
-
-V1.7 adds Google Analytics 4 (G-Y16GMPF2PP) site-wide plus four new local tools: IPv6 Compress/Expand, IP in CIDR Checker, Docker Run to Compose Converter and .env Parser/JSON Converter. Total: 26 tools.
+## Post-deploy checks
+1. Open /about.html
+2. Open /privacy.html
+3. Open /contact.html
+4. Confirm footer links work from a tool page
+5. Open /robots.txt
+6. Open /sitemap.xml
+7. Confirm Google Analytics real-time still receives page views

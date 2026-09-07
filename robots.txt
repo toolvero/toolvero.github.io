@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
 Sitemap: https://toolvero.github.io/sitemap.xml

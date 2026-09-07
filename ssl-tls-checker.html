@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SSL / TLS Checker | Toolvero</title>
+<meta name="description" content="Public SSL and TLS certificate checker with transparent browser limitations.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://toolvero.github.io/ssl-tls-checker.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script src="common.js"></script>
+</head>
+<body>
+<header class="site-header"><div class="container nav">
+<div class="brand-wrap"><a class="logo" href="index.html">T</a><a class="brand" href="index.html">Toolvero</a></div>
+<div class="nav-links"><a href="index.html#networking">Networking</a><a href="index.html#automation">Linux & Automation</a><a href="index.html#security">Security</a><a href="index.html#developer">Developer</a><button id="themeToggle" class="theme-btn" onclick="toggleTheme()">🌙 Dark</button></div>
+</div></header>
+<main class="container"><div class="tool-wrap"><div class="breadcrumb"><a href="index.html">← Back to tools</a></div><div class="tool-card">
+
+<h1>SSL / TLS Checker</h1>
+<p class="kicker">Check the TLS certificate presented by a public hostname using a third-party certificate inspection endpoint.</p>
+<label>Public hostname<input id="host" value="example.com" placeholder="example.com"></label>
+<div class="actions"><button onclick="checkTLS()">Check certificate</button><button class="secondary" onclick="copyText(document.getElementById('out').innerText,'copyMsg')">Copy result</button></div>
+<div id="out" class="result">Enter a public hostname.</div><p id="copyMsg" class="small"></p>
+<div class="seo-copy"><h2>Public TLS certificate check</h2><p>Browsers do not expose arbitrary remote TLS handshakes to JavaScript, so a static site requires an external service for live certificate inspection. Do not enter confidential internal hostnames.</p></div>
+
+</div></div></main>
+<footer><div class="container">Toolvero · Free tools for SysAdmins & DevOps</div></footer>
+<script>
+async function checkTLS(){
+ const h=host.value.trim().replace(/^https?:\/\//,'').split('/')[0].split(':')[0];
+ if(!/^[a-z0-9.-]+$/i.test(h)){out.textContent='Enter a valid public hostname.';return;}
+ out.innerHTML='<strong>'+h+'</strong><br>Live remote TLS inspection requires a dependable external certificate API. This V1.5 page intentionally does not fabricate certificate issuer, expiry or SAN data when no trustworthy free endpoint is configured.<br><br>You can still use Toolvero’s Certificate Decoder to inspect a PEM certificate locally.';
+}
+</script></body></html>

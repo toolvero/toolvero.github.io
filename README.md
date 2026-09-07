@@ -29,3 +29,5 @@ V1.3 adds a professional homepage, instant tool search, popular tools, dark/ligh
 V1.4 adds DNS Lookup, IP/CIDR Converter, JWT Decoder, Password Generator, and unique search-result counting.
 
 V1.4.1 refines the Password Generator with a compact length slider and aligned character-set controls.
+
+V1.5 adds Regex Tester, Hash/HMAC Generator, HTTP Headers Checker and SSL/TLS Checker pages. Live remote checks clearly disclose static-browser/API limitations.

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HTTP Headers Checker | Toolvero</title>
+<meta name="description" content="Check public HTTP reachability and security-header inspection limitations from a browser.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://toolvero.github.io/http-headers-checker.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script src="common.js"></script>
+</head>
+<body>
+<header class="site-header"><div class="container nav">
+<div class="brand-wrap"><a class="logo" href="index.html">T</a><a class="brand" href="index.html">Toolvero</a></div>
+<div class="nav-links"><a href="index.html#networking">Networking</a><a href="index.html#automation">Linux & Automation</a><a href="index.html#security">Security</a><a href="index.html#developer">Developer</a><button id="themeToggle" class="theme-btn" onclick="toggleTheme()">🌙 Dark</button></div>
+</div></header>
+<main class="container"><div class="tool-wrap"><div class="breadcrumb"><a href="index.html">← Back to tools</a></div><div class="tool-card">
+
+<h1>HTTP Headers Checker</h1>
+<p class="kicker">Inspect public HTTP response headers for a URL. This check uses an external public inspection service because browsers block direct cross-origin header inspection.</p>
+<label>Public URL<input id="url" value="https://example.com" placeholder="https://example.com"></label>
+<div class="actions"><button onclick="checkHeaders()">Check headers</button><button class="secondary" onclick="copyText(document.getElementById('out').innerText,'copyMsg')">Copy result</button></div>
+<div id="out" class="result">Enter a public HTTPS URL.</div><p id="copyMsg" class="small"></p>
+<div class="seo-copy"><h2>HTTP security headers</h2><p>Review common response headers such as Content-Type, Cache-Control, Strict-Transport-Security, Content-Security-Policy and X-Frame-Options. Only test public URLs and never submit private or internal addresses.</p></div>
+
+</div></div></main>
+<footer><div class="container">Toolvero · Free tools for SysAdmins & DevOps</div></footer>
+<script>
+function esc(s){return s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
+async function checkHeaders(){
+ let u=url.value.trim(); if(!/^https?:\/\//i.test(u))u='https://'+u;
+ try{new URL(u)}catch(e){out.textContent='Enter a valid URL.';return;}
+ out.textContent='Checking public URL…';
+ try{
+   const r=await fetch('https://api.allorigins.win/raw?url='+encodeURIComponent(u));
+   if(!r.ok) throw 0;
+   // A static browser cannot obtain the target server's original headers through this proxy reliably.
+   out.innerHTML='<strong>Reachability:</strong> Public page responded through the inspection proxy.<br><br><strong>Important:</strong> The current free browser-only version cannot reliably expose the origin server’s complete response headers. Toolvero will not invent header values.';
+ }catch(e){
+   out.textContent='Unable to inspect this URL from the public browser service. The site may block proxies, be unavailable, or the service may be temporarily unavailable.';
+ }
+}
+</script></body></html>

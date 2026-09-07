@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hash / HMAC Generator | Toolvero</title>
+<meta name="description" content="Generate SHA-1, SHA-256, SHA-384, SHA-512 hashes and HMAC signatures locally.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://toolvero.github.io/hash-hmac-generator.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script src="common.js"></script>
+</head>
+<body>
+<header class="site-header"><div class="container nav">
+<div class="brand-wrap"><a class="logo" href="index.html">T</a><a class="brand" href="index.html">Toolvero</a></div>
+<div class="nav-links"><a href="index.html#networking">Networking</a><a href="index.html#automation">Linux & Automation</a><a href="index.html#security">Security</a><a href="index.html#developer">Developer</a><button id="themeToggle" class="theme-btn" onclick="toggleTheme()">🌙 Dark</button></div>
+</div></header>
+<main class="container"><div class="tool-wrap"><div class="breadcrumb"><a href="index.html">← Back to tools</a></div><div class="tool-card">
+
+<h1>Hash / HMAC Generator</h1>
+<p class="kicker">Generate SHA hashes and HMAC signatures locally with the Web Crypto API.</p>
+<label>Input text<textarea id="input" placeholder="Text to hash">Toolvero</textarea></label>
+<div class="cols-2"><label>Algorithm<select id="algo"><option>SHA-1</option><option selected>SHA-256</option><option>SHA-384</option><option>SHA-512</option></select></label><label>Mode<select id="mode" onchange="toggleSecret()"><option value="hash">Hash</option><option value="hmac">HMAC</option></select></label></div>
+<label id="secretWrap" style="display:none">HMAC secret<input id="secret" type="password" placeholder="Secret key"></label>
+<div class="actions"><button onclick="generateHash()">Generate</button><button class="secondary" onclick="copyText(document.getElementById('out').textContent,'copyMsg')">Copy</button></div>
+<div id="out" class="cron-preview">Result will appear here</div><p id="copyMsg" class="small"></p>
+<div class="seo-copy"><h2>Hash and HMAC utility</h2><p>Generate SHA-1, SHA-256, SHA-384 and SHA-512 digests or HMAC signatures locally. HMAC combines a secret key with the selected hash algorithm for message authentication.</p></div>
+
+</div></div></main>
+<footer><div class="container">Toolvero · Free tools for SysAdmins & DevOps</div></footer>
+<script>
+const enc=new TextEncoder();
+function hex(buf){return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('');}
+function toggleSecret(){secretWrap.style.display=mode.value==='hmac'?'block':'none';}
+async function generateHash(){
+ try{
+  let result;
+  if(mode.value==='hash') result=await crypto.subtle.digest(algo.value,enc.encode(input.value));
+  else{
+   if(!secret.value){out.textContent='Enter an HMAC secret.';return;}
+   const key=await crypto.subtle.importKey('raw',enc.encode(secret.value),{name:'HMAC',hash:algo.value},false,['sign']);
+   result=await crypto.subtle.sign('HMAC',key,enc.encode(input.value));
+  }
+  out.textContent=hex(result);copyMsg.textContent='';
+ }catch(e){out.textContent='Unable to generate result.';}
+}
+generateHash();
+</script></body></html>

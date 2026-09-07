@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Regex Tester | Toolvero</title>
+<meta name="description" content="Free browser-based JavaScript regex tester with flags, match count and positions.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://toolvero.github.io/regex-tester.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script src="common.js"></script>
+</head>
+<body>
+<header class="site-header"><div class="container nav">
+<div class="brand-wrap"><a class="logo" href="index.html">T</a><a class="brand" href="index.html">Toolvero</a></div>
+<div class="nav-links"><a href="index.html#networking">Networking</a><a href="index.html#automation">Linux & Automation</a><a href="index.html#security">Security</a><a href="index.html#developer">Developer</a><button id="themeToggle" class="theme-btn" onclick="toggleTheme()">🌙 Dark</button></div>
+</div></header>
+<main class="container"><div class="tool-wrap"><div class="breadcrumb"><a href="index.html">← Back to tools</a></div><div class="tool-card">
+
+<h1>Regex Tester</h1>
+<p class="kicker">Test JavaScript regular expressions locally and inspect matches instantly.</p>
+<div class="cols-2"><label>Regular expression<input id="pattern" value="\b\w+@\w+\.\w+\b" placeholder="e.g. \d+"></label><label>Flags<input id="flags" value="gi" placeholder="gim"></label></div>
+<label>Test text<textarea id="text">Contact admin@example.com or support@toolvero.dev for help.</textarea></label>
+<div class="actions"><button onclick="testRegex()">Test regex</button><button class="ghost" onclick="clearRegex()">Clear</button></div>
+<div id="regexInfo" class="result">Run the test to see matches.</div>
+<div id="matches" class="result"></div>
+<div class="seo-copy"><h2>Browser-based regex tester</h2><p>Test patterns and JavaScript regex flags without sending your sample text to a server. Useful for validating log parsing, configuration rules and application input patterns.</p></div>
+
+</div></div></main>
+<footer><div class="container">Toolvero · Free tools for SysAdmins & DevOps</div></footer>
+<script>
+function esc(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function testRegex(){
+ try{
+  const f=flags.value, rx=new RegExp(pattern.value,f), s=text.value;
+  let arr=[], m;
+  if(f.includes('g')){while((m=rx.exec(s))!==null){arr.push({v:m[0],i:m.index});if(m[0]==='')rx.lastIndex++;}}
+  else {m=rx.exec(s);if(m)arr.push({v:m[0],i:m.index});}
+  regexInfo.textContent=arr.length+' match'+(arr.length===1?'':'es');
+  matches.innerHTML=arr.length?arr.map((x,i)=>'<strong>#'+(i+1)+'</strong> at '+x.i+': <code>'+esc(x.v)+'</code>').join('<br>'):'No matches.';
+ }catch(e){regexInfo.textContent='Invalid regular expression: '+e.message;matches.textContent='';}
+}
+function clearRegex(){pattern.value='';flags.value='g';text.value='';regexInfo.textContent='Run the test to see matches.';matches.textContent='';}
+testRegex();
+</script></body></html>

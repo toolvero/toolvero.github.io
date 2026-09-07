@@ -50,7 +50,7 @@
   <div class="search-box">
     <span class="search-icon">⌕</span>
     <input id="toolSearch" type="search" placeholder="Search tools — e.g. cron, SSL, JSON, subnet..." oninput="filterTools()">
-    <span id="searchCount" class="search-count">14 tools</span>
+    <span id="searchCount" class="search-count">18 tools</span>
   </div>
 </div>
 
@@ -82,6 +82,8 @@
 
   <div class="section-title-row" id="security"><h2>Security & Encoding</h2><span>Certificates, hashes & encoding</span></div>
   <div class="grid">
+    <a class="card tool-item" data-search="ssl tls checker certificate expiry domain security" href="ssl-tls-checker.html"><div class="icon">🔐</div><h3>SSL / TLS Checker</h3><p>Check public TLS certificate inspection options and limitations.</p><span class="tag">Security</span></a>
+    <a class="card tool-item" data-search="http headers checker hsts csp x-frame-options security web" href="http-headers-checker.html"><div class="icon">🌐</div><h3>HTTP Headers Checker</h3><p>Inspect public web reachability and security-header checks.</p><span class="tag">Security</span></a>
     <a class="card tool-item" data-search="jwt decoder json web token header payload security developer" href="jwt-decoder.html"><div class="icon">🎟️</div><h3>JWT Decoder</h3><p>Decode JWT headers, payloads and expiration locally.</p><span class="tag">Security</span></a>
     <a class="card tool-item" data-search="password generator random secure security crypto" href="password-generator.html"><div class="icon">🔑</div><h3>Password Generator</h3><p>Generate secure customizable passwords locally.</p><span class="tag">Security</span></a>
     <a class="card tool-item" data-search="ssl tls x509 certificate decoder pem subject issuer security" href="certificate-decoder.html"><div class="icon">📜</div><h3>Certificate Decoder</h3><p>Inspect X.509 subject, issuer, validity dates and extensions.</p><span class="tag">Security</span></a>
@@ -92,6 +94,8 @@
 
   <div class="section-title-row" id="developer"><h2>Developer utilities</h2><span>Everyday development helpers</span></div>
   <div class="grid">
+    <a class="card tool-item" data-search="regex regular expression tester javascript matches developer" href="regex-tester.html"><div class="icon">.*</div><h3>Regex Tester</h3><p>Test JavaScript regex patterns, flags and matches locally.</p><span class="tag">Developer</span></a>
+    <a class="card tool-item" data-search="hash hmac sha1 sha256 sha384 sha512 crypto developer security" href="hash-hmac-generator.html"><div class="icon">#</div><h3>Hash / HMAC Generator</h3><p>Generate SHA hashes and HMAC signatures locally.</p><span class="tag">Developer</span></a>
     <a class="card tool-item" data-search="json formatter validator minify developer" href="json.html"><div class="icon">🧩</div><h3>JSON Formatter</h3><p>Validate, pretty-print and minify JSON instantly.</p><span class="tag">Developer</span></a>
     <a class="card tool-item" data-search="unix timestamp epoch date converter time developer" href="timestamp.html"><div class="icon">🕒</div><h3>Unix Timestamp</h3><p>Convert Unix timestamps to dates and dates back to Unix time.</p><span class="tag">Developer</span></a>
     <a class="card tool-item" data-search="uuid v4 generator guid identifier developer" href="uuid.html"><div class="icon">🆔</div><h3>UUID Generator</h3><p>Generate one or multiple UUID v4 identifiers instantly.</p><span class="tag">Developer</span></a>
@@ -118,7 +122,7 @@ function filterTools(){
     item.classList.toggle('hidden-card',!show);
     if(show) visibleHrefs.add(item.getAttribute('href'));
   });
-  document.getElementById('searchCount').textContent = q ? `${visibleHrefs.size} matches` : '14 tools';
+  document.getElementById('searchCount').textContent = q ? `${visibleHrefs.size} matches` : '18 tools';
   const groups=[...document.querySelectorAll('main .grid')];
   groups.forEach(grid=>{
     const cards=[...grid.querySelectorAll('.tool-item')];

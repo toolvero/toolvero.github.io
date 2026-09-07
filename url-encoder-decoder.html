@@ -28,8 +28,8 @@
 <p class="kicker">Encode text for URLs or decode percent-encoded strings locally.</p>
 <label>Input<textarea id="input" style="min-height:180px" placeholder="https://example.com/search?q=hello world"></textarea></label>
 <div class="actions">
-<button onclick="encodeURL()">Encode</button>
-<button class="secondary" onclick="decodeURL()">Decode</button>
+<button id="encodeBtn" onclick="encodeURL()">Encode</button>
+<button id="decodeBtn" class="secondary" onclick="decodeURL()">Decode</button>
 <button class="secondary" onclick="loadExample()">Load example</button>
 <button class="ghost" onclick="clearAll()">Clear</button>
 </div>
@@ -42,15 +42,16 @@
 </div></main>
 <footer><div class="container">Toolvero · Free tools for SysAdmins & DevOps</div></footer>
 <script>
+function setMode(mode){encodeBtn.className=mode==='encode'?'':'secondary';decodeBtn.className=mode==='decode'?'':'secondary';}
 function encodeURL(){
- try{output.value=encodeURIComponent(input.value);status.className='result ok';status.textContent='Encoded successfully.'}
+ try{output.value=encodeURIComponent(input.value);setMode('encode');status.className='result ok';status.textContent='Encoded successfully.'}
  catch(e){status.className='result error';status.textContent='Unable to encode input.'}
 }
 function decodeURL(){
- try{output.value=decodeURIComponent(input.value);status.className='result ok';status.textContent='Decoded successfully.'}
+ try{output.value=decodeURIComponent(input.value);setMode('decode');status.className='result ok';status.textContent='Decoded successfully.'}
  catch(e){status.className='result error';status.textContent='Invalid percent-encoded input.'}
 }
 function loadExample(){input.value='https://example.com/search?q=hello world&lang=en';encodeURL();}
-function clearAll(){input.value='';output.value='';status.className='result';status.textContent='Ready.';}
+function clearAll(){input.value='';output.value='';setMode('encode');status.className='result';status.textContent='Ready.';}
 </script>
 </body></html>

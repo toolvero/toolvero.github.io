@@ -29,7 +29,7 @@
 
 <h3>CPU</h3>
 <div class="cols-2">
-<label>Value<input id="cpuValue" type="number" step="any" value="500"></label>
+<label>Value<input id="cpuValue" type="text" value="500m" placeholder="e.g. 500m or 2"></label>
 <label>Unit<select id="cpuUnit"><option value="m">millicores (m)</option><option value="core">cores</option></select></label>
 </div>
 <button onclick="convertCPU()">Convert CPU</button>
@@ -37,7 +37,7 @@
 
 <h3 style="margin-top:28px">Memory</h3>
 <div class="cols-2">
-<label>Value<input id="memValue" type="number" step="any" value="512"></label>
+<label>Value<input id="memValue" type="text" value="512Mi" placeholder="e.g. 512Mi or 2Gi"></label>
 <label>Unit<select id="memUnit"><option>Ki</option><option selected>Mi</option><option>Gi</option><option>Ti</option><option>bytes</option></select></label>
 </div>
 <button onclick="convertMemory()">Convert memory</button>
@@ -50,16 +50,27 @@
 <script>
 function fmt(n){return Number(n.toFixed(6)).toLocaleString('en-US',{maximumFractionDigits:6});}
 function convertCPU(){
- const v=Number(cpuValue.value);
- if(!Number.isFinite(v)||v<0){cpuOut.textContent='Enter a valid CPU value.';return;}
- const cores=cpuUnit.value==='m'?v/1000:v;
+ const raw=cpuValue.value.trim();
+ const m=raw.match(/^([0-9]*\.?[0-9]+)\s*(m|cores?|core)?$/i);
+ if(!m){cpuOut.textContent='Enter a valid CPU value such as 500m or 2.';return;}
+ const v=Number(m[1]);
+ const typed=(m[2]||'').toLowerCase();
+ const unit=typed==='m'?'m':(typed?'core':cpuUnit.value);
+ cpuUnit.value=unit;
+ const cores=unit==='m'?v/1000:v;
  cpuOut.innerHTML=`<strong>Cores:</strong> ${fmt(cores)}<br><strong>Millicores:</strong> ${fmt(cores*1000)}m`;
 }
 function convertMemory(){
- const v=Number(memValue.value);
- if(!Number.isFinite(v)||v<0){memOut.textContent='Enter a valid memory value.';return;}
+ const raw=memValue.value.trim();
+ const m=raw.match(/^([0-9]*\.?[0-9]+)\s*(Ki|Mi|Gi|Ti|bytes?|B)?$/i);
+ if(!m){memOut.textContent='Enter a valid memory value such as 512Mi or 2Gi.';return;}
+ const v=Number(m[1]);
+ let typed=m[2]||'';
+ const map={ki:'Ki',mi:'Mi',gi:'Gi',ti:'Ti',byte:'bytes',bytes:'bytes',b:'bytes'};
+ const unit=typed?map[typed.toLowerCase()]:memUnit.value;
+ memUnit.value=unit;
  const f={Ki:1024,Mi:1024**2,Gi:1024**3,Ti:1024**4,bytes:1};
- const b=v*f[memUnit.value];
+ const b=v*f[unit];
  memOut.innerHTML=`<strong>Bytes:</strong> ${fmt(b)}<br><strong>Ki:</strong> ${fmt(b/1024)} Ki<br><strong>Mi:</strong> ${fmt(b/1024**2)} Mi<br><strong>Gi:</strong> ${fmt(b/1024**3)} Gi<br><strong>Ti:</strong> ${fmt(b/1024**4)} Ti`;
 }
 convertCPU();convertMemory();

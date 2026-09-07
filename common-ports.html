@@ -38,7 +38,9 @@ const PORTS=[{"port": 20, "protocol": "TCP", "service": "FTP Data"}, {"port": 21
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 function renderPorts(){
  const q=query.value.trim().toLowerCase();
- const rows=PORTS.filter(x=>!q||String(x.port).includes(q)||x.protocol.toLowerCase().includes(q)||x.service.toLowerCase().includes(q));
+ const numeric=/^\d+$/.test(q);
+ const exact=numeric?PORTS.filter(x=>String(x.port)===q):[];
+ const rows=exact.length?exact:PORTS.filter(x=>!q||String(x.port).includes(q)||x.protocol.toLowerCase().includes(q)||x.service.toLowerCase().includes(q));
  count.textContent=rows.length+' result'+(rows.length===1?'':'s');
  portsTable.innerHTML=`<table><thead><tr><th>Port</th><th>Protocol</th><th>Service</th></tr></thead><tbody>${rows.map(x=>`<tr><td>${x.port}</td><td>${esc(x.protocol)}</td><td>${esc(x.service)}</td></tr>`).join('')}</tbody></table>`;
 }

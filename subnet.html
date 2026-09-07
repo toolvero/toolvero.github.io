@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Subnet Calculator | Toolvero</title>
+<meta name="description" content="Calculadora IPv4 y CIDR gratuita.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a href="index.html" class="brand">Toolvero</a>
+    <small>Herramientas gratuitas para SysAdmins y DevOps</small>
+  </div>
+</header>
+<main class="container">
+  <div class="tool-wrap">
+    <div class="breadcrumb"><a href="index.html">← Volver a herramientas</a></div>
+    
+<div class="tool-card">
+<h1>Subnet Calculator</h1>
+<p class="kicker">IPv4 + CIDR → red, máscara, broadcast, rango y cantidad de hosts.</p>
+<div class="cols-2">
+<label>Dirección IP<input id="ip" value="192.168.1.10"></label>
+<label>CIDR<input id="cidr" type="number" min="0" max="32" value="24"></label>
+</div>
+<button onclick="calc()">Calcular</button>
+<div id="out" class="result"></div>
+</div>
+
+  </div>
+</main>
+<footer><div class="container">Toolvero · Gratis · Sin registro · Procesamiento local cuando es posible</div></footer>
+<script src="common.js"></script>
+<script>
+function ipToInt(ip){
+ const p=ip.split('.').map(Number);
+ if(p.length!==4||p.some(x=>!Number.isInteger(x)||x<0||x>255)) throw Error('Dirección IPv4 inválida.');
+ return (((p[0]<<24)>>>0)+((p[1]<<16)>>>0)+((p[2]<<8)>>>0)+p[3])>>>0;
+}
+function intToIp(n){return[(n>>>24)&255,(n>>>16)&255,(n>>>8)&255,n&255].join('.');}
+function calc(){
+ const out=document.getElementById('out');
+ try{
+  const ip=document.getElementById('ip').value.trim(), c=Number(document.getElementById('cidr').value);
+  if(!Number.isInteger(c)||c<0||c>32) throw Error('CIDR inválido.');
+  const n=ipToInt(ip), mask=c===0?0:(0xFFFFFFFF<<(32-c))>>>0;
+  const net=(n&mask)>>>0, bc=(net|(~mask>>>0))>>>0;
+  const usable=c<=30?Math.max(0,2**(32-c)-2):(c===31?2:1);
+  const range=c<=30?`${intToIp((net+1)>>>0)} - ${intToIp((bc-1)>>>0)}`:`${intToIp(net)} - ${intToIp(bc)}`;
+  out.className='result';
+  out.innerHTML=`<strong>Red:</strong> ${intToIp(net)}/${c}<br><strong>Máscara:</strong> ${intToIp(mask)}<br><strong>Broadcast:</strong> ${intToIp(bc)}<br><strong>Rango:</strong> ${range}<br><strong>Hosts utilizables:</strong> ${usable.toLocaleString()}`;
+ }catch(e){out.className='result error'; out.textContent=e.message;}
+}
+calc();
+</script>
+</body>
+</html>

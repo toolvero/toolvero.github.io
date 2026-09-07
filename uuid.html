@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UUID Generator | Toolvero</title>
+<meta name="description" content="Generador gratuito de UUID v4.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a href="index.html" class="brand">Toolvero</a>
+    <small>Herramientas gratuitas para SysAdmins y DevOps</small>
+  </div>
+</header>
+<main class="container">
+  <div class="tool-wrap">
+    <div class="breadcrumb"><a href="index.html">← Volver a herramientas</a></div>
+    
+<div class="tool-card">
+<h1>UUID v4 Generator</h1>
+<p class="kicker">Generá uno o varios UUID v4.</p>
+<label>Cantidad<input id="count" type="number" min="1" max="100" value="5"></label>
+<div class="actions"><button onclick="gen()">Generar</button><button class="secondary" onclick="copyText(document.getElementById('out').textContent,'msg')">Copiar todos</button></div>
+<p id="msg" class="small"></p>
+<pre id="out" class="result"></pre>
+</div>
+  </div>
+</main>
+<footer><div class="container">Toolvero · Gratis · Sin registro · Procesamiento local cuando es posible</div></footer>
+<script src="common.js"></script>
+<script>
+function gen(){let n=Math.max(1,Math.min(100,Number(document.getElementById('count').value)||1));document.getElementById('out').textContent=Array.from({length:n},()=>crypto.randomUUID()).join('\n')}
+gen();
+</script>
+</body>
+</html>

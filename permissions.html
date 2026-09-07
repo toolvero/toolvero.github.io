@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Linux Permissions | Toolvero</title>
+<meta name="description" content="Calculadora de permisos Linux rwx y octal.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a href="index.html" class="brand">Toolvero</a>
+    <small>Herramientas gratuitas para SysAdmins y DevOps</small>
+  </div>
+</header>
+<main class="container">
+  <div class="tool-wrap">
+    <div class="breadcrumb"><a href="index.html">← Volver a herramientas</a></div>
+    
+<div class="tool-card">
+<h1>Linux Permissions Calculator</h1>
+<p class="kicker">Marcá permisos para obtener el valor octal y simbólico.</p>
+<div class="cols-3">
+<div><h3>Owner</h3>
+<label><span><input type="checkbox" class="p" data-g="0" data-v="4" checked> Read</span></label>
+<label><span><input type="checkbox" class="p" data-g="0" data-v="2" checked> Write</span></label>
+<label><span><input type="checkbox" class="p" data-g="0" data-v="1" checked> Execute</span></label>
+</div>
+<div><h3>Group</h3>
+<label><span><input type="checkbox" class="p" data-g="1" data-v="4" checked> Read</span></label>
+<label><span><input type="checkbox" class="p" data-g="1" data-v="2"> Write</span></label>
+<label><span><input type="checkbox" class="p" data-g="1" data-v="1" checked> Execute</span></label>
+</div>
+<div><h3>Others</h3>
+<label><span><input type="checkbox" class="p" data-g="2" data-v="4" checked> Read</span></label>
+<label><span><input type="checkbox" class="p" data-g="2" data-v="2"> Write</span></label>
+<label><span><input type="checkbox" class="p" data-g="2" data-v="1" checked> Execute</span></label>
+</div>
+</div>
+<div class="result"><strong>Octal:</strong> <span id="oct">755</span><br><strong>Simbólico:</strong> <span id="sym">rwxr-xr-x</span></div>
+</div>
+  </div>
+</main>
+<footer><div class="container">Toolvero · Gratis · Sin registro · Procesamiento local cuando es posible</div></footer>
+<script src="common.js"></script>
+<script>
+function upd(){
+ let g=[0,0,0];
+ document.querySelectorAll('.p').forEach(c=>{if(c.checked)g[+c.dataset.g]+=+c.dataset.v});
+ document.getElementById('oct').textContent=g.join('');
+ document.getElementById('sym').textContent=g.map(n=>`${n&4?'r':'-'}${n&2?'w':'-'}${n&1?'x':'-'}`).join('');
+}
+document.querySelectorAll('.p').forEach(c=>c.addEventListener('change',upd)); upd();
+</script>
+</body>
+</html>

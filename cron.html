@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cron Generator | Toolvero</title>
+<meta name="description" content="Generador de expresiones cron personalizadas.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a href="index.html" class="brand">Toolvero</a>
+    <small>Herramientas gratuitas para SysAdmins y DevOps</small>
+  </div>
+</header>
+<main class="container">
+  <div class="tool-wrap">
+    <div class="breadcrumb"><a href="index.html">← Volver a herramientas</a></div>
+    
+<div class="tool-card">
+<h1>Cron Generator</h1>
+<p class="kicker">Construí tu cron campo por campo. Podés usar valores específicos, todos los valores (*) o intervalos como */5.</p>
+
+<div class="cron-row">
+  <label>Minuto
+    <select id="minuteMode" onchange="renderField('minute')">
+      <option value="any">Cada minuto (*)</option>
+      <option value="specific">Minuto específico</option>
+      <option value="step">Cada X minutos</option>
+    </select>
+  </label>
+  <label id="minuteValueWrap" style="display:none">Valor
+    <input id="minuteValue" type="number" min="0" max="59" value="0" oninput="buildCron()">
+  </label>
+</div>
+
+<div class="cron-row">
+  <label>Hora
+    <select id="hourMode" onchange="renderField('hour')">
+      <option value="any">Cada hora (*)</option>
+      <option value="specific" selected>Hora específica</option>
+      <option value="step">Cada X horas</option>
+    </select>
+  </label>
+  <label id="hourValueWrap">Valor
+    <input id="hourValue" type="number" min="0" max="23" value="2" oninput="buildCron()">
+  </label>
+</div>
+
+<div class="cron-row">
+  <label>Día del mes
+    <select id="domMode" onchange="renderField('dom')">
+      <option value="any" selected>Cualquier día (*)</option>
+      <option value="specific">Día específico</option>
+      <option value="step">Cada X días</option>
+    </select>
+  </label>
+  <label id="domValueWrap" style="display:none">Valor
+    <input id="domValue" type="number" min="1" max="31" value="1" oninput="buildCron()">
+  </label>
+</div>
+
+<div class="cron-row">
+  <label>Mes
+    <select id="monthMode" onchange="renderField('month')">
+      <option value="any" selected>Cualquier mes (*)</option>
+      <option value="specific">Mes específico</option>
+      <option value="step">Cada X meses</option>
+    </select>
+  </label>
+  <label id="monthValueWrap" style="display:none">Valor
+    <select id="monthValue" onchange="buildCron()">
+      <option value="1">Enero</option><option value="2">Febrero</option><option value="3">Marzo</option>
+      <option value="4">Abril</option><option value="5">Mayo</option><option value="6">Junio</option>
+      <option value="7">Julio</option><option value="8">Agosto</option><option value="9">Septiembre</option>
+      <option value="10">Octubre</option><option value="11">Noviembre</option><option value="12">Diciembre</option>
+    </select>
+  </label>
+</div>
+
+<div class="cron-row">
+  <label>Día de la semana
+    <select id="dowMode" onchange="renderField('dow')">
+      <option value="any" selected>Cualquier día (*)</option>
+      <option value="specific">Día específico</option>
+      <option value="weekday">Lunes a viernes</option>
+    </select>
+  </label>
+  <label id="dowValueWrap" style="display:none">Valor
+    <select id="dowValue" onchange="buildCron()">
+      <option value="0">Domingo</option><option value="1">Lunes</option><option value="2">Martes</option>
+      <option value="3">Miércoles</option><option value="4">Jueves</option><option value="5">Viernes</option>
+      <option value="6">Sábado</option>
+    </select>
+  </label>
+</div>
+
+<div class="cron-preview"><code id="cronOut">* 2 * * *</code></div>
+<div class="actions">
+  <button onclick="copyText(document.getElementById('cronOut').textContent,'copyMsg')">Copiar cron</button>
+  <button class="secondary" onclick="presetDaily()">Todos los días 02:00</button>
+  <button class="secondary" onclick="presetWeekdays()">Lun-Vie 09:00</button>
+  <button class="secondary" onclick="preset15()">Cada 15 min</button>
+</div>
+<p id="copyMsg" class="small"></p>
+<div id="desc" class="result"></div>
+
+<div class="result">
+<strong>Formato:</strong><br>
+<code>minuto hora día_del_mes mes día_de_semana</code>
+</div>
+</div>
+
+  </div>
+</main>
+<footer><div class="container">Toolvero · Gratis · Sin registro · Procesamiento local cuando es posible</div></footer>
+<script src="common.js"></script>
+<script>
+const cfg={
+ minute:{min:0,max:59}, hour:{min:0,max:23}, dom:{min:1,max:31}, month:{min:1,max:12}
+};
+function renderField(name){
+ const mode=document.getElementById(name+'Mode').value;
+ const wrap=document.getElementById(name+'ValueWrap');
+ wrap.style.display=(mode==='any'||mode==='weekday')?'none':'grid';
+ buildCron();
+}
+function field(name){
+ const mode=document.getElementById(name+'Mode').value;
+ if(mode==='any') return '*';
+ if(mode==='weekday') return '1-5';
+ const el=document.getElementById(name+'Value');
+ let v=Number(el.value);
+ const c=cfg[name];
+ if(c){ v=Math.max(c.min,Math.min(c.max,v||c.min)); el.value=v; }
+ return mode==='step' ? `*/${v}` : String(v);
+}
+function buildCron(){
+ const exp=[field('minute'),field('hour'),field('dom'),field('month'),field('dow')].join(' ');
+ document.getElementById('cronOut').textContent=exp;
+ document.getElementById('desc').innerHTML='<strong>Interpretación:</strong> '+describe();
+}
+function describe(){
+ const mm=document.getElementById('minuteMode').value, hv=document.getElementById('hourMode').value;
+ const dm=document.getElementById('domMode').value, mo=document.getElementById('monthMode').value, dw=document.getElementById('dowMode').value;
+ const minute=field('minute'), hour=field('hour'), dom=field('dom'), month=field('month'), dow=field('dow');
+ if(minute==='*'&&hour==='*'&&dom==='*'&&month==='*'&&dow==='*') return 'Se ejecuta cada minuto.';
+ if(mm==='step'&&hour==='*'&&dom==='*'&&month==='*'&&dow==='*') return `Se ejecuta cada ${minute.replace('*/','')} minutos.`;
+ let parts=[];
+ if(hour!=='*' && mm!=='step') parts.push(`a las ${String(hour).padStart(2,'0')}:${minute==='*'?'cada minuto':String(minute).padStart(2,'0')}`);
+ else if(hour==='*') parts.push(minute==='*'?'cada minuto':`en el minuto ${minute} de cada hora`);
+ if(dm==='specific') parts.push(`el día ${dom} del mes`);
+ if(dm==='step') parts.push(`cada ${dom.replace('*/','')} días`);
+ if(mo==='specific') parts.push(`en el mes ${month}`);
+ if(mo==='step') parts.push(`cada ${month.replace('*/','')} meses`);
+ if(dw==='specific') parts.push(`el día de semana ${dow}`);
+ if(dw==='weekday') parts.push('de lunes a viernes');
+ return 'Se ejecuta '+(parts.length?parts.join(', '):'según la expresión indicada')+'.';
+}
+function setMode(name,mode,val){
+ document.getElementById(name+'Mode').value=mode;
+ if(val!==undefined && document.getElementById(name+'Value')) document.getElementById(name+'Value').value=val;
+ renderField(name);
+}
+function presetDaily(){
+ setMode('minute','specific',0); setMode('hour','specific',2); setMode('dom','any'); setMode('month','any'); setMode('dow','any');
+ buildCron();
+}
+function presetWeekdays(){
+ setMode('minute','specific',0); setMode('hour','specific',9); setMode('dom','any'); setMode('month','any'); setMode('dow','weekday');
+ buildCron();
+}
+function preset15(){
+ setMode('minute','step',15); setMode('hour','any'); setMode('dom','any'); setMode('month','any'); setMode('dow','any');
+ buildCron();
+}
+['minute','hour','dom','month','dow'].forEach(renderField);
+buildCron();
+</script>
+</body>
+</html>

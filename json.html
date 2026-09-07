@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JSON Formatter | Toolvero</title>
+<meta name="description" content="Validador y formateador JSON.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a href="index.html" class="brand">Toolvero</a>
+    <small>Herramientas gratuitas para SysAdmins y DevOps</small>
+  </div>
+</header>
+<main class="container">
+  <div class="tool-wrap">
+    <div class="breadcrumb"><a href="index.html">← Volver a herramientas</a></div>
+    
+<div class="tool-card">
+<h1>JSON Formatter & Validator</h1>
+<p class="kicker">Pegá JSON para validarlo, formatearlo o minificarlo.</p>
+<label>JSON<textarea id="txt" placeholder='{"name":"Toolvero"}'></textarea></label>
+<div class="actions"><button onclick="fmt()">Formatear</button><button class="secondary" onclick="mini()">Minificar</button></div>
+<div id="status" class="result"></div>
+</div>
+  </div>
+</main>
+<footer><div class="container">Toolvero · Gratis · Sin registro · Procesamiento local cuando es posible</div></footer>
+<script src="common.js"></script>
+<script>
+function parse(){return JSON.parse(document.getElementById('txt').value)}
+function fmt(){const s=document.getElementById('status');try{document.getElementById('txt').value=JSON.stringify(parse(),null,2);s.className='result ok';s.textContent='JSON válido.'}catch(e){s.className='result error';s.textContent=e.message}}
+function mini(){const s=document.getElementById('status');try{document.getElementById('txt').value=JSON.stringify(parse());s.className='result ok';s.textContent='JSON válido y minificado.'}catch(e){s.className='result error';s.textContent=e.message}}
+</script>
+</body>
+</html>

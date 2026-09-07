@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SHA-256 Generator | Toolvero</title>
+<meta name="description" content="Generador SHA-256 gratuito.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a href="index.html" class="brand">Toolvero</a>
+    <small>Herramientas gratuitas para SysAdmins y DevOps</small>
+  </div>
+</header>
+<main class="container">
+  <div class="tool-wrap">
+    <div class="breadcrumb"><a href="index.html">← Volver a herramientas</a></div>
+    
+<div class="tool-card">
+<h1>SHA-256 Generator</h1>
+<p class="kicker">Generá un hash SHA-256 localmente con Web Crypto.</p>
+<label>Texto<textarea id="txt"></textarea></label>
+<button onclick="hashIt()">Generar SHA-256</button>
+<div id="out" class="result"></div>
+</div>
+  </div>
+</main>
+<footer><div class="container">Toolvero · Gratis · Sin registro · Procesamiento local cuando es posible</div></footer>
+<script src="common.js"></script>
+<script>
+async function hashIt(){
+ const data=new TextEncoder().encode(document.getElementById('txt').value);
+ const buf=await crypto.subtle.digest('SHA-256',data);
+ document.getElementById('out').textContent=Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+</script>
+</body>
+</html>

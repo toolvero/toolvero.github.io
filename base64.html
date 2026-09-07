@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Base64 | Toolvero</title>
+<meta name="description" content="Codificador y decodificador Base64.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a href="index.html" class="brand">Toolvero</a>
+    <small>Herramientas gratuitas para SysAdmins y DevOps</small>
+  </div>
+</header>
+<main class="container">
+  <div class="tool-wrap">
+    <div class="breadcrumb"><a href="index.html">← Volver a herramientas</a></div>
+    
+<div class="tool-card">
+<h1>Base64 Encode / Decode</h1>
+<p class="kicker">El procesamiento se realiza localmente en tu navegador.</p>
+<label>Texto<textarea id="txt" placeholder="Ingresá texto..."></textarea></label>
+<div class="actions">
+<button onclick="encode64()">Codificar</button>
+<button class="secondary" onclick="decode64()">Decodificar</button>
+<button class="ghost" onclick="document.getElementById('txt').value=''">Limpiar</button>
+</div>
+<div id="out" class="result"></div>
+</div>
+  </div>
+</main>
+<footer><div class="container">Toolvero · Gratis · Sin registro · Procesamiento local cuando es posible</div></footer>
+<script src="common.js"></script>
+<script>
+function encode64(){try{const s=document.getElementById('txt').value; const b=btoa(unescape(encodeURIComponent(s))); out.className='result'; out.textContent=b;}catch(e){out.className='result error';out.textContent=e.message}}
+function decode64(){try{const s=document.getElementById('txt').value.trim(); const t=decodeURIComponent(escape(atob(s))); out.className='result'; out.textContent=t;}catch(e){out.className='result error';out.textContent='Base64 inválido.'}}
+const out=document.getElementById('out');
+</script>
+</body>
+</html>

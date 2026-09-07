@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Unix Timestamp Converter | Toolvero</title>
+<meta name="description" content="Conversor Unix timestamp y fecha.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a href="index.html" class="brand">Toolvero</a>
+    <small>Herramientas gratuitas para SysAdmins y DevOps</small>
+  </div>
+</header>
+<main class="container">
+  <div class="tool-wrap">
+    <div class="breadcrumb"><a href="index.html">← Volver a herramientas</a></div>
+    
+<div class="tool-card">
+<h1>Unix Timestamp Converter</h1>
+<p class="kicker">Convertí timestamp ↔ fecha/hora.</p>
+<div class="cols-2">
+<label>Unix timestamp<input id="ts" type="number"></label>
+<label>Fecha y hora<input id="dt" type="datetime-local"></label>
+</div>
+<div class="actions"><button onclick="fromTs()">Timestamp → Fecha</button><button class="secondary" onclick="toTs()">Fecha → Timestamp</button><button class="ghost" onclick="now()">Usar ahora</button></div>
+<div id="out" class="result"></div>
+</div>
+  </div>
+</main>
+<footer><div class="container">Toolvero · Gratis · Sin registro · Procesamiento local cuando es posible</div></footer>
+<script src="common.js"></script>
+<script>
+function now(){const d=new Date();document.getElementById('ts').value=Math.floor(d.getTime()/1000);document.getElementById('dt').value=new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,16);fromTs()}
+function fromTs(){const v=Number(document.getElementById('ts').value);const d=new Date(v*1000);document.getElementById('out').innerHTML=`<strong>Local:</strong> ${d.toLocaleString()}<br><strong>UTC:</strong> ${d.toUTCString()}`}
+function toTs(){const d=new Date(document.getElementById('dt').value);document.getElementById('out').innerHTML=`<strong>Unix:</strong> ${Math.floor(d.getTime()/1000)}<br><strong>Milisegundos:</strong> ${d.getTime()}`}
+now();
+</script>
+</body>
+</html>

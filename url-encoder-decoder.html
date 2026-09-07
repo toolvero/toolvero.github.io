@@ -2,14 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>URL Encoder / Decoder | Toolvero</title>
-<meta name="description" content="Free URL percent encoder and decoder for query strings, APIs and redirect URLs.">
+<title>URL Encoder &amp; Decoder – Percent-Encoding Tool | Toolvero</title>
+<meta name="description" content="Encode or decode URL components using percent-encoding in your browser.">
 <meta name="robots" content="index,follow">
-<link rel="canonical" href="https://toolvero.github.io/url-encoder-decoder.html">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="style.css">
 <script src="common.js"></script>
 
+<link rel="canonical" href="https://toolvero.github.io/url-encoder-decoder.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="URL Encoder &amp; Decoder – Percent-Encoding Tool | Toolvero">
+<meta property="og:description" content="Encode or decode URL components using percent-encoding in your browser.">
+<meta property="og:url" content="https://toolvero.github.io/url-encoder-decoder.html">
 </head>
 <body>
 <header class="site-header"><div class="container nav">
@@ -39,7 +43,17 @@
 <div id="status" class="result">Ready.</div>
 <div class="seo-copy"><h2>Percent encoding</h2><p>URL encoding replaces reserved or unsafe characters with percent-encoded values. This is useful when building query strings, redirect URLs and API requests.</p></div>
 </div>
-</div></main>
+</div>
+<section class="tool-seo" aria-label="About this tool">
+  <h2>What is URL encoding?</h2>
+  <p>URLs reserve certain characters for structural meaning. Percent-encoding represents characters using a percent sign followed by hexadecimal bytes so values can safely appear in URL components. Decoding reverses that representation for inspection.</p>
+  <h3>Common uses</h3>
+  <ul><li>Encode query parameter values.</li><li>Decode percent-encoded strings from logs or requests.</li><li>Inspect URLs while debugging web applications and APIs.</li></ul>
+  <h3>Related Toolvero tools</h3>
+  <p class="related-tools"><a href="base64.html">Base64 Encoder/Decoder</a> · <a href="jwt-decoder.html">JWT Decoder</a> · <a href="regex-tester.html">Regex Tester</a></p>
+</section>
+
+</main>
 <footer><div class="container">Toolvero · Free tools for SysAdmins & DevOps</div></footer>
 <script>
 const inputEl = document.getElementById('input');

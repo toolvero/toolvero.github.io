@@ -2,12 +2,16 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>HTTP Security Headers Analyzer | Toolvero</title>
-<meta name="description" content="Analyze HTTP response headers locally. Paste raw headers from curl or your browser and check HSTS, CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy and Permissions-Policy.">
+<title>HTTP Security Headers Analyzer – Check Response Headers | Toolvero</title>
+<meta name="description" content="Paste HTTP response headers and analyze common security headers such as CSP, HSTS and X-Content-Type-Options.">
 <meta name="robots" content="index,follow">
-<link rel="canonical" href="https://toolvero.github.io/http-headers-checker.html">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="style.css"><script src="common.js"></script>
+<link rel="canonical" href="https://toolvero.github.io/http-headers-checker.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="HTTP Security Headers Analyzer – Check Response Headers | Toolvero">
+<meta property="og:description" content="Paste HTTP response headers and analyze common security headers such as CSP, HSTS and X-Content-Type-Options.">
+<meta property="og:url" content="https://toolvero.github.io/http-headers-checker.html">
 </head>
 <body>
 <header class="site-header"><div class="container nav">
@@ -38,7 +42,17 @@
 <h2>How to get response headers</h2>
 <p>On Linux, macOS or Windows with curl, run <code>curl -I https://example.com</code> and paste the output here. The analysis runs entirely in your browser.</p>
 </div>
-</div></div></main>
+</div></div>
+<section class="tool-seo" aria-label="About this tool">
+  <h2>Why inspect HTTP security headers?</h2>
+  <p>HTTP response headers can instruct browsers to enforce important protections. Headers such as Content-Security-Policy, Strict-Transport-Security and X-Content-Type-Options can reduce exposure to common web attacks when configured correctly. This analyzer works from headers you paste into the page.</p>
+  <h3>Common uses</h3>
+  <ul><li>Review headers copied from curl or browser developer tools.</li><li>Identify common missing browser security directives.</li><li>Use the result as a starting point; application requirements determine the final policy.</li></ul>
+  <h3>Related Toolvero tools</h3>
+  <p class="related-tools"><a href="ssl-tls-checker.html">SSL Expiry Checker</a> · <a href="certificate-decoder.html">Certificate Decoder</a></p>
+</section>
+
+</main>
 <footer><div class="container">Toolvero · Free tools for SysAdmins & DevOps</div></footer>
 
 <script>

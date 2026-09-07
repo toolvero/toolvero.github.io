@@ -2,13 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SSL Certificate Decoder | Toolvero</title>
-<meta name="description" content="Free SSL/TLS X.509 certificate decoder. Paste a PEM certificate to inspect subject, issuer, serial number, validity dates and extensions locally in your browser.">
+<title>X.509 Certificate Decoder – Inspect PEM Certificates | Toolvero</title>
+<meta name="description" content="Decode an X.509 PEM certificate and inspect its subject, issuer, validity and certificate details.">
 <meta name="robots" content="index,follow">
-<link rel="canonical" href="https://toolvero.github.io/certificate-decoder.html">
 <link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css">
 <script src="https://cdn.jsdelivr.net/npm/node-forge@1.3.1/dist/forge.min.js"></script>
 <script src="common.js"></script>
+<link rel="canonical" href="https://toolvero.github.io/certificate-decoder.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="X.509 Certificate Decoder – Inspect PEM Certificates | Toolvero">
+<meta property="og:description" content="Decode an X.509 PEM certificate and inspect its subject, issuer, validity and certificate details.">
+<meta property="og:url" content="https://toolvero.github.io/certificate-decoder.html">
 </head>
 <body>
 <header class="site-header">
@@ -36,7 +40,17 @@
 </div>
 <div class="seo-copy"><h2>What does this tool show?</h2><p>Inspect common X.509 certificate fields including subject, issuer, serial number, signature algorithm, validity period and extensions without uploading the certificate to a server.</p></div>
 <div class="tool-links"><strong>More Toolvero tools</strong><div class="links"><a href="csr-decoder.html">CSR Decoder</a><a href="sha256.html">SHA-256</a><a href="base64.html">Base64</a><a href="subnet.html">Subnet</a><a href="cron.html">Cron</a></div></div>
-</div></main>
+</div>
+<section class="tool-seo" aria-label="About this tool">
+  <h2>What can you inspect in an X.509 certificate?</h2>
+  <p>An X.509 certificate contains identity and public-key information used by TLS and other PKI systems. Decoding a PEM certificate is useful for checking the subject, issuing certificate authority, validity dates and other fields while troubleshooting certificate deployments.</p>
+  <h3>Common uses</h3>
+  <ul><li>Inspect certificate subject and issuer information.</li><li>Check validity dates before deployment.</li><li>Review PEM certificate details without using OpenSSL for a quick inspection.</li></ul>
+  <h3>Related Toolvero tools</h3>
+  <p class="related-tools"><a href="csr-decoder.html">CSR Decoder</a> · <a href="ssl-tls-checker.html">SSL Certificate Expiry Checker</a> · <a href="base64.html">Base64 Encoder/Decoder</a></p>
+</section>
+
+</main>
 <footer><div class="container">Toolvero · Free tools for SysAdmins & DevOps</div></footer>
 <script>
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}

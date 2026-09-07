@@ -2,13 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Hash / HMAC Generator | Toolvero</title>
-<meta name="description" content="Generate SHA-1, SHA-256, SHA-384, SHA-512 hashes and HMAC signatures locally.">
+<title>Hash &amp; HMAC Generator – SHA Hashes and HMAC | Toolvero</title>
+<meta name="description" content="Generate common cryptographic hashes and HMAC values locally in your browser.">
 <meta name="robots" content="index,follow">
-<link rel="canonical" href="https://toolvero.github.io/hash-hmac-generator.html">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="style.css">
 <script src="common.js"></script>
+<link rel="canonical" href="https://toolvero.github.io/hash-hmac-generator.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hash &amp; HMAC Generator – SHA Hashes and HMAC | Toolvero">
+<meta property="og:description" content="Generate common cryptographic hashes and HMAC values locally in your browser.">
+<meta property="og:url" content="https://toolvero.github.io/hash-hmac-generator.html">
 </head>
 <body>
 <header class="site-header"><div class="container nav">
@@ -26,7 +30,17 @@
 <div id="out" class="cron-preview">Result will appear here</div><p id="copyMsg" class="small"></p>
 <div class="seo-copy"><h2>Hash and HMAC utility</h2><p>Generate SHA-1, SHA-256, SHA-384 and SHA-512 digests or HMAC signatures locally. HMAC combines a secret key with the selected hash algorithm for message authentication.</p></div>
 
-</div></div></main>
+</div></div>
+<section class="tool-seo" aria-label="About this tool">
+  <h2>What is the difference between a hash and HMAC?</h2>
+  <p>A cryptographic hash produces a fixed-size digest from input data. HMAC combines a cryptographic hash with a secret key to provide message authentication. That distinction matters when validating integrity versus proving that a party with the shared secret created a value.</p>
+  <h3>Common uses</h3>
+  <ul><li>Compare plain hashes with keyed HMAC output.</li><li>Generate values for development and interoperability testing.</li><li>Use test secrets rather than production credentials in browser utilities.</li></ul>
+  <h3>Related Toolvero tools</h3>
+  <p class="related-tools"><a href="sha256.html">SHA-256 Generator</a> · <a href="base64.html">Base64 Encoder/Decoder</a></p>
+</section>
+
+</main>
 <footer><div class="container">Toolvero · Free tools for SysAdmins & DevOps</div></footer>
 <script>
 const enc=new TextEncoder();

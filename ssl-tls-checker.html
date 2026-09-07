@@ -2,13 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SSL Certificate Expiry Checker | Toolvero</title>
-<meta name="description" content="Check SSL/TLS certificate validity and expiration locally. Paste a PEM X.509 certificate to see issuer, subject, validity dates, days remaining and expiration status.">
+<title>SSL Certificate Expiry Checker – Check PEM Validity Dates | Toolvero</title>
+<meta name="description" content="Paste a PEM certificate to inspect its validity period and expiration status locally.">
 <meta name="robots" content="index,follow">
-<link rel="canonical" href="https://toolvero.github.io/ssl-tls-checker.html">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="style.css"><script src="common.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/node-forge@1.3.1/dist/forge.min.js"></script>
+<link rel="canonical" href="https://toolvero.github.io/ssl-tls-checker.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SSL Certificate Expiry Checker – Check PEM Validity Dates | Toolvero">
+<meta property="og:description" content="Paste a PEM certificate to inspect its validity period and expiration status locally.">
+<meta property="og:url" content="https://toolvero.github.io/ssl-tls-checker.html">
 </head>
 <body>
 <header class="site-header"><div class="container nav">
@@ -38,7 +42,17 @@
 <h2>Why paste the certificate?</h2>
 <p>A static browser page cannot perform arbitrary remote TLS handshakes. Pasting a PEM certificate keeps the check reliable and local. Use Toolvero’s Certificate Decoder when you need full X.509 extension details.</p>
 </div>
-</div></div></main>
+</div></div>
+<section class="tool-seo" aria-label="About this tool">
+  <h2>Why check certificate expiration?</h2>
+  <p>TLS certificates have a defined validity period. Expired certificates can break secure connections and cause outages, while certificates nearing expiration need renewal planning. This tool reads a pasted PEM certificate rather than attempting a cross-origin live connection to arbitrary servers.</p>
+  <h3>Common uses</h3>
+  <ul><li>Check not-before and not-after dates from PEM data.</li><li>Confirm how many days remain before expiration.</li><li>Use with the certificate decoder for additional X.509 details.</li></ul>
+  <h3>Related Toolvero tools</h3>
+  <p class="related-tools"><a href="certificate-decoder.html">Certificate Decoder</a> · <a href="csr-decoder.html">CSR Decoder</a> · <a href="http-headers-checker.html">HTTP Headers Analyzer</a></p>
+</section>
+
+</main>
 <footer><div class="container">Toolvero · Free tools for SysAdmins & DevOps</div></footer>
 
 <script>

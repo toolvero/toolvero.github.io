@@ -2,14 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>IP / CIDR Converter | Toolvero</title>
-<meta name="description" content="Convert IPv4 addresses, CIDR prefixes, subnet masks, wildcard masks and binary notation.">
+<title>IP/CIDR Converter – IPv4 Address and CIDR Network Details | Toolvero</title>
+<meta name="description" content="Convert IPv4 CIDR notation into subnet mask, network and address-range information.">
 <meta name="robots" content="index,follow">
-<link rel="canonical" href="https://toolvero.github.io/ip-cidr-converter.html">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="style.css">
 <script src="common.js"></script>
 
+<link rel="canonical" href="https://toolvero.github.io/ip-cidr-converter.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="IP/CIDR Converter – IPv4 Address and CIDR Network Details | Toolvero">
+<meta property="og:description" content="Convert IPv4 CIDR notation into subnet mask, network and address-range information.">
+<meta property="og:url" content="https://toolvero.github.io/ip-cidr-converter.html">
 </head>
 <body>
 <header class="site-header">
@@ -32,7 +36,17 @@
 <div id="out" class="result"></div><p id="copyMsg" class="small"></p>
 <div class="seo-copy"><h2>IPv4 CIDR conversion</h2><p>Quickly translate CIDR prefixes into subnet and wildcard masks and inspect the binary representation of an IPv4 address.</p></div>
 </div>
-</div></main>
+</div>
+<section class="tool-seo" aria-label="About this tool">
+  <h2>What is CIDR notation?</h2>
+  <p>CIDR notation combines an IP address with a prefix length such as /24. The prefix indicates how many bits identify the network. Converting CIDR into familiar subnet information helps administrators understand address boundaries and plan networks.</p>
+  <h3>Common uses</h3>
+  <ul><li>Translate CIDR prefixes into subnet masks.</li><li>Inspect network boundaries from an IPv4 CIDR.</li><li>Use alongside the subnet calculator when planning address space.</li></ul>
+  <h3>Related Toolvero tools</h3>
+  <p class="related-tools"><a href="subnet.html">Subnet Calculator</a> · <a href="ip-in-cidr.html">IP in CIDR Checker</a> · <a href="ipv6-compressor.html">IPv6 Compressor</a></p>
+</section>
+
+</main>
 <footer><div class="container">Toolvero · Free tools for SysAdmins & DevOps</div></footer>
 <script>
 function convert(){

@@ -2,14 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>YAML ↔ JSON Converter | Toolvero</title>
-<meta name="description" content="Free YAML to JSON and JSON to YAML converter for Kubernetes, DevOps and configuration files.">
+<title>YAML to JSON Converter – Convert YAML ↔ JSON | Toolvero</title>
+<meta name="description" content="Convert YAML to JSON or JSON to YAML directly in your browser.">
 <meta name="robots" content="index,follow">
-<link rel="canonical" href="https://toolvero.github.io/yaml-json-converter.html">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="style.css">
 <script src="common.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+<link rel="canonical" href="https://toolvero.github.io/yaml-json-converter.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="YAML to JSON Converter – Convert YAML ↔ JSON | Toolvero">
+<meta property="og:description" content="Convert YAML to JSON or JSON to YAML directly in your browser.">
+<meta property="og:url" content="https://toolvero.github.io/yaml-json-converter.html">
 </head>
 <body>
 <header class="site-header"><div class="container nav">
@@ -39,7 +43,17 @@
 <div id="status" class="result">Conversion status will appear here.</div>
 <div class="seo-copy"><h2>YAML and JSON conversion</h2><p>Useful for Kubernetes manifests, CI/CD configuration and application settings. Conversion happens in your browser.</p></div>
 </div>
-</div></main>
+</div>
+<section class="tool-seo" aria-label="About this tool">
+  <h2>Why convert YAML and JSON?</h2>
+  <p>YAML is common in infrastructure configuration while JSON is widely used by APIs and software tooling. Converting between the two formats is useful when moving configuration between systems, inspecting Kubernetes manifests or preparing structured data for another tool.</p>
+  <h3>Common uses</h3>
+  <ul><li>Convert configuration between YAML and JSON.</li><li>Reformat structured data for APIs or infrastructure tools.</li><li>Inspect YAML as JSON while debugging nested values.</li></ul>
+  <h3>Related Toolvero tools</h3>
+  <p class="related-tools"><a href="json.html">JSON Formatter</a> · <a href="kubernetes-resource-converter.html">Kubernetes Resource Converter</a> · <a href="env-parser.html">.env Parser</a></p>
+</section>
+
+</main>
 <footer><div class="container">Toolvero · Free tools for SysAdmins & DevOps</div></footer>
 <script>
 function yamlToJson(){

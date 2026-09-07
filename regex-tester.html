@@ -2,13 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Regex Tester | Toolvero</title>
-<meta name="description" content="Free browser-based JavaScript regex tester with flags, match count and positions.">
+<title>Regex Tester – Test JavaScript Regular Expressions | Toolvero</title>
+<meta name="description" content="Test JavaScript regular expressions against sample text and inspect matches in your browser.">
 <meta name="robots" content="index,follow">
-<link rel="canonical" href="https://toolvero.github.io/regex-tester.html">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="style.css">
 <script src="common.js"></script>
+<link rel="canonical" href="https://toolvero.github.io/regex-tester.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Regex Tester – Test JavaScript Regular Expressions | Toolvero">
+<meta property="og:description" content="Test JavaScript regular expressions against sample text and inspect matches in your browser.">
+<meta property="og:url" content="https://toolvero.github.io/regex-tester.html">
 </head>
 <body>
 <header class="site-header"><div class="container nav">
@@ -26,7 +30,17 @@
 <div id="matches" class="result"></div>
 <div class="seo-copy"><h2>Browser-based regex tester</h2><p>Test patterns and JavaScript regex flags without sending your sample text to a server. Useful for validating log parsing, configuration rules and application input patterns.</p></div>
 
-</div></div></main>
+</div></div>
+<section class="tool-seo" aria-label="About this tool">
+  <h2>What is a regular expression tester?</h2>
+  <p>Regular expressions describe text patterns used for validation, searching and transformation. Testing a pattern against representative input makes it easier to find escaping, grouping or matching mistakes before the expression is placed into application code.</p>
+  <h3>Common uses</h3>
+  <ul><li>Test patterns against realistic sample text.</li><li>Experiment with common JavaScript regex flags.</li><li>Check whether a validation pattern matches too much or too little.</li></ul>
+  <h3>Related Toolvero tools</h3>
+  <p class="related-tools"><a href="json.html">JSON Formatter</a> · <a href="url-encoder-decoder.html">URL Encoder/Decoder</a></p>
+</section>
+
+</main>
 <footer><div class="container">Toolvero · Free tools for SysAdmins & DevOps</div></footer>
 <script>
 function esc(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}

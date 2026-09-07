@@ -2,14 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>JWT Decoder | Toolvero</title>
-<meta name="description" content="Free JWT decoder for inspecting token headers, payloads and expiration locally in your browser.">
+<title>JWT Decoder – Decode JSON Web Token Header &amp; Payload | Toolvero</title>
+<meta name="description" content="Decode JWT header and payload data locally in your browser without verifying the signature.">
 <meta name="robots" content="index,follow">
-<link rel="canonical" href="https://toolvero.github.io/jwt-decoder.html">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="style.css">
 <script src="common.js"></script>
 
+<link rel="canonical" href="https://toolvero.github.io/jwt-decoder.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="JWT Decoder – Decode JSON Web Token Header &amp; Payload | Toolvero">
+<meta property="og:description" content="Decode JWT header and payload data locally in your browser without verifying the signature.">
+<meta property="og:url" content="https://toolvero.github.io/jwt-decoder.html">
 </head>
 <body>
 <header class="site-header">
@@ -36,7 +40,17 @@
 <div id="jwtInfo" class="result">Token information will appear here.</div>
 <div class="seo-copy"><h2>What is a JWT decoder?</h2><p>JWTs contain Base64URL-encoded header and payload sections. Decoding is not the same as signature verification, so never treat decoded claims as trusted without verifying the signature.</p></div>
 </div>
-</div></main>
+</div>
+<section class="tool-seo" aria-label="About this tool">
+  <h2>What is a JWT?</h2>
+  <p>A JSON Web Token is a compact format used to carry claims between systems. A JWT commonly contains a header, payload and signature. Decoding the first two sections lets you inspect claims such as issuer, audience and expiration, but decoding alone does not prove that the token is authentic.</p>
+  <h3>Common uses</h3>
+  <ul><li>Inspect claims while debugging authentication.</li><li>Read exp and other timestamp-based fields.</li><li>Remember that this tool decodes the token; it does not verify its signature.</li></ul>
+  <h3>Related Toolvero tools</h3>
+  <p class="related-tools"><a href="base64.html">Base64 Encoder/Decoder</a> · <a href="timestamp.html">Unix Timestamp</a> · <a href="json.html">JSON Formatter</a></p>
+</section>
+
+</main>
 <footer><div class="container">Toolvero · Free tools for SysAdmins & DevOps</div></footer>
 <script>
 function b64url(s){s=s.replace(/-/g,'+').replace(/_/g,'/');while(s.length%4)s+='=';return decodeURIComponent(Array.prototype.map.call(atob(s),c=>'%'+('00'+c.charCodeAt(0).toString(16)).slice(-2)).join(''));}

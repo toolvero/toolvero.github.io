@@ -2,13 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CSR Decoder | Toolvero</title>
-<meta name="description" content="Free PKCS#10 CSR decoder. Paste a PEM certificate signing request to inspect subject, public key and requested extensions locally in your browser.">
+<title>CSR Decoder – Inspect Certificate Signing Requests | Toolvero</title>
+<meta name="description" content="Decode a PEM certificate signing request and inspect its subject and requested certificate information.">
 <meta name="robots" content="index,follow">
-<link rel="canonical" href="https://toolvero.github.io/csr-decoder.html">
 <link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css">
 <script src="https://cdn.jsdelivr.net/npm/node-forge@1.3.1/dist/forge.min.js"></script>
 <script src="common.js"></script>
+<link rel="canonical" href="https://toolvero.github.io/csr-decoder.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CSR Decoder – Inspect Certificate Signing Requests | Toolvero">
+<meta property="og:description" content="Decode a PEM certificate signing request and inspect its subject and requested certificate information.">
+<meta property="og:url" content="https://toolvero.github.io/csr-decoder.html">
 </head>
 <body>
 <header class="site-header">
@@ -36,7 +40,17 @@
 </div>
 <div class="seo-copy"><h2>Why decode a CSR?</h2><p>A CSR contains the identity and public key submitted to a certificate authority. This tool helps verify the requested common name and other attributes before a certificate is issued.</p></div>
 <div class="tool-links"><strong>More Toolvero tools</strong><div class="links"><a href="certificate-decoder.html">Certificate Decoder</a><a href="sha256.html">SHA-256</a><a href="base64.html">Base64</a><a href="subnet.html">Subnet</a></div></div>
-</div></main>
+</div>
+<section class="tool-seo" aria-label="About this tool">
+  <h2>What is a CSR?</h2>
+  <p>A certificate signing request contains a public key and identifying information that is sent to a certificate authority when requesting a certificate. Inspecting the CSR helps verify names and request details before a CA signs it.</p>
+  <h3>Common uses</h3>
+  <ul><li>Check the subject before submitting a CSR.</li><li>Verify request information during certificate troubleshooting.</li><li>Compare a CSR with the certificate that was later issued.</li></ul>
+  <h3>Related Toolvero tools</h3>
+  <p class="related-tools"><a href="certificate-decoder.html">Certificate Decoder</a> · <a href="ssl-tls-checker.html">SSL Expiry Checker</a></p>
+</section>
+
+</main>
 <footer><div class="container">Toolvero · Free tools for SysAdmins & DevOps</div></footer>
 <script>
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}

@@ -2,14 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DNS Lookup | Toolvero</title>
-<meta name="description" content="Free DNS lookup for A, AAAA, MX, TXT, CNAME and NS records using DNS-over-HTTPS.">
+<title>DNS Lookup – Query A, AAAA, MX, TXT and Other Records | Toolvero</title>
+<meta name="description" content="Look up common DNS record types using public DNS-over-HTTPS.">
 <meta name="robots" content="index,follow">
-<link rel="canonical" href="https://toolvero.github.io/dns-lookup.html">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="style.css">
 <script src="common.js"></script>
 
+<link rel="canonical" href="https://toolvero.github.io/dns-lookup.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="DNS Lookup – Query A, AAAA, MX, TXT and Other Records | Toolvero">
+<meta property="og:description" content="Look up common DNS record types using public DNS-over-HTTPS.">
+<meta property="og:url" content="https://toolvero.github.io/dns-lookup.html">
 </head>
 <body>
 <header class="site-header">
@@ -32,7 +36,17 @@
 <div id="out" class="result">Enter a domain and run a lookup.</div><p id="copyMsg" class="small"></p>
 <div class="seo-copy"><h2>DNS-over-HTTPS lookup</h2><p>This tool queries DNS records through a public HTTPS resolver so it can work from a static GitHub Pages site. Do not enter confidential internal hostnames.</p></div>
 </div>
-</div></main>
+</div>
+<section class="tool-seo" aria-label="About this tool">
+  <h2>What does a DNS lookup do?</h2>
+  <p>DNS translates domain names into records used by browsers, mail systems and other network services. Looking up records such as A, AAAA, MX, TXT, CNAME and NS is a common first step when troubleshooting name resolution, mail routing or domain configuration.</p>
+  <h3>Common uses</h3>
+  <ul><li>Check IPv4 and IPv6 address records.</li><li>Inspect MX and TXT records during mail or domain troubleshooting.</li><li>Verify DNS changes using a public resolver.</li></ul>
+  <h3>Related Toolvero tools</h3>
+  <p class="related-tools"><a href="subnet.html">Subnet Calculator</a> · <a href="ip-in-cidr.html">IP in CIDR Checker</a> · <a href="common-ports.html">Common Ports</a></p>
+</section>
+
+</main>
 <footer><div class="container">Toolvero · Free tools for SysAdmins & DevOps</div></footer>
 <script>
 async function lookup(){

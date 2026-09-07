@@ -1,30 +1,28 @@
-# Toolvero v1.8
+# Toolvero v1.9
 
-SEO, trust and monetization-readiness release.
+SEO & Discovery release built on v1.8.
 
-## Included
-- 26 existing tools preserved from v1.7
-- Google Analytics 4 retained: G-Y16GMPF2PP
-- New About page
-- New Privacy Policy
-- New Contact page
-- Shared footer links to About / Privacy / Contact
-- Improved homepage descriptive copy and internal links
-- robots.txt
-- Updated sitemap.xml with all public pages
-- Shared style.css, common.js and favicon.svg included in the package
+## What changed
+- All 26 tool pages now have unique search-focused titles and meta descriptions.
+- Canonical URL added to every tool page.
+- Basic Open Graph metadata added to tool pages.
+- Compact, genuinely useful explanatory content added below each tool.
+- Common-use examples added to each tool page.
+- Contextual internal links connect related tools.
+- WebSite structured data added to the homepage.
+- About, Privacy and Contact from v1.8 are retained.
+- GA4 measurement ID G-Y16GMPF2PP is retained.
+- Sitemap remains complete with 30 public URLs.
 
-## Deployment
-Upload/replace the complete contents in the GitHub Pages repository root.
+No new calculators were added in this release. The objective is to make the existing 26 tools stronger landing pages for users and search engines.
 
 Suggested commit:
-`Release Toolvero v1.8 - SEO, privacy and site trust improvements`
+`Release Toolvero v1.9 - SEO and internal discovery improvements`
 
-## Post-deploy checks
-1. Open /about.html
-2. Open /privacy.html
-3. Open /contact.html
-4. Confirm footer links work from a tool page
-5. Open /robots.txt
-6. Open /sitemap.xml
-7. Confirm Google Analytics real-time still receives page views
+## Post-deploy spot checks
+1. Open subnet.html and scroll below the calculator.
+2. Confirm its related-tool links work.
+3. Repeat with certificate-decoder.html, json.html and docker-run-to-compose.html.
+4. Confirm About / Privacy / Contact remain accessible in the footer.
+5. Open sitemap.xml.
+6. Check GA4 Realtime after navigating between several pages.

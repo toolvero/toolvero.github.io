@@ -2,14 +2,18 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Kubernetes Resource Converter | Toolvero</title>
-<meta name="description" content="Convert Kubernetes CPU millicores and cores plus memory Ki, Mi, Gi, Ti and bytes.">
+<title>Kubernetes CPU &amp; Memory Resource Converter – mCPU, Mi and Gi | Toolvero</title>
+<meta name="description" content="Convert Kubernetes CPU and memory resource values such as 500m, Mi and Gi.">
 <meta name="robots" content="index,follow">
-<link rel="canonical" href="https://toolvero.github.io/kubernetes-resource-converter.html">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="style.css">
 <script src="common.js"></script>
 
+<link rel="canonical" href="https://toolvero.github.io/kubernetes-resource-converter.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Kubernetes CPU &amp; Memory Resource Converter – mCPU, Mi and Gi | Toolvero">
+<meta property="og:description" content="Convert Kubernetes CPU and memory resource values such as 500m, Mi and Gi.">
+<meta property="og:url" content="https://toolvero.github.io/kubernetes-resource-converter.html">
 </head>
 <body>
 <header class="site-header"><div class="container nav">
@@ -45,7 +49,17 @@
 
 <div class="seo-copy"><h2>Kubernetes resource units</h2><p>CPU requests and limits commonly use cores or millicores, while memory uses binary units such as Mi and Gi. This converter helps translate values quickly when editing manifests.</p></div>
 </div>
-</div></main>
+</div>
+<section class="tool-seo" aria-label="About this tool">
+  <h2>How are Kubernetes CPU and memory resources expressed?</h2>
+  <p>Kubernetes commonly expresses CPU in cores or millicores, such as 500m for half a CPU core. Memory quantities use units such as Mi and Gi. Converting these values helps when reviewing requests, limits and capacity across manifests and workloads.</p>
+  <h3>Common uses</h3>
+  <ul><li>Convert millicores to CPU cores.</li><li>Translate Mi and Gi memory quantities.</li><li>Review resource requests and limits more quickly.</li></ul>
+  <h3>Related Toolvero tools</h3>
+  <p class="related-tools"><a href="yaml-json-converter.html">YAML ↔ JSON Converter</a> · <a href="docker-run-to-compose.html">Docker Run → Compose</a></p>
+</section>
+
+</main>
 <footer><div class="container">Toolvero · Free tools for SysAdmins & DevOps</div></footer>
 <script>
 function fmt(n){return Number(n.toFixed(6)).toLocaleString('en-US',{maximumFractionDigits:6});}

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Common Ports Reference | Toolvero</title>
+<meta name="description" content="Search common TCP and UDP ports for SSH, HTTP, DNS, databases, Windows, Kubernetes and DevOps services.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://toolvero.github.io/common-ports.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script src="common.js"></script>
+
+</head>
+<body>
+<header class="site-header"><div class="container nav">
+<div class="brand-wrap"><a class="logo" href="index.html">T</a><a class="brand" href="index.html">Toolvero</a></div>
+<div class="nav-links">
+<a href="index.html#networking">Networking</a>
+<a href="index.html#automation">Linux & Automation</a>
+<a href="index.html#security">Security</a>
+<a href="index.html#developer">Developer</a>
+<button id="themeToggle" class="theme-btn" onclick="toggleTheme()">🌙 Dark</button>
+</div></div></header>
+<main class="container"><div class="tool-wrap">
+<div class="breadcrumb"><a href="index.html">← Back to tools</a></div>
+<div class="tool-card">
+<h1>Common Ports Reference</h1>
+<p class="kicker">Search common TCP and UDP ports used in networking, Windows, Linux, databases and DevOps platforms.</p>
+<label>Search<input id="query" placeholder="e.g. 443, SSH, Kubernetes, database" oninput="renderPorts()"></label>
+<div id="count" class="small"></div>
+<div id="portsTable" class="result"></div>
+<div class="seo-copy"><h2>Common TCP and UDP ports</h2><p>This is a quick operational reference, not a complete IANA registry. Always verify application-specific port requirements in vendor documentation.</p></div>
+</div>
+</div></main>
+<footer><div class="container">Toolvero · Free tools for SysAdmins & DevOps</div></footer>
+<script>
+const PORTS=[{"port": 20, "protocol": "TCP", "service": "FTP Data"}, {"port": 21, "protocol": "TCP", "service": "FTP Control"}, {"port": 22, "protocol": "TCP", "service": "SSH / SFTP"}, {"port": 23, "protocol": "TCP", "service": "Telnet"}, {"port": 25, "protocol": "TCP", "service": "SMTP"}, {"port": 53, "protocol": "TCP/UDP", "service": "DNS"}, {"port": 67, "protocol": "UDP", "service": "DHCP Server"}, {"port": 68, "protocol": "UDP", "service": "DHCP Client"}, {"port": 69, "protocol": "UDP", "service": "TFTP"}, {"port": 80, "protocol": "TCP", "service": "HTTP"}, {"port": 88, "protocol": "TCP/UDP", "service": "Kerberos"}, {"port": 110, "protocol": "TCP", "service": "POP3"}, {"port": 123, "protocol": "UDP", "service": "NTP"}, {"port": 135, "protocol": "TCP", "service": "Microsoft RPC"}, {"port": 137, "protocol": "UDP", "service": "NetBIOS Name"}, {"port": 138, "protocol": "UDP", "service": "NetBIOS Datagram"}, {"port": 139, "protocol": "TCP", "service": "NetBIOS Session"}, {"port": 143, "protocol": "TCP", "service": "IMAP"}, {"port": 161, "protocol": "UDP", "service": "SNMP"}, {"port": 162, "protocol": "UDP", "service": "SNMP Trap"}, {"port": 179, "protocol": "TCP", "service": "BGP"}, {"port": 389, "protocol": "TCP/UDP", "service": "LDAP"}, {"port": 443, "protocol": "TCP", "service": "HTTPS"}, {"port": 445, "protocol": "TCP", "service": "SMB"}, {"port": 465, "protocol": "TCP", "service": "SMTPS"}, {"port": 514, "protocol": "UDP", "service": "Syslog"}, {"port": 587, "protocol": "TCP", "service": "SMTP Submission"}, {"port": 636, "protocol": "TCP", "service": "LDAPS"}, {"port": 993, "protocol": "TCP", "service": "IMAPS"}, {"port": 995, "protocol": "TCP", "service": "POP3S"}, {"port": 1433, "protocol": "TCP", "service": "Microsoft SQL Server"}, {"port": 1521, "protocol": "TCP", "service": "Oracle Database"}, {"port": 2049, "protocol": "TCP/UDP", "service": "NFS"}, {"port": 2375, "protocol": "TCP", "service": "Docker API (unencrypted)"}, {"port": 2376, "protocol": "TCP", "service": "Docker API TLS"}, {"port": 2379, "protocol": "TCP", "service": "etcd client"}, {"port": 2380, "protocol": "TCP", "service": "etcd peer"}, {"port": 3306, "protocol": "TCP", "service": "MySQL / MariaDB"}, {"port": 3389, "protocol": "TCP/UDP", "service": "RDP"}, {"port": 5432, "protocol": "TCP", "service": "PostgreSQL"}, {"port": 5672, "protocol": "TCP", "service": "AMQP / RabbitMQ"}, {"port": 6379, "protocol": "TCP", "service": "Redis"}, {"port": 6443, "protocol": "TCP", "service": "Kubernetes API Server"}, {"port": 8080, "protocol": "TCP", "service": "HTTP Alternate"}, {"port": 8443, "protocol": "TCP", "service": "HTTPS Alternate"}, {"port": 9092, "protocol": "TCP", "service": "Apache Kafka"}, {"port": 9200, "protocol": "TCP", "service": "Elasticsearch HTTP"}, {"port": 9300, "protocol": "TCP", "service": "Elasticsearch Transport"}];
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function renderPorts(){
+ const q=query.value.trim().toLowerCase();
+ const rows=PORTS.filter(x=>!q||String(x.port).includes(q)||x.protocol.toLowerCase().includes(q)||x.service.toLowerCase().includes(q));
+ count.textContent=rows.length+' result'+(rows.length===1?'':'s');
+ portsTable.innerHTML=`<table><thead><tr><th>Port</th><th>Protocol</th><th>Service</th></tr></thead><tbody>${rows.map(x=>`<tr><td>${x.port}</td><td>${esc(x.protocol)}</td><td>${esc(x.service)}</td></tr>`).join('')}</tbody></table>`;
+}
+renderPorts();
+</script>
+</body></html>

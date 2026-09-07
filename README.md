@@ -35,3 +35,5 @@ V1.5 adds Regex Tester, Hash/HMAC Generator, HTTP Headers Checker and SSL/TLS Ch
 V1.5.1 replaces unreliable remote HTTP/TLS checks with fully functional local analyzers: HTTP Security Headers Analyzer and SSL Certificate Expiry Checker.
 
 V1.5.2 fixes the SSL Certificate Expiry Checker demo by replacing the invalid sample with a real parseable X.509 certificate.
+
+V1.6 adds YAML/JSON Converter, Kubernetes Resource Converter, URL Encoder/Decoder and Common Ports Reference. Total: 22 tools.

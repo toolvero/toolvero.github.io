@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>YAML ↔ JSON Converter | Toolvero</title>
+<meta name="description" content="Free YAML to JSON and JSON to YAML converter for Kubernetes, DevOps and configuration files.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://toolvero.github.io/yaml-json-converter.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script src="common.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+</head>
+<body>
+<header class="site-header"><div class="container nav">
+<div class="brand-wrap"><a class="logo" href="index.html">T</a><a class="brand" href="index.html">Toolvero</a></div>
+<div class="nav-links">
+<a href="index.html#networking">Networking</a>
+<a href="index.html#automation">Linux & Automation</a>
+<a href="index.html#security">Security</a>
+<a href="index.html#developer">Developer</a>
+<button id="themeToggle" class="theme-btn" onclick="toggleTheme()">🌙 Dark</button>
+</div></div></header>
+<main class="container"><div class="tool-wrap">
+<div class="breadcrumb"><a href="index.html">← Back to tools</a></div>
+<div class="tool-card">
+<h1>YAML ↔ JSON Converter</h1>
+<p class="kicker">Convert YAML to JSON or JSON to YAML directly in your browser.</p>
+<label>Input<textarea id="input" style="min-height:240px" placeholder="name: toolvero&#10;enabled: true"></textarea></label>
+<div class="actions">
+<button onclick="yamlToJson()">YAML → JSON</button>
+<button class="secondary" onclick="jsonToYaml()">JSON → YAML</button>
+<button class="secondary" onclick="loadExample()">Load example</button>
+<button class="ghost" onclick="clearAll()">Clear</button>
+</div>
+<label style="margin-top:18px">Output<textarea id="output" style="min-height:240px" readonly></textarea></label>
+<div class="actions"><button class="secondary" onclick="copyText(output.value,'copyMsg')">Copy output</button></div>
+<p id="copyMsg" class="small"></p>
+<div id="status" class="result">Conversion status will appear here.</div>
+<div class="seo-copy"><h2>YAML and JSON conversion</h2><p>Useful for Kubernetes manifests, CI/CD configuration and application settings. Conversion happens in your browser.</p></div>
+</div>
+</div></main>
+<footer><div class="container">Toolvero · Free tools for SysAdmins & DevOps</div></footer>
+<script>
+function yamlToJson(){
+ try{
+  const obj=jsyaml.load(input.value);
+  output.value=JSON.stringify(obj,null,2);
+  status.className='result ok';status.textContent='Valid YAML converted to JSON.';
+ }catch(e){status.className='result error';status.textContent='Invalid YAML: '+e.message;}
+}
+function jsonToYaml(){
+ try{
+  const obj=JSON.parse(input.value);
+  output.value=jsyaml.dump(obj,{noRefs:true,lineWidth:120});
+  status.className='result ok';status.textContent='Valid JSON converted to YAML.';
+ }catch(e){status.className='result error';status.textContent='Invalid JSON: '+e.message;}
+}
+function loadExample(){input.value=`apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: toolvero-demo
+data:
+  environment: production
+  enabled: "true"`;yamlToJson();}
+function clearAll(){input.value='';output.value='';status.className='result';status.textContent='Conversion status will appear here.';}
+</script>
+</body></html>

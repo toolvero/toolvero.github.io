@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>URL Encoder / Decoder | Toolvero</title>
+<meta name="description" content="Free URL percent encoder and decoder for query strings, APIs and redirect URLs.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://toolvero.github.io/url-encoder-decoder.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script src="common.js"></script>
+
+</head>
+<body>
+<header class="site-header"><div class="container nav">
+<div class="brand-wrap"><a class="logo" href="index.html">T</a><a class="brand" href="index.html">Toolvero</a></div>
+<div class="nav-links">
+<a href="index.html#networking">Networking</a>
+<a href="index.html#automation">Linux & Automation</a>
+<a href="index.html#security">Security</a>
+<a href="index.html#developer">Developer</a>
+<button id="themeToggle" class="theme-btn" onclick="toggleTheme()">🌙 Dark</button>
+</div></div></header>
+<main class="container"><div class="tool-wrap">
+<div class="breadcrumb"><a href="index.html">← Back to tools</a></div>
+<div class="tool-card">
+<h1>URL Encoder / Decoder</h1>
+<p class="kicker">Encode text for URLs or decode percent-encoded strings locally.</p>
+<label>Input<textarea id="input" style="min-height:180px" placeholder="https://example.com/search?q=hello world"></textarea></label>
+<div class="actions">
+<button onclick="encodeURL()">Encode</button>
+<button class="secondary" onclick="decodeURL()">Decode</button>
+<button class="secondary" onclick="loadExample()">Load example</button>
+<button class="ghost" onclick="clearAll()">Clear</button>
+</div>
+<label style="margin-top:18px">Output<textarea id="output" style="min-height:180px" readonly></textarea></label>
+<div class="actions"><button class="secondary" onclick="copyText(output.value,'copyMsg')">Copy output</button></div>
+<p id="copyMsg" class="small"></p>
+<div id="status" class="result">Ready.</div>
+<div class="seo-copy"><h2>Percent encoding</h2><p>URL encoding replaces reserved or unsafe characters with percent-encoded values. This is useful when building query strings, redirect URLs and API requests.</p></div>
+</div>
+</div></main>
+<footer><div class="container">Toolvero · Free tools for SysAdmins & DevOps</div></footer>
+<script>
+function encodeURL(){
+ try{output.value=encodeURIComponent(input.value);status.className='result ok';status.textContent='Encoded successfully.'}
+ catch(e){status.className='result error';status.textContent='Unable to encode input.'}
+}
+function decodeURL(){
+ try{output.value=decodeURIComponent(input.value);status.className='result ok';status.textContent='Decoded successfully.'}
+ catch(e){status.className='result error';status.textContent='Invalid percent-encoded input.'}
+}
+function loadExample(){input.value='https://example.com/search?q=hello world&lang=en';encodeURL();}
+function clearAll(){input.value='';output.value='';status.className='result';status.textContent='Ready.';}
+</script>
+</body></html>

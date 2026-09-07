@@ -50,7 +50,7 @@
   <div class="search-box">
     <span class="search-icon">⌕</span>
     <input id="toolSearch" type="search" placeholder="Search tools — e.g. cron, SSL, JSON, subnet..." oninput="filterTools()">
-    <span id="searchCount" class="search-count">18 tools</span>
+    <span id="searchCount" class="search-count">22 tools</span>
   </div>
 </div>
 
@@ -69,6 +69,7 @@
 
   <div class="section-title-row" id="networking"><h2>Networking</h2><span>IP & network utilities</span></div>
   <div class="grid">
+    <a class="card tool-item" data-search="ports tcp udp reference ssh http dns database kubernetes networking" href="common-ports.html"><div class="icon">🔌</div><h3>Common Ports</h3><p>Search common TCP and UDP ports for infrastructure services.</p><span class="tag">Networking</span></a>
     <a class="card tool-item" data-search="dns lookup checker a aaaa mx txt cname ns networking" href="dns-lookup.html"><div class="icon">🔎</div><h3>DNS Lookup</h3><p>Query A, AAAA, MX, TXT, CNAME and NS records.</p><span class="tag">Networking</span></a>
     <a class="card tool-item" data-search="ip cidr converter subnet mask wildcard binary ipv4 networking" href="ip-cidr-converter.html"><div class="icon">🔢</div><h3>IP / CIDR Converter</h3><p>Convert CIDR, subnet masks, wildcard masks and binary IPv4.</p><span class="tag">Networking</span></a>
     <a class="card tool-item" data-search="subnet ipv4 cidr network broadcast mask hosts networking" href="subnet.html"><div class="icon">🌐</div><h3>Subnet Calculator</h3><p>Calculate network, subnet mask, broadcast, usable range and host count.</p><span class="tag">Networking</span></a>
@@ -76,6 +77,7 @@
 
   <div class="section-title-row" id="automation"><h2>Linux & Automation</h2><span>Shell & scheduling</span></div>
   <div class="grid">
+    <a class="card tool-item" data-search="kubernetes resource cpu memory millicores mi gi devops converter" href="kubernetes-resource-converter.html"><div class="icon">☸️</div><h3>Kubernetes Resources</h3><p>Convert CPU millicores and Kubernetes memory units.</p><span class="tag">DevOps</span></a>
     <a class="card tool-item" data-search="cron schedule expression linux automation" href="cron.html"><div class="icon">⏱️</div><h3>Cron Generator</h3><p>Build cron expressions by minute, hour, day, month and weekday.</p><span class="tag">Automation</span></a>
     <a class="card tool-item" data-search="linux chmod permissions rwx octal" href="permissions.html"><div class="icon">🐧</div><h3>Linux Permissions</h3><p>Convert Linux rwx permissions to octal chmod values and back.</p><span class="tag">Linux</span></a>
   </div>
@@ -94,6 +96,8 @@
 
   <div class="section-title-row" id="developer"><h2>Developer utilities</h2><span>Everyday development helpers</span></div>
   <div class="grid">
+    <a class="card tool-item" data-search="yaml json converter kubernetes config devops developer" href="yaml-json-converter.html"><div class="icon">⇄</div><h3>YAML ↔ JSON</h3><p>Convert YAML and JSON configuration formats in your browser.</p><span class="tag">Developer</span></a>
+    <a class="card tool-item" data-search="url encoder decoder percent encoding query string developer" href="url-encoder-decoder.html"><div class="icon">🔗</div><h3>URL Encoder / Decoder</h3><p>Encode or decode URL percent-encoded text locally.</p><span class="tag">Developer</span></a>
     <a class="card tool-item" data-search="regex regular expression tester javascript matches developer" href="regex-tester.html"><div class="icon">.*</div><h3>Regex Tester</h3><p>Test JavaScript regex patterns, flags and matches locally.</p><span class="tag">Developer</span></a>
     <a class="card tool-item" data-search="hash hmac sha1 sha256 sha384 sha512 crypto developer security" href="hash-hmac-generator.html"><div class="icon">#</div><h3>Hash / HMAC Generator</h3><p>Generate SHA hashes and HMAC signatures locally.</p><span class="tag">Developer</span></a>
     <a class="card tool-item" data-search="json formatter validator minify developer" href="json.html"><div class="icon">🧩</div><h3>JSON Formatter</h3><p>Validate, pretty-print and minify JSON instantly.</p><span class="tag">Developer</span></a>
@@ -122,7 +126,7 @@ function filterTools(){
     item.classList.toggle('hidden-card',!show);
     if(show) visibleHrefs.add(item.getAttribute('href'));
   });
-  document.getElementById('searchCount').textContent = q ? `${visibleHrefs.size} matches` : '18 tools';
+  document.getElementById('searchCount').textContent = q ? `${visibleHrefs.size} matches` : '22 tools';
   const groups=[...document.querySelectorAll('main .grid')];
   groups.forEach(grid=>{
     const cards=[...grid.querySelectorAll('.tool-item')];

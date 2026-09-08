@@ -161,97 +161,71 @@ function filterTools(){
 </script>
 
 
+
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-  const input = document.querySelector('input[placeholder*="Search tools"]');
+  const input = document.getElementById('toolSearch');
+  const countEl = document.getElementById('searchCount');
   const results = document.getElementById('searchResults');
   const resultsGrid = document.getElementById('searchResultsGrid');
-  if (!input || !results || !resultsGrid) return;
-
-  const allCards = Array.from(document.querySelectorAll('.tool-item'));
-  const countEl = Array.from(document.querySelectorAll('span,div,p')).find(el =>
-    el.children.length === 0 && /^\s*\d+\s+(tools|matches?|match)\s*$/i.test(el.textContent || '')
-  );
-  const guides = document.querySelector('.home-guides');
-
-  // Top-level homepage sections that contain the original tool cards.
-  const toolSections = Array.from(document.querySelectorAll('section')).filter(sec =>
-    sec.querySelector('.tool-item')
-  );
+  const main = document.querySelector('main.container');
+  if (!input || !results || !resultsGrid || !main) return;
 
   function norm(v) {
     return (v || '').toLowerCase().normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '').trim();
   }
 
-  function search() {
+  function renderSearch() {
     const q = norm(input.value);
+    const cards = Array.from(document.querySelectorAll('main .tool-item'));
 
     if (!q) {
       results.style.display = 'none';
       resultsGrid.innerHTML = '';
-      toolSections.forEach(sec => sec.style.display = '');
-      allCards.forEach(card => card.style.display = '');
-      if (guides) guides.style.display = '';
-      document.querySelectorAll('[data-search-original-display]').forEach(el => {
-        const original = el.dataset.searchOriginalDisplay;
-        el.style.display = original === '__default__' ? '' : original;
-        delete el.dataset.searchOriginalDisplay;
-      });
+      main.style.display = '';
       if (countEl) countEl.textContent = '32 tools';
       return;
     }
 
-    const matches = allCards.filter(card => {
-      const text = norm((card.dataset.search || '') + ' ' +
-                        (card.dataset.category || '') + ' ' +
-                        (card.textContent || ''));
-      return text.includes(q);
+    const matches = cards.filter(card => {
+      const haystack = norm(
+        (card.dataset.search || '') + ' ' +
+        (card.dataset.category || '') + ' ' +
+        (card.textContent || '')
+      );
+      return haystack.includes(q);
     });
 
-    // During search, hide the complete normal homepage catalog/content and
-    // show only the dedicated results area.
-    toolSections.forEach(sec => sec.style.display = 'none');
-    if (guides) guides.style.display = 'none';
-
-    const resultsParent = results.parentElement;
-    if (resultsParent) {
-      Array.from(resultsParent.children).forEach(el => {
-        if (el === results || el.contains(results) || el.matches('footer')) return;
-        if (!el.dataset.searchOriginalDisplay) {
-          el.dataset.searchOriginalDisplay = el.style.display || '__default__';
-        }
-        // Keep the search/hero area itself; hide normal content below results.
-        const rectResults = results.getBoundingClientRect();
-        const rectEl = el.getBoundingClientRect();
-        if (rectEl.top >= rectResults.bottom - 2) el.style.display = 'none';
-      });
-    }
-
+    main.style.display = 'none';
+    results.style.display = 'block';
     resultsGrid.innerHTML = '';
+
+    const label = document.createElement('div');
+    label.className = matches.length ? 'search-results-label' : 'search-no-results';
+    label.textContent = matches.length
+      ? (matches.length === 1 ? 'Search result' : 'Search results')
+      : 'No tools match your search.';
+    resultsGrid.appendChild(label);
+
     matches.forEach(card => {
       const clone = card.cloneNode(true);
+      clone.classList.remove('hidden-card');
       clone.style.display = '';
       resultsGrid.appendChild(clone);
     });
 
-    if (matches.length) {
-      resultsGrid.innerHTML = '<div class="search-results-label">' +
-        (matches.length === 1 ? 'Search result' : 'Search results') +
-        '</div>' + resultsGrid.innerHTML;
-    } else {
-      resultsGrid.innerHTML = '<div class="search-no-results">No tools match your search.</div>';
+    if (countEl) {
+      countEl.textContent = matches.length + ' ' +
+        (matches.length === 1 ? 'match' : 'matches');
     }
-
-    results.style.display = '';
-    if (countEl) countEl.textContent =
-      matches.length + ' ' + (matches.length === 1 ? 'match' : 'matches');
   }
 
-  // Capture + delayed execution ensures this is the final visual state even if
-  // an older homepage listener also reacts to the input event.
-  input.addEventListener('input', function () { setTimeout(search, 0); }, true);
-  search();
+  input.addEventListener('input', function () {
+    setTimeout(renderSearch, 0);
+  }, true);
+
+  renderSearch();
 });
 </script>
 

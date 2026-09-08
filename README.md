@@ -1,17 +1,18 @@
-# Toolvero v2.1.1 — Final
+# Toolvero v2.1.1 — Final Search Fix 2
 
-Final homepage search polish.
+This corrects the regression where the search bar disappeared after typing.
 
-- All 32 tools are searchable.
-- Matching cards appear directly below the search box.
-- While searching, the normal catalog, category headings, guides and lower homepage content are hidden.
-- Clearing the query restores the full homepage and `32 tools`.
+Behavior:
+- Hero and search bar always remain visible.
+- While searching, only the normal `<main>` catalog is hidden.
+- Matching results appear directly below the search bar.
+- Clearing the query restores the complete 32-tool homepage.
 
-Quick verification:
-1. `dns pro` → one visible DNS Propagation Checker card.
-2. `compose validator` → one visible Docker Compose Validator card.
-3. `dns` → matching DNS-related cards only.
-4. Clear search → complete normal homepage.
+Tests:
+- `dns pro` → visible DNS Propagation Checker
+- `compose validator` → visible Docker Compose Validator
+- `dns` → all DNS-related matches
+- clear query → full homepage and 32 tools
 
 Suggested commit:
-`Finalize Toolvero v2.1.1 homepage search`
+`Fix Toolvero v2.1.1 search bar visibility`

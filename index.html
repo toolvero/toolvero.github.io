@@ -111,12 +111,12 @@
   </div>
 
   <div id="emptyState" class="empty">No tools match your search.
-<a class="card tool-card-search" data-category="networking" data-search="dns propagation checker resolver doh ttl" href="dns-propagation-checker.html"><div class="icon">🌐</div><h3>DNS Propagation Checker</h3><p>Compare current DNS answers from public resolvers.</p><span class="tag">Networking</span></a>
-<a class="card tool-card-search" data-category="networking" data-search="mac address formatter validator cisco" href="mac-address-formatter.html"><div class="icon">🔗</div><h3>MAC Address Formatter</h3><p>Validate and normalize common MAC address formats.</p><span class="tag">Networking</span></a>
-<a class="card tool-card-search" data-category="networking" data-search="ipv4 range calculator cidr addresses" href="ipv4-range-calculator.html"><div class="icon">📐</div><h3>IPv4 Range Calculator</h3><p>Count an IPv4 range and find a covering CIDR.</p><span class="tag">Networking</span></a>
-<a class="card tool-card-search" data-category="developer" data-search="http status codes 404 500 reference" href="http-status-codes.html"><div class="icon">📡</div><h3>HTTP Status Codes</h3><p>Search common HTTP response codes and meanings.</p><span class="tag">Developer</span></a>
-<a class="card tool-card-search" data-category="developer" data-search="json csv converter data" href="json-csv-converter.html"><div class="icon">⇄</div><h3>JSON ↔ CSV</h3><p>Convert flat JSON arrays and CSV tables locally.</p><span class="tag">Developer</span></a>
-<a class="card tool-card-search" data-category="developer" data-search="docker compose yaml validator" href="docker-compose-validator.html"><div class="icon">🐳</div><h3>Docker Compose Validator</h3><p>Run a lightweight structural check on Compose YAML.</p><span class="tag">Developer</span></a>
+<a class="card tool-item" data-category="networking" data-search="dns propagation checker resolver doh ttl" href="dns-propagation-checker.html"><div class="icon">🌐</div><h3>DNS Propagation Checker</h3><p>Compare current DNS answers from public resolvers.</p><span class="tag">Networking</span></a>
+<a class="card tool-item" data-category="networking" data-search="mac address formatter validator cisco" href="mac-address-formatter.html"><div class="icon">🔗</div><h3>MAC Address Formatter</h3><p>Validate and normalize common MAC address formats.</p><span class="tag">Networking</span></a>
+<a class="card tool-item" data-category="networking" data-search="ipv4 range calculator cidr addresses" href="ipv4-range-calculator.html"><div class="icon">📐</div><h3>IPv4 Range Calculator</h3><p>Count an IPv4 range and find a covering CIDR.</p><span class="tag">Networking</span></a>
+<a class="card tool-item" data-category="developer" data-search="http status codes 404 500 reference" href="http-status-codes.html"><div class="icon">📡</div><h3>HTTP Status Codes</h3><p>Search common HTTP response codes and meanings.</p><span class="tag">Developer</span></a>
+<a class="card tool-item" data-category="developer" data-search="json csv converter data" href="json-csv-converter.html"><div class="icon">⇄</div><h3>JSON ↔ CSV</h3><p>Convert flat JSON arrays and CSV tables locally.</p><span class="tag">Developer</span></a>
+<a class="card tool-item" data-category="developer" data-search="docker compose yaml validator" href="docker-compose-validator.html"><div class="icon">🐳</div><h3>Docker Compose Validator</h3><p>Run a lightweight structural check on Compose YAML.</p><span class="tag">Developer</span></a>
 
 </div>
 
@@ -155,5 +155,50 @@ function filterTools(){
   document.getElementById('emptyState').style.display = visibleHrefs.size ? 'none' : 'block';
 }
 </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const input = document.getElementById('toolSearch');
+  const count = document.getElementById('searchCount');
+  const empty = document.getElementById('emptyState');
+  if (!input) return;
+
+  function norm(v) {
+    return (v || '').toLowerCase().normalize('NFD')
+      .replace(/[\u0300-\u036f]/g,'').trim();
+  }
+
+  function runSearch() {
+    const q = norm(input.value);
+    const cards = Array.from(document.querySelectorAll('.tool-item'));
+    let matches = 0;
+
+    cards.forEach(card => {
+      const text = norm((card.dataset.search || '') + ' ' + card.textContent);
+      const show = !q || text.includes(q);
+      card.style.display = show ? '' : 'none';
+      if (q && show) matches++;
+    });
+
+    // Hide category grids with no matching cards.
+    document.querySelectorAll('main .grid, section .grid').forEach(grid => {
+      const tools = Array.from(grid.querySelectorAll('.tool-item'));
+      if (!tools.length) return;
+      if (!q) grid.style.display='';
+      else grid.style.display = tools.some(c => c.style.display !== 'none') ? '' : 'none';
+    });
+
+    if (count) count.textContent = q ? `${matches} ${matches===1?'match':'matches'}` : '32 tools';
+    if (empty) empty.style.display = (q && matches===0) ? '' : 'none';
+  }
+
+  // Capture phase prevents the old handler from leaving stale results/counts.
+  input.addEventListener('input', function(e) {
+    setTimeout(runSearch, 0);
+  }, true);
+  runSearch();
+});
+</script>
+
 </body>
 </html>

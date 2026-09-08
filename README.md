@@ -1,22 +1,17 @@
-# Toolvero v2.1.1 — Final Search Display Fix
+# Toolvero v2.1.1 — Final
 
-This build keeps the version at v2.1.1 and fixes the remaining homepage search issue.
+Final homepage search polish.
 
-While typing a query:
-- matching tools are copied into a dedicated results grid directly below the search box;
-- the normal tool catalog and Technical Guides are temporarily hidden;
-- the counter shows the real number of matches.
+- All 32 tools are searchable.
+- Matching cards appear directly below the search box.
+- While searching, the normal catalog, category headings, guides and lower homepage content are hidden.
+- Clearing the query restores the full homepage and `32 tools`.
 
-Clearing the query restores the normal 32-tool homepage.
-
-Required checks:
-- `dns pro` → visible DNS Propagation Checker card
-- `mac address` → visible MAC Address Formatter card
-- `ipv4 range` → visible IPv4 Range Calculator card
-- `status` → visible HTTP Status Codes card
-- `csv` → visible JSON ↔ CSV card
-- `compose validator` → visible Docker Compose Validator card
-- clear search → normal homepage + `32 tools`
+Quick verification:
+1. `dns pro` → one visible DNS Propagation Checker card.
+2. `compose validator` → one visible Docker Compose Validator card.
+3. `dns` → matching DNS-related cards only.
+4. Clear search → complete normal homepage.
 
 Suggested commit:
-`Fix Toolvero v2.1.1 - Display homepage search results`
+`Finalize Toolvero v2.1.1 homepage search`

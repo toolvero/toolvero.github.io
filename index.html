@@ -193,6 +193,11 @@ document.addEventListener('DOMContentLoaded', function () {
       toolSections.forEach(sec => sec.style.display = '');
       allCards.forEach(card => card.style.display = '');
       if (guides) guides.style.display = '';
+      document.querySelectorAll('[data-search-original-display]').forEach(el => {
+        const original = el.dataset.searchOriginalDisplay;
+        el.style.display = original === '__default__' ? '' : original;
+        delete el.dataset.searchOriginalDisplay;
+      });
       if (countEl) countEl.textContent = '32 tools';
       return;
     }
@@ -204,9 +209,24 @@ document.addEventListener('DOMContentLoaded', function () {
       return text.includes(q);
     });
 
-    // During search, hide the normal catalog and guides; show a clean results grid.
+    // During search, hide the complete normal homepage catalog/content and
+    // show only the dedicated results area.
     toolSections.forEach(sec => sec.style.display = 'none');
     if (guides) guides.style.display = 'none';
+
+    const resultsParent = results.parentElement;
+    if (resultsParent) {
+      Array.from(resultsParent.children).forEach(el => {
+        if (el === results || el.contains(results) || el.matches('footer')) return;
+        if (!el.dataset.searchOriginalDisplay) {
+          el.dataset.searchOriginalDisplay = el.style.display || '__default__';
+        }
+        // Keep the search/hero area itself; hide normal content below results.
+        const rectResults = results.getBoundingClientRect();
+        const rectEl = el.getBoundingClientRect();
+        if (rectEl.top >= rectResults.bottom - 2) el.style.display = 'none';
+      });
+    }
 
     resultsGrid.innerHTML = '';
     matches.forEach(card => {

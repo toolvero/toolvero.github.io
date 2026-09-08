@@ -4,8 +4,8 @@
 <meta property="og:description" content="Calculate the number of IPv4 addresses in a range and find the smallest CIDR block that covers it."><meta property="og:url" content="https://toolvero.github.io/ipv4-range-calculator.html">
 <link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css"><script src="common.js"></script></head><body><header class="site-header"><div class="container nav">
 <div class="brand-wrap"><a class="logo" href="index.html">T</a><a class="brand" href="index.html">Toolvero</a></div>
-<div class="nav-links"><a href="index.html#networking">Networking</a><a href="index.html#security">Security</a><a href="index.html#developer">Developer</a><a href="guides.html">Guides</a><button id="themeToggle" class="theme-btn" onclick="toggleTheme()">🌙 Dark</button></div>
-</div></header>
+<div class="nav-links"><a href="networking.html">Networking</a><a href="security.html">Security</a><a href="developer.html">Developer</a><a href="guides.html">Guides</a><button id="themeToggle" class="theme-btn" onclick="toggleTheme()">🌙 Dark</button></div>
+</div></header><div class="breadcrumb-bar"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span>›</span><a href="networking.html">Networking Tools</a><span>›</span><span>Tool</span></nav></div>
 <main class="tool-page"><a class="back" href="index.html">← Back to tools</a><section class="tool-card">
 <h1>IPv4 Range Calculator</h1><p>Enter the first and last IPv4 address.</p><div class="two-col"><div><label for="startIp">Start IPv4</label><input id="startIp" value="192.168.1.10"></div><div><label for="endIp">End IPv4</label><input id="endIp" value="192.168.1.50"></div></div>
 <button style="margin-top:10px" onclick="calcRange()">Calculate range</button><div id="rangeResult" class="result">Range details will appear here.</div></section>

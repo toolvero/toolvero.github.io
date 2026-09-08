@@ -4,8 +4,8 @@
 <meta property="og:description" content="Validate and convert MAC addresses between colon, hyphen, Cisco dotted and plain formats."><meta property="og:url" content="https://toolvero.github.io/mac-address-formatter.html">
 <link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css"><script src="common.js"></script></head><body><header class="site-header"><div class="container nav">
 <div class="brand-wrap"><a class="logo" href="index.html">T</a><a class="brand" href="index.html">Toolvero</a></div>
-<div class="nav-links"><a href="index.html#networking">Networking</a><a href="index.html#security">Security</a><a href="index.html#developer">Developer</a><a href="guides.html">Guides</a><button id="themeToggle" class="theme-btn" onclick="toggleTheme()">🌙 Dark</button></div>
-</div></header>
+<div class="nav-links"><a href="networking.html">Networking</a><a href="security.html">Security</a><a href="developer.html">Developer</a><a href="guides.html">Guides</a><button id="themeToggle" class="theme-btn" onclick="toggleTheme()">🌙 Dark</button></div>
+</div></header><div class="breadcrumb-bar"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span>›</span><a href="networking.html">Networking Tools</a><span>›</span><span>Tool</span></nav></div>
 <main class="tool-page"><a class="back" href="index.html">← Back to tools</a><section class="tool-card">
 <h1>MAC Address Formatter &amp; Validator</h1><p>Normalize a MAC address locally in your browser.</p><label for="macInput">MAC address</label><input id="macInput" value="00:1A:2B:3C:4D:5E" placeholder="00:1A:2B:3C:4D:5E">
 <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><button onclick="formatMac('colon')">Colon</button><button onclick="formatMac('hyphen')">Hyphen</button><button onclick="formatMac('cisco')">Cisco</button><button onclick="formatMac('plain')">Plain</button></div>

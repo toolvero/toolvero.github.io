@@ -7,6 +7,9 @@
     <loc>https://toolvero.github.io/about.html</loc>
   </url>
   <url>
+    <loc>https://toolvero.github.io/automation.html</loc>
+  </url>
+  <url>
     <loc>https://toolvero.github.io/base64.html</loc>
   </url>
   <url>
@@ -23,6 +26,9 @@
   </url>
   <url>
     <loc>https://toolvero.github.io/csr-decoder.html</loc>
+  </url>
+  <url>
+    <loc>https://toolvero.github.io/developer.html</loc>
   </url>
   <url>
     <loc>https://toolvero.github.io/dns-lookup.html</loc>
@@ -97,6 +103,9 @@
     <loc>https://toolvero.github.io/mac-address-formatter.html</loc>
   </url>
   <url>
+    <loc>https://toolvero.github.io/networking.html</loc>
+  </url>
+  <url>
     <loc>https://toolvero.github.io/password-generator.html</loc>
   </url>
   <url>
@@ -107,6 +116,9 @@
   </url>
   <url>
     <loc>https://toolvero.github.io/regex-tester.html</loc>
+  </url>
+  <url>
+    <loc>https://toolvero.github.io/security.html</loc>
   </url>
   <url>
     <loc>https://toolvero.github.io/sha256.html</loc>

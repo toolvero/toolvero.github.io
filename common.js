@@ -36,7 +36,7 @@
     if(!footer) return;
     footer.innerHTML='<div class="container">Toolvero · Free tools for SysAdmins & DevOps'
       +'<div class="footer-links"><a href="about.html">About</a><a href="privacy.html">Privacy</a>'
-      +'<a href="contact.html">Contact</a><a href="guides.html">Guides</a></div></div>';
+      +'<a href="contact.html">Contact</a><a href="guides.html">Guides</a><a href="networking.html">Networking</a><a href="security.html">Security</a><a href="developer.html">Developer</a><a href="automation.html">Linux &amp; Automation</a></div></div>';
   }
 
   document.addEventListener('DOMContentLoaded', function(){

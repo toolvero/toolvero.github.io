@@ -1,18 +1,27 @@
-# Toolvero v2.1.1 — Final Search Fix 2
+# Toolvero v2.2 — Category Architecture & Internal SEO
 
-This corrects the regression where the search bar disappeared after typing.
+New category landing pages:
+- networking.html
+- security.html
+- developer.html
+- automation.html
 
-Behavior:
-- Hero and search bar always remain visible.
-- While searching, only the normal `<main>` catalog is hidden.
-- Matching results appear directly below the search bar.
-- Clearing the query restores the complete 32-tool homepage.
-
-Tests:
-- `dns pro` → visible DNS Propagation Checker
-- `compose validator` → visible Docker Compose Validator
-- `dns` → all DNS-related matches
-- clear query → full homepage and 32 tools
+Also included:
+- category-aware breadcrumbs across all 32 tool pages;
+- breadcrumbs on all 6 technical guides;
+- top navigation linked to real category pages;
+- category links in the global footer;
+- CollectionPage structured data on category pages;
+- stable v2.1.1 homepage search preserved;
+- sitemap updated to 47 public URLs.
 
 Suggested commit:
-`Fix Toolvero v2.1.1 search bar visibility`
+`Release Toolvero v2.2 - Category pages and internal SEO architecture`
+
+Post-deploy tests:
+1. networking.html
+2. security.html
+3. subnet.html breadcrumb
+4. guide-cidr-explained.html breadcrumb
+5. homepage search `dns pro`
+6. sitemap.xml

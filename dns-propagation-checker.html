@@ -4,8 +4,8 @@
 <meta property="og:description" content="Compare DNS answers from available public DNS-over-HTTPS resolvers without claiming global propagation."><meta property="og:url" content="https://toolvero.github.io/dns-propagation-checker.html">
 <link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css"><script src="common.js"></script></head><body><header class="site-header"><div class="container nav">
 <div class="brand-wrap"><a class="logo" href="index.html">T</a><a class="brand" href="index.html">Toolvero</a></div>
-<div class="nav-links"><a href="index.html#networking">Networking</a><a href="index.html#security">Security</a><a href="index.html#developer">Developer</a><a href="guides.html">Guides</a><button id="themeToggle" class="theme-btn" onclick="toggleTheme()">🌙 Dark</button></div>
-</div></header>
+<div class="nav-links"><a href="networking.html">Networking</a><a href="security.html">Security</a><a href="developer.html">Developer</a><a href="guides.html">Guides</a><button id="themeToggle" class="theme-btn" onclick="toggleTheme()">🌙 Dark</button></div>
+</div></header><div class="breadcrumb-bar"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span>›</span><a href="networking.html">Networking Tools</a><span>›</span><span>Tool</span></nav></div>
 <main class="tool-page"><a class="back" href="index.html">← Back to tools</a><section class="tool-card">
 <h1>DNS Propagation Checker</h1><p>Compare current answers from multiple public resolvers.</p><div class="two-col"><div><label for="dnsName">Domain</label><input id="dnsName" value="example.com"></div><div><label for="dnsType">Record type</label><select id="dnsType"><option>A</option><option>AAAA</option><option>MX</option><option>TXT</option><option>NS</option><option>CNAME</option></select></div></div>
 <button style="margin-top:10px" onclick="checkDns()">Compare public resolvers</button><div id="dnsPropResult" class="result">Results from available public DNS-over-HTTPS resolvers will appear here.</div></section>

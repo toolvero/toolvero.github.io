@@ -50,7 +50,7 @@
 <div class="container search-wrap">
   <div class="search-box">
     <span class="search-icon">⌕</span>
-    <input id="toolSearch" type="search" placeholder="Search tools — e.g. cron, SSL, JSON, subnet..." oninput="filterTools()">
+    <input id="toolSearch" type="search" placeholder="Search tools — e.g. cron, SSL, JSON, subnet...">
     <span id="searchCount" class="search-count">32 tools</span>
   </div>
 <div id="searchResults" class="search-results" style="display:none">
@@ -139,26 +139,7 @@
 
 <footer><div class="container">Toolvero · Free tools for SysAdmins & DevOps</div></footer>
 
-<script>
-function filterTools(){
-  const q=(document.getElementById('toolSearch').value||'').trim().toLowerCase();
-  const items=[...document.querySelectorAll('.tool-item')];
-  const visibleHrefs=new Set();
-  items.forEach(item=>{
-    const hay=(item.dataset.search+' '+item.innerText).toLowerCase();
-    const show=!q || hay.includes(q);
-    item.classList.toggle('hidden-card',!show);
-    if(show) visibleHrefs.add(item.getAttribute('href'));
-  });
-  document.getElementById('searchCount').textContent = q ? `${visibleHrefs.size} matches` : '32 tools';
-  const groups=[...document.querySelectorAll('main .grid')];
-  groups.forEach(grid=>{
-    const cards=[...grid.querySelectorAll('.tool-item')];
-    grid.style.display = cards.some(c=>!c.classList.contains('hidden-card')) ? 'grid' : 'none';
-  });
-  document.getElementById('emptyState').style.display = visibleHrefs.size ? 'none' : 'block';
-}
-</script>
+
 
 
 
@@ -188,14 +169,23 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
 
-    const matches = cards.filter(card => {
+    const uniqueMatches = new Map();
+    cards.forEach(card => {
       const haystack = norm(
         (card.dataset.search || '') + ' ' +
         (card.dataset.category || '') + ' ' +
         (card.textContent || '')
       );
-      return haystack.includes(q);
+      if (!haystack.includes(q)) return;
+
+      const href = card.getAttribute('href') || '';
+      const existing = uniqueMatches.get(href);
+      // Prefer the canonical category card over its duplicate in Popular tools.
+      if (!existing || (existing.classList.contains('popular') && !card.classList.contains('popular'))) {
+        uniqueMatches.set(href, card);
+      }
     });
+    const matches = Array.from(uniqueMatches.values());
 
     main.style.display = 'none';
     results.style.display = 'block';

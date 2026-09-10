@@ -30,7 +30,7 @@
 <label style="display:block;margin-top:10px"><input id="ngWebsocket" type="checkbox" style="width:auto"> Enable WebSocket proxy headers</label>
 <label style="display:block;margin-top:6px"><input id="ngHttpsRedirect" type="checkbox" style="width:auto"> Add HTTP → HTTPS redirect block</label>
 <button style="margin-top:10px" onclick="genNginx()">Generate config</button>
-<textarea id="ngOutput" readonly style="min-height:260px;margin-top:10px"></textarea>
+<textarea id="ngOutput" readonly style="min-height:260px;margin-top:10px"></textarea><div class="output-actions"><button class="secondary-btn" onclick="copyToolOutput('ngOutput', this)">Copy output</button></div>
 <div id="ngStatus" class="status">Ready.</div>
 
 </section>

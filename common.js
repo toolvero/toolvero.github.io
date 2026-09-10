@@ -44,3 +44,9 @@
     enhanceFooter();
   });
 })();
+
+async function copyToolOutput(targetId, button){
+  const el=document.getElementById(targetId); if(!el) return;
+  try{ await navigator.clipboard.writeText(el.value || el.textContent || ''); const old=button.textContent; button.textContent='Copied!'; setTimeout(()=>button.textContent=old,1400); }
+  catch(e){ el.focus(); if(el.select) el.select(); document.execCommand('copy'); const old=button.textContent; button.textContent='Copied!'; setTimeout(()=>button.textContent=old,1400); }
+}

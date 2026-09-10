@@ -29,7 +29,7 @@
 <div class="two-col" style="margin-top:10px"><div><label for="dzTtl">TTL</label><input id="dzTtl" value="3600"></div><div><label for="dzValue">Value</label><input id="dzValue" value="192.0.2.10"></div></div>
 <label for="dzPriority" id="dzPriorityLabel" style="display:none;margin-top:10px">MX priority</label><input id="dzPriority" value="10" style="display:none">
 <button style="margin-top:10px" onclick="genDns()">Generate record</button>
-<textarea id="dzOutput" readonly style="min-height:120px;margin-top:10px"></textarea>
+<textarea id="dzOutput" readonly style="min-height:120px;margin-top:10px"></textarea><div class="output-actions"><button class="secondary-btn" onclick="copyToolOutput('dzOutput', this)">Copy output</button></div>
 <div id="dzStatus" class="status">Ready.</div>
 
 </section>

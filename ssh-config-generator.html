@@ -31,7 +31,7 @@
 <label for="sshJump" style="display:block;margin-top:10px">ProxyJump (optional)</label><input id="sshJump" placeholder="bastion">
 <label for="sshAlive" style="display:block;margin-top:10px">ServerAliveInterval</label><input id="sshAlive" value="60">
 <button style="margin-top:10px" onclick="genSsh()">Generate SSH config</button>
-<textarea id="sshOutput" readonly style="min-height:220px;margin-top:10px"></textarea>
+<textarea id="sshOutput" readonly style="min-height:220px;margin-top:10px"></textarea><div class="output-actions"><button class="secondary-btn" onclick="copyToolOutput('sshOutput', this)">Copy output</button></div>
 <div id="sshStatus" class="status">Ready.</div>
 
 </section>

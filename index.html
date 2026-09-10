@@ -51,7 +51,7 @@
   <div class="search-box">
     <span class="search-icon">⌕</span>
     <input id="toolSearch" type="search" placeholder="Search tools — e.g. cron, SSL, JSON, subnet...">
-    <span id="searchCount" class="search-count">37 tools</span>
+    <span id="searchCount" class="search-count">41 tools</span>
   </div>
 <div id="searchResults" class="search-results" style="display:none">
   <div id="searchResultsGrid" class="grid"></div>
@@ -129,12 +129,16 @@
 <a class="card tool-item" data-category="automation" data-search="systemd service generator unit linux execstart" href="systemd-service-generator.html"><div class="icon">⚙️</div><h3>systemd Service Generator</h3><p>Build a basic Linux systemd service unit.</p><span class="tag">Automation</span></a>
 <a class="card tool-item" data-category="automation" data-search="ssh config generator host hostname user identityfile proxyjump" href="ssh-config-generator.html"><div class="icon">🔐</div><h3>SSH Config Generator</h3><p>Generate reusable SSH client Host blocks.</p><span class="tag">Automation</span></a>
 
+<a class="card tool-item" data-category="developer" data-search="kubernetes yaml generator deployment service manifest resources" href="kubernetes-yaml-generator.html"><div class="icon">☸</div><h3>Kubernetes YAML Generator</h3><p>Generate a Deployment and optional Service.</p><span class="tag">Developer</span></a>
+<a class="card tool-item" data-category="developer" data-search="kubernetes resource calculator cpu memory requests limits replicas" href="kubernetes-resource-calculator.html"><div class="icon">📊</div><h3>Kubernetes Resource Calculator</h3><p>Calculate workload CPU and memory totals.</p><span class="tag">Developer</span></a>
+<a class="card tool-item" data-category="automation" data-search="linux find command generator files mtime size delete" href="linux-find-generator.html"><div class="icon">🔎</div><h3>Linux find Generator</h3><p>Build common find commands safely.</p><span class="tag">Automation</span></a>
+<a class="card tool-item" data-category="automation" data-search="rsync command generator ssh backup sync dry run delete" href="rsync-command-generator.html"><div class="icon">⇆</div><h3>rsync Command Generator</h3><p>Build rsync commands with safe common options.</p><span class="tag">Automation</span></a>
 </div>
 
   
 <section class="home-guides">
   <div class="section-title-row"><h2>Technical Guides</h2><a href="guides.html">View all guides →</a></div>
-  <div class="guide-grid"><a class="guide-card" href="guide-cidr-explained.html"><span class="kicker">NETWORKING</span><h2>CIDR Explained</h2><p>/24, /16, subnet masks, network boundaries and usable hosts.</p></a><a class="guide-card" href="guide-linux-chmod.html"><span class="kicker">LINUX</span><h2>Linux chmod Explained</h2><p>755, 644, rwx notation and practical file permissions.</p></a><a class="guide-card" href="guide-ssl-certificates.html"><span class="kicker">SECURITY</span><h2>SSL/TLS Certificates Explained</h2><p>CSR, X.509, SAN, expiration and certificate chains.</p></a><a class="guide-card" href="guide-dns-records.html"><span class="kicker">NETWORKING</span><h2>DNS Records Explained</h2><p>A, AAAA, CNAME, MX, TXT, NS, TTL and troubleshooting.</p></a><a class="guide-card" href="guide-http-security-headers.html"><span class="kicker">SECURITY</span><h2>HTTP Security Headers Explained</h2><p>CSP, HSTS and common browser security headers.</p></a><a class="guide-card" href="guide-kubernetes-resources.html"><span class="kicker">DEVOPS</span><h2>Kubernetes Resources Explained</h2><p>CPU, millicores, Mi, Gi, requests and limits.</p></a></div>
+  <div class="guide-grid"><a class="guide-card" href="guide-cidr-explained.html"><span class="kicker">NETWORKING</span><h2>CIDR Explained</h2><p>/24, /16, subnet masks, network boundaries and usable hosts.</p></a><a class="guide-card" href="guide-linux-chmod.html"><span class="kicker">LINUX</span><h2>Linux chmod Explained</h2><p>755, 644, rwx notation and practical file permissions.</p></a><a class="guide-card" href="guide-ssl-certificates.html"><span class="kicker">SECURITY</span><h2>SSL/TLS Certificates Explained</h2><p>CSR, X.509, SAN, expiration and certificate chains.</p></a><a class="guide-card" href="guide-dns-records.html"><span class="kicker">NETWORKING</span><h2>DNS Records Explained</h2><p>A, AAAA, CNAME, MX, TXT, NS, TTL and troubleshooting.</p></a><a class="guide-card" href="guide-http-security-headers.html"><span class="kicker">SECURITY</span><h2>HTTP Security Headers Explained</h2><p>CSP, HSTS and common browser security headers.</p></a><a class="guide-card" href="guide-kubernetes-resources.html"><span class="kicker">DEVOPS</span><h2>Kubernetes Resources Explained</h2><p>CPU, millicores, Mi, Gi, requests and limits.</p></a><a class="guide-card" href="guide-kubernetes-requests-limits.html"><span class="kicker">DEVOPS</span><h2>Kubernetes Requests vs Limits</h2><p>Scheduling, capacity and runtime behavior explained.</p></a><a class="guide-card" href="guide-linux-find.html"><span class="kicker">LINUX</span><h2>Linux find Examples</h2><p>Names, age, size and safe cleanup workflows.</p></a></div>
 </section>
 
 <div class="seo-copy">
@@ -172,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function () {
       results.style.display = 'none';
       resultsGrid.innerHTML = '';
       main.style.display = '';
-      if (countEl) countEl.textContent = '37 tools';
+      if (countEl) countEl.textContent = '41 tools';
       return;
     }
 

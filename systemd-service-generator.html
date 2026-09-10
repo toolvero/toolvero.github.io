@@ -32,7 +32,7 @@
 <div class="two-col" style="margin-top:10px"><div><label for="sdRestart">Restart</label><select id="sdRestart"><option>on-failure</option><option>always</option><option>no</option></select></div><div><label for="sdWanted">WantedBy</label><input id="sdWanted" value="multi-user.target"></div></div>
 <label for="sdEnv" style="display:block;margin-top:10px">Environment (KEY=value, one per line)</label><textarea id="sdEnv">APP_ENV=production</textarea>
 <button onclick="genSystemd()">Generate service unit</button>
-<textarea id="sdOutput" readonly style="min-height:300px;margin-top:10px"></textarea>
+<textarea id="sdOutput" readonly style="min-height:300px;margin-top:10px"></textarea><div class="output-actions"><button class="secondary-btn" onclick="copyToolOutput('sdOutput', this)">Copy output</button></div>
 <div id="sdStatus" class="status">Ready.</div>
 
 </section>

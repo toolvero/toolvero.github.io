@@ -9,7 +9,7 @@
 <h2>CPU units</h2><p>Kubernetes CPU is measured in CPU units. <code>1</code> represents one CPU core (or equivalent virtual CPU scheduling capacity), while <code>500m</code> means 500 millicores, or 0.5 CPU.</p>
 <table><tr><th>Value</th><th>Equivalent</th></tr><tr><td>100m</td><td>0.1 CPU</td></tr><tr><td>250m</td><td>0.25 CPU</td></tr><tr><td>500m</td><td>0.5 CPU</td></tr><tr><td>1000m</td><td>1 CPU</td></tr></table>
 <h2>Memory units</h2><p>Memory values commonly use binary units such as <code>Mi</code> and <code>Gi</code>. For example, <code>512Mi</code> is half of <code>1Gi</code>.</p>
-<div class="guide-tools"><a href="kubernetes-resource-converter.html">Kubernetes Resource Converter</a><a href="yaml-json-converter.html">YAML ↔ JSON</a><a href="docker-compose-validator.html">Compose Validator</a></div>
+<div class="guide-tools"><a href="kubernetes-resource-calculator.html">Kubernetes Resource Calculator</a><a href="kubernetes-yaml-generator.html">Kubernetes YAML Generator</a><a href="guide-kubernetes-requests-limits.html">Requests vs Limits Guide</a><a href="kubernetes-resource-converter.html">Kubernetes Resource Converter</a><a href="yaml-json-converter.html">YAML ↔ JSON</a><a href="docker-compose-validator.html">Compose Validator</a></div>
 <h2>Requests vs limits</h2><p>A request is used by the scheduler when placing a Pod and represents the resource amount requested for scheduling. A limit constrains resource usage according to Kubernetes and runtime behavior. CPU and memory react differently when limits are exceeded, so they should not be treated as interchangeable controls.</p>
 <h2>Example</h2><pre><code>resources:
   requests:

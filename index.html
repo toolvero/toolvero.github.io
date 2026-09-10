@@ -51,7 +51,7 @@
   <div class="search-box">
     <span class="search-icon">⌕</span>
     <input id="toolSearch" type="search" placeholder="Search tools — e.g. cron, SSL, JSON, subnet...">
-    <span id="searchCount" class="search-count">32 tools</span>
+    <span id="searchCount" class="search-count">37 tools</span>
   </div>
 <div id="searchResults" class="search-results" style="display:none">
   <div id="searchResultsGrid" class="grid"></div>
@@ -122,6 +122,13 @@
 <a class="card tool-item" data-category="developer" data-search="json csv converter data" href="json-csv-converter.html"><div class="icon">⇄</div><h3>JSON ↔ CSV</h3><p>Convert flat JSON arrays and CSV tables locally.</p><span class="tag">Developer</span></a>
 <a class="card tool-item" data-category="developer" data-search="docker compose yaml validator" href="docker-compose-validator.html"><div class="icon">🐳</div><h3>Docker Compose Validator</h3><p>Run a lightweight structural check on Compose YAML.</p><span class="tag">Developer</span></a>
 
+
+<a class="card tool-item" data-category="developer" data-search="nginx reverse proxy generator server block websocket" href="nginx-reverse-proxy-generator.html"><div class="icon">🟩</div><h3>Nginx Reverse Proxy Generator</h3><p>Generate a basic Nginx reverse proxy server block.</p><span class="tag">Developer</span></a>
+<a class="card tool-item" data-category="developer" data-search="docker compose generator yaml container" href="docker-compose-generator.html"><div class="icon">🐳</div><h3>Docker Compose Generator</h3><p>Build Compose YAML from common container options.</p><span class="tag">Developer</span></a>
+<a class="card tool-item" data-category="networking" data-search="dns record generator zone a aaaa cname mx txt ns" href="dns-record-generator.html"><div class="icon">🧭</div><h3>DNS Record Generator</h3><p>Generate common zone-style DNS records.</p><span class="tag">Networking</span></a>
+<a class="card tool-item" data-category="automation" data-search="systemd service generator unit linux execstart" href="systemd-service-generator.html"><div class="icon">⚙️</div><h3>systemd Service Generator</h3><p>Build a basic Linux systemd service unit.</p><span class="tag">Automation</span></a>
+<a class="card tool-item" data-category="automation" data-search="ssh config generator host hostname user identityfile proxyjump" href="ssh-config-generator.html"><div class="icon">🔐</div><h3>SSH Config Generator</h3><p>Generate reusable SSH client Host blocks.</p><span class="tag">Automation</span></a>
+
 </div>
 
   
@@ -165,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function () {
       results.style.display = 'none';
       resultsGrid.innerHTML = '';
       main.style.display = '';
-      if (countEl) countEl.textContent = '32 tools';
+      if (countEl) countEl.textContent = '37 tools';
       return;
     }
 

@@ -37,6 +37,12 @@
     <loc>https://toolvero.github.io/dns-propagation-checker.html</loc>
   </url>
   <url>
+    <loc>https://toolvero.github.io/dns-record-generator.html</loc>
+  </url>
+  <url>
+    <loc>https://toolvero.github.io/docker-compose-generator.html</loc>
+  </url>
+  <url>
     <loc>https://toolvero.github.io/docker-compose-validator.html</loc>
   </url>
   <url>
@@ -106,6 +112,9 @@
     <loc>https://toolvero.github.io/networking.html</loc>
   </url>
   <url>
+    <loc>https://toolvero.github.io/nginx-reverse-proxy-generator.html</loc>
+  </url>
+  <url>
     <loc>https://toolvero.github.io/password-generator.html</loc>
   </url>
   <url>
@@ -124,10 +133,16 @@
     <loc>https://toolvero.github.io/sha256.html</loc>
   </url>
   <url>
+    <loc>https://toolvero.github.io/ssh-config-generator.html</loc>
+  </url>
+  <url>
     <loc>https://toolvero.github.io/ssl-tls-checker.html</loc>
   </url>
   <url>
     <loc>https://toolvero.github.io/subnet.html</loc>
+  </url>
+  <url>
+    <loc>https://toolvero.github.io/systemd-service-generator.html</loc>
   </url>
   <url>
     <loc>https://toolvero.github.io/timestamp.html</loc>

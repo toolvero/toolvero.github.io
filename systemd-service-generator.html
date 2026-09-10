@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>systemd Service Generator – Build .service Units | Toolvero</title>
+<meta name="description" content="Generate a basic systemd service unit with Description, After, User, WorkingDirectory, ExecStart, Restart, Environment and WantedBy.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://toolvero.github.io/systemd-service-generator.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="systemd Service Generator – Build .service Units | Toolvero">
+<meta property="og:description" content="Generate a basic systemd service unit with Description, After, User, WorkingDirectory, ExecStart, Restart, Environment and WantedBy.">
+<meta property="og:url" content="https://toolvero.github.io/systemd-service-generator.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script src="common.js"></script>
+</head>
+<body>
+<header class="site-header"><div class="container nav">
+<div class="brand-wrap"><a class="logo" href="index.html">T</a><a class="brand" href="index.html">Toolvero</a></div>
+<div class="nav-links"><a href="networking.html">Networking</a><a href="automation.html">Linux &amp; Automation</a><a href="security.html">Security</a><a href="developer.html">Developer</a><a href="guides.html">Guides</a><button id="themeToggle" class="theme-btn" onclick="toggleTheme()">🌙 Dark</button></div>
+</div></header>
+<div class="breadcrumb-bar"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span>›</span><a href="developer.html">Developer &amp; DevOps Tools</a><span>›</span><span>Tool</span></nav></div>
+<main class="tool-page">
+<a class="back" href="developer.html">← Back to Developer &amp; DevOps Tools</a>
+<section class="tool-card">
+<h1>systemd Service Generator</h1><p>Build a Linux systemd .service unit from common options.</p>
+
+<label for="sdDesc">Description</label><input id="sdDesc" value="Toolvero Example Service">
+<div class="two-col" style="margin-top:10px"><div><label for="sdUser">User</label><input id="sdUser" value="appuser"></div><div><label for="sdAfter">After</label><input id="sdAfter" value="network-online.target"></div></div>
+<label for="sdWork" style="display:block;margin-top:10px">WorkingDirectory</label><input id="sdWork" value="/opt/app">
+<label for="sdExec" style="display:block;margin-top:10px">ExecStart</label><input id="sdExec" value="/usr/bin/python3 /opt/app/app.py">
+<div class="two-col" style="margin-top:10px"><div><label for="sdRestart">Restart</label><select id="sdRestart"><option>on-failure</option><option>always</option><option>no</option></select></div><div><label for="sdWanted">WantedBy</label><input id="sdWanted" value="multi-user.target"></div></div>
+<label for="sdEnv" style="display:block;margin-top:10px">Environment (KEY=value, one per line)</label><textarea id="sdEnv">APP_ENV=production</textarea>
+<button onclick="genSystemd()">Generate service unit</button>
+<textarea id="sdOutput" readonly style="min-height:300px;margin-top:10px"></textarea>
+<div id="sdStatus" class="status">Ready.</div>
+
+</section>
+<section class="tool-seo">
+<h2>What does a systemd service unit define?</h2><p>A service unit describes how systemd should start and manage a process. The generated unit covers common fields but does not replace application-specific hardening, dependency design, permissions or security directives.</p>
+<h3>Common uses</h3><ul><li>Create a basic long-running service unit.</li><li>Add environment variables and restart behavior.</li><li>Generate a starting point for custom application services.</li></ul>
+<h3>Related Toolvero tools</h3><p class="related-tools"><a href="cron.html">Cron Generator</a> · <a href="permissions.html">Linux Permissions Calculator</a> · <a href="guide-linux-chmod.html">Linux chmod Guide</a></p>
+</section>
+</main>
+<footer><div class="container">Toolvero · Free tools for SysAdmins &amp; DevOps</div></footer>
+<script>
+function qsystemd(v){return '"' + String(v).replace(/\\/g,'\\\\').replace(/"/g,'\\"') + '"'}
+function genSystemd(){
+  if(!sdExec.value.trim()){sdStatus.textContent='Enter ExecStart.';return}
+  let out='[Unit]\nDescription='+sdDesc.value.trim()+'\nAfter='+sdAfter.value.trim()+'\n\n[Service]\nType=simple\n';
+  if(sdUser.value.trim()) out+='User='+sdUser.value.trim()+'\n';
+  if(sdWork.value.trim()) out+='WorkingDirectory='+sdWork.value.trim()+'\n';
+  out+='ExecStart='+sdExec.value.trim()+'\nRestart='+sdRestart.value+'\n';
+  sdEnv.value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean).forEach(x=>out+='Environment='+qsystemd(x)+'\n');
+  out+='\n[Install]\nWantedBy='+(sdWanted.value.trim()||'multi-user.target')+'\n';
+  sdOutput.value=out; sdStatus.textContent='systemd unit generated. Review paths, user and permissions before enabling.'; sdStatus.className='status success';
+} genSystemd();
+</script>
+</body></html>

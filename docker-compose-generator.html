@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Docker Compose Generator – Build Compose YAML | Toolvero</title>
+<meta name="description" content="Generate Docker Compose YAML from a simple form with image, ports, environment variables, volumes, restart policy and network.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://toolvero.github.io/docker-compose-generator.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Docker Compose Generator – Build Compose YAML | Toolvero">
+<meta property="og:description" content="Generate Docker Compose YAML from a simple form with image, ports, environment variables, volumes, restart policy and network.">
+<meta property="og:url" content="https://toolvero.github.io/docker-compose-generator.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script src="common.js"></script>
+</head>
+<body>
+<header class="site-header"><div class="container nav">
+<div class="brand-wrap"><a class="logo" href="index.html">T</a><a class="brand" href="index.html">Toolvero</a></div>
+<div class="nav-links"><a href="networking.html">Networking</a><a href="automation.html">Linux &amp; Automation</a><a href="security.html">Security</a><a href="developer.html">Developer</a><a href="guides.html">Guides</a><button id="themeToggle" class="theme-btn" onclick="toggleTheme()">🌙 Dark</button></div>
+</div></header>
+<div class="breadcrumb-bar"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span>›</span><a href="developer.html">Developer &amp; DevOps Tools</a><span>›</span><span>Tool</span></nav></div>
+<main class="tool-page">
+<a class="back" href="developer.html">← Back to Developer &amp; DevOps Tools</a>
+<section class="tool-card">
+<h1>Docker Compose Generator</h1><p>Create a Compose service without writing YAML from scratch.</p>
+
+<div class="two-col"><div><label for="dcService">Service name</label><input id="dcService" value="web"></div><div><label for="dcImage">Image</label><input id="dcImage" value="nginx:latest"></div></div>
+<label for="dcPorts" style="display:block;margin-top:10px">Ports (one per line)</label><textarea id="dcPorts">8080:80</textarea>
+<label for="dcEnv">Environment (KEY=value, one per line)</label><textarea id="dcEnv">APP_ENV=production</textarea>
+<label for="dcVolumes">Volumes (one per line)</label><textarea id="dcVolumes">./html:/usr/share/nginx/html:ro</textarea>
+<div class="two-col"><div><label for="dcRestart">Restart policy</label><select id="dcRestart"><option>unless-stopped</option><option>always</option><option>on-failure</option><option>no</option></select></div><div><label for="dcNetwork">Network (optional)</label><input id="dcNetwork" placeholder="frontend"></div></div>
+<button style="margin-top:10px" onclick="genCompose()">Generate Compose</button>
+<textarea id="dcOutput" readonly style="min-height:280px;margin-top:10px"></textarea>
+<div id="dcStatus" class="status">Ready.</div>
+
+</section>
+<section class="tool-seo">
+<h2>Why use a Docker Compose generator?</h2><p>A generator is useful for creating a clean starting point from common container options. Toolvero outputs modern Compose-style YAML without an obsolete version key, but you should still validate the result with Docker in the target environment.</p>
+<h3>Common uses</h3><ul><li>Create a single-service Compose file quickly.</li><li>Translate common container settings into YAML.</li><li>Use the result with Toolvero&#x27;s Compose validator before CLI validation.</li></ul>
+<h3>Related Toolvero tools</h3><p class="related-tools"><a href="docker-compose-validator.html">Docker Compose Validator</a> · <a href="docker-run-to-compose.html">Docker Run → Compose</a> · <a href="yaml-json-converter.html">YAML ↔ JSON Converter</a></p>
+</section>
+</main>
+<footer><div class="container">Toolvero · Free tools for SysAdmins &amp; DevOps</div></footer>
+<script>
+function yamlQuote(v){return '"' + String(v).replace(/\\/g,'\\\\').replace(/"/g,'\\"') + '"'}
+function lines(v){return v.split(/\r?\n/).map(x=>x.trim()).filter(Boolean)}
+function genCompose(){
+  const svc=dcService.value.trim(), img=dcImage.value.trim();
+  if(!svc||!img){dcStatus.textContent='Enter a service name and image.';return}
+  let out='services:\n  '+svc+':\n    image: '+yamlQuote(img)+'\n    restart: '+yamlQuote(dcRestart.value)+'\n';
+  const ports=lines(dcPorts.value), env=lines(dcEnv.value), vols=lines(dcVolumes.value), net=dcNetwork.value.trim();
+  if(ports.length){out+='    ports:\n'+ports.map(x=>'      - '+yamlQuote(x)).join('\n')+'\n'}
+  if(env.length){out+='    environment:\n'+env.map(x=>'      - '+yamlQuote(x)).join('\n')+'\n'}
+  if(vols.length){out+='    volumes:\n'+vols.map(x=>'      - '+yamlQuote(x)).join('\n')+'\n'}
+  if(net){out+='    networks:\n      - '+net+'\n\nnetworks:\n  '+net+': {}\n'}
+  dcOutput.value=out; dcStatus.textContent='Compose YAML generated.'; dcStatus.className='status success';
+} genCompose();
+</script>
+</body></html>

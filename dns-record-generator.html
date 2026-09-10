@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DNS Record Generator – A, AAAA, CNAME, MX, TXT &amp; NS | Toolvero</title>
+<meta name="description" content="Generate common DNS records in zone-file style notation including A, AAAA, CNAME, MX, TXT and NS.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://toolvero.github.io/dns-record-generator.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="DNS Record Generator – A, AAAA, CNAME, MX, TXT &amp; NS | Toolvero">
+<meta property="og:description" content="Generate common DNS records in zone-file style notation including A, AAAA, CNAME, MX, TXT and NS.">
+<meta property="og:url" content="https://toolvero.github.io/dns-record-generator.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script src="common.js"></script>
+</head>
+<body>
+<header class="site-header"><div class="container nav">
+<div class="brand-wrap"><a class="logo" href="index.html">T</a><a class="brand" href="index.html">Toolvero</a></div>
+<div class="nav-links"><a href="networking.html">Networking</a><a href="automation.html">Linux &amp; Automation</a><a href="security.html">Security</a><a href="developer.html">Developer</a><a href="guides.html">Guides</a><button id="themeToggle" class="theme-btn" onclick="toggleTheme()">🌙 Dark</button></div>
+</div></header>
+<div class="breadcrumb-bar"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span>›</span><a href="developer.html">Developer &amp; DevOps Tools</a><span>›</span><span>Tool</span></nav></div>
+<main class="tool-page">
+<a class="back" href="developer.html">← Back to Developer &amp; DevOps Tools</a>
+<section class="tool-card">
+<h1>DNS Record Generator</h1><p>Build a zone-style DNS record locally for documentation or configuration review.</p>
+
+<div class="two-col"><div><label for="dzName">Name</label><input id="dzName" value="www"></div><div><label for="dzType">Record type</label><select id="dzType" onchange="updateDnsHint()"><option>A</option><option>AAAA</option><option>CNAME</option><option>MX</option><option>TXT</option><option>NS</option></select></div></div>
+<div class="two-col" style="margin-top:10px"><div><label for="dzTtl">TTL</label><input id="dzTtl" value="3600"></div><div><label for="dzValue">Value</label><input id="dzValue" value="192.0.2.10"></div></div>
+<label for="dzPriority" id="dzPriorityLabel" style="display:none;margin-top:10px">MX priority</label><input id="dzPriority" value="10" style="display:none">
+<button style="margin-top:10px" onclick="genDns()">Generate record</button>
+<textarea id="dzOutput" readonly style="min-height:120px;margin-top:10px"></textarea>
+<div id="dzStatus" class="status">Ready.</div>
+
+</section>
+<section class="tool-seo">
+<h2>What does this DNS record generator output?</h2><p>It creates a single zone-file style record with name, TTL, class, type and value. DNS providers use different interfaces and may normalize names automatically, so treat this as portable reference syntax rather than a provider-specific configuration.</p>
+<h3>Common uses</h3><ul><li>Generate common A, AAAA and CNAME records.</li><li>Create MX records with preference values.</li><li>Draft TXT or NS records for documentation and review.</li></ul>
+<h3>Related Toolvero tools</h3><p class="related-tools"><a href="dns-lookup.html">DNS Lookup</a> · <a href="dns-propagation-checker.html">DNS Propagation Checker</a> · <a href="guide-dns-records.html">DNS Records Guide</a></p>
+</section>
+</main>
+<footer><div class="container">Toolvero · Free tools for SysAdmins &amp; DevOps</div></footer>
+<script>
+function updateDnsHint(){
+  const t=dzType.value;
+  dzPriority.style.display=dzPriorityLabel.style.display=t==='MX'?'block':'none';
+  const hints={A:'192.0.2.10',AAAA:'2001:db8::10',CNAME:'target.example.com.',MX:'mail.example.com.',TXT:'v=spf1 include:_spf.example.com ~all',NS:'ns1.example.com.'};
+  dzValue.value=hints[t]||'';
+}
+function qtxt(v){return '"' + String(v).replace(/\\/g,'\\\\').replace(/"/g,'\\"') + '"'}
+function genDns(){
+  let name=dzName.value.trim()||'@', ttl=dzTtl.value.trim()||'3600', type=dzType.value, value=dzValue.value.trim();
+  if(!value){dzStatus.textContent='Enter a record value.';return}
+  let rhs=value;
+  if(type==='TXT') rhs=qtxt(value);
+  if(type==='MX') rhs=(dzPriority.value.trim()||'10')+' '+value;
+  dzOutput.value=`${name}\t${ttl}\tIN\t${type}\t${rhs}`;
+  dzStatus.textContent='Zone-style record generated.'; dzStatus.className='status success';
+} genDns();
+</script>
+</body></html>

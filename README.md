@@ -1,27 +1,37 @@
-# Toolvero v2.2 — Category Architecture & Internal SEO
+# Toolvero v2.3 — DevOps Configuration Generators
 
-New category landing pages:
-- networking.html
-- security.html
-- developer.html
-- automation.html
+Built on stable v2.2.1.
 
-Also included:
-- category-aware breadcrumbs across all 32 tool pages;
-- breadcrumbs on all 6 technical guides;
-- top navigation linked to real category pages;
-- category links in the global footer;
-- CollectionPage structured data on category pages;
-- stable v2.1.1 homepage search preserved;
-- sitemap updated to 47 public URLs.
+## New tools
+1. Nginx Reverse Proxy Generator
+2. Docker Compose Generator
+3. DNS Record Generator
+4. systemd Service Generator
+5. SSH Config Generator
 
-Suggested commit:
-`Release Toolvero v2.2 - Category pages and internal SEO architecture`
+Tool count: 37
 
-Post-deploy tests:
-1. networking.html
-2. security.html
-3. subnet.html breadcrumb
-4. guide-cidr-explained.html breadcrumb
-5. homepage search `dns pro`
-6. sitemap.xml
+## Integration
+- Homepage updated to 37 tools.
+- Search index includes all five new tools.
+- Networking category now includes DNS Record Generator.
+- Developer & DevOps category now includes Nginx Reverse Proxy Generator and Docker Compose Generator.
+- Linux & Automation category now includes systemd Service Generator and SSH Config Generator.
+- Related internal links added from nearby existing tools.
+- Sitemap updated to 52 public URLs.
+
+## Suggested commit
+`Release Toolvero v2.3 - DevOps configuration generators`
+
+## Post-deploy tests
+- Search `nginx`
+- Search `compose generator`
+- Search `dns record`
+- Search `systemd`
+- Search `ssh config`
+- DNS Record Generator: A / www / 3600 / 192.0.2.10
+- Nginx Generator: app.example.com -> 127.0.0.1:3000
+- Docker Compose Generator: default sample
+- systemd Generator: default sample
+- SSH Config Generator: default sample
+- Confirm homepage shows 37 tools

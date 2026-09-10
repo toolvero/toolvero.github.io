@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nginx Reverse Proxy Generator – Server Block Builder | Toolvero</title>
+<meta name="description" content="Generate a basic Nginx reverse proxy server block with common proxy headers, optional WebSocket support and HTTP-to-HTTPS redirect.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://toolvero.github.io/nginx-reverse-proxy-generator.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Nginx Reverse Proxy Generator – Server Block Builder | Toolvero">
+<meta property="og:description" content="Generate a basic Nginx reverse proxy server block with common proxy headers, optional WebSocket support and HTTP-to-HTTPS redirect.">
+<meta property="og:url" content="https://toolvero.github.io/nginx-reverse-proxy-generator.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script src="common.js"></script>
+</head>
+<body>
+<header class="site-header"><div class="container nav">
+<div class="brand-wrap"><a class="logo" href="index.html">T</a><a class="brand" href="index.html">Toolvero</a></div>
+<div class="nav-links"><a href="networking.html">Networking</a><a href="automation.html">Linux &amp; Automation</a><a href="security.html">Security</a><a href="developer.html">Developer</a><a href="guides.html">Guides</a><button id="themeToggle" class="theme-btn" onclick="toggleTheme()">🌙 Dark</button></div>
+</div></header>
+<div class="breadcrumb-bar"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span>›</span><a href="developer.html">Developer &amp; DevOps Tools</a><span>›</span><span>Tool</span></nav></div>
+<main class="tool-page">
+<a class="back" href="developer.html">← Back to Developer &amp; DevOps Tools</a>
+<section class="tool-card">
+<h1>Nginx Reverse Proxy Generator</h1><p>Build a practical Nginx reverse proxy configuration locally in your browser.</p>
+
+<div class="two-col"><div><label for="ngDomain">Server name</label><input id="ngDomain" value="app.example.com"></div><div><label for="ngBackend">Backend</label><input id="ngBackend" value="127.0.0.1:3000"></div></div>
+<div class="two-col" style="margin-top:10px"><div><label for="ngScheme">Backend scheme</label><select id="ngScheme"><option>http</option><option>https</option></select></div><div><label for="ngListen">Listen port</label><input id="ngListen" value="80"></div></div>
+<label style="display:block;margin-top:10px"><input id="ngWebsocket" type="checkbox" style="width:auto"> Enable WebSocket proxy headers</label>
+<label style="display:block;margin-top:6px"><input id="ngHttpsRedirect" type="checkbox" style="width:auto"> Add HTTP → HTTPS redirect block</label>
+<button style="margin-top:10px" onclick="genNginx()">Generate config</button>
+<textarea id="ngOutput" readonly style="min-height:260px;margin-top:10px"></textarea>
+<div id="ngStatus" class="status">Ready.</div>
+
+</section>
+<section class="tool-seo">
+<h2>What does this Nginx generator create?</h2><p>It creates a starting-point server block for a reverse proxy. The generated configuration includes common proxy headers and optional WebSocket handling. Production TLS, caching, timeouts, access controls and application-specific requirements still need review.</p>
+<h3>Common uses</h3><ul><li>Create a reverse proxy server block quickly.</li><li>Add common X-Forwarded-* and Host headers.</li><li>Generate a WebSocket-ready proxy configuration.</li></ul>
+<h3>Related Toolvero tools</h3><p class="related-tools"><a href="http-headers-checker.html">HTTP Security Headers</a> · <a href="ssl-tls-checker.html">SSL Expiry Checker</a> · <a href="http-status-codes.html">HTTP Status Codes</a></p>
+</section>
+</main>
+<footer><div class="container">Toolvero · Free tools for SysAdmins &amp; DevOps</div></footer>
+<script>
+function genNginx(){
+  const domain=ngDomain.value.trim(), backend=ngBackend.value.trim(), scheme=ngScheme.value, listen=ngListen.value.trim()||'80';
+  if(!domain||!backend){ngStatus.textContent='Enter a server name and backend.';return}
+  let out='';
+  if(ngHttpsRedirect.checked){
+    out += `server {\n    listen 80;\n    server_name ${domain};\n    return 301 https://$host$request_uri;\n}\n\n`;
+  }
+  out += `server {\n    listen ${listen};\n    server_name ${domain};\n\n    location / {\n        proxy_pass ${scheme}://${backend};\n        proxy_set_header Host $host;\n        proxy_set_header X-Real-IP $remote_addr;\n        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto $scheme;`;
+  if(ngWebsocket.checked) out += `\n        proxy_http_version 1.1;\n        proxy_set_header Upgrade $http_upgrade;\n        proxy_set_header Connection "upgrade";`;
+  out += `\n    }\n}\n`;
+  ngOutput.value=out; ngStatus.textContent='Config generated. Review before deployment.'; ngStatus.className='status success';
+} genNginx();
+</script>
+</body></html>

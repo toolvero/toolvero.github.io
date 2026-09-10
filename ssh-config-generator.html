@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SSH Config Generator – Build ~/.ssh/config Host Blocks | Toolvero</title>
+<meta name="description" content="Generate SSH client config Host blocks with HostName, User, Port, IdentityFile, ProxyJump and ServerAliveInterval.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://toolvero.github.io/ssh-config-generator.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SSH Config Generator – Build ~/.ssh/config Host Blocks | Toolvero">
+<meta property="og:description" content="Generate SSH client config Host blocks with HostName, User, Port, IdentityFile, ProxyJump and ServerAliveInterval.">
+<meta property="og:url" content="https://toolvero.github.io/ssh-config-generator.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<script src="common.js"></script>
+</head>
+<body>
+<header class="site-header"><div class="container nav">
+<div class="brand-wrap"><a class="logo" href="index.html">T</a><a class="brand" href="index.html">Toolvero</a></div>
+<div class="nav-links"><a href="networking.html">Networking</a><a href="automation.html">Linux &amp; Automation</a><a href="security.html">Security</a><a href="developer.html">Developer</a><a href="guides.html">Guides</a><button id="themeToggle" class="theme-btn" onclick="toggleTheme()">🌙 Dark</button></div>
+</div></header>
+<div class="breadcrumb-bar"><nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span>›</span><a href="developer.html">Developer &amp; DevOps Tools</a><span>›</span><span>Tool</span></nav></div>
+<main class="tool-page">
+<a class="back" href="developer.html">← Back to Developer &amp; DevOps Tools</a>
+<section class="tool-card">
+<h1>SSH Config Generator</h1><p>Create a reusable SSH client configuration block locally.</p>
+
+<div class="two-col"><div><label for="sshAlias">Host alias</label><input id="sshAlias" value="prod-web"></div><div><label for="sshHost">HostName</label><input id="sshHost" value="203.0.113.10"></div></div>
+<div class="two-col" style="margin-top:10px"><div><label for="sshUser">User</label><input id="sshUser" value="admin"></div><div><label for="sshPort">Port</label><input id="sshPort" value="22"></div></div>
+<label for="sshKey" style="display:block;margin-top:10px">IdentityFile</label><input id="sshKey" value="~/.ssh/id_ed25519">
+<label for="sshJump" style="display:block;margin-top:10px">ProxyJump (optional)</label><input id="sshJump" placeholder="bastion">
+<label for="sshAlive" style="display:block;margin-top:10px">ServerAliveInterval</label><input id="sshAlive" value="60">
+<button style="margin-top:10px" onclick="genSsh()">Generate SSH config</button>
+<textarea id="sshOutput" readonly style="min-height:220px;margin-top:10px"></textarea>
+<div id="sshStatus" class="status">Ready.</div>
+
+</section>
+<section class="tool-seo">
+<h2>Why use an SSH config file?</h2><p>An SSH client config lets you replace long connection commands with memorable host aliases and reusable settings. It is especially useful when different systems require different users, keys, ports or bastion hosts.</p>
+<h3>Common uses</h3><ul><li>Create short aliases for frequently used servers.</li><li>Configure a specific identity key or non-default port.</li><li>Add ProxyJump for bastion-host workflows.</li></ul>
+<h3>Related Toolvero tools</h3><p class="related-tools"><a href="permissions.html">Linux Permissions Calculator</a> · <a href="systemd-service-generator.html">systemd Service Generator</a> · <a href="cron.html">Cron Generator</a></p>
+</section>
+</main>
+<footer><div class="container">Toolvero · Free tools for SysAdmins &amp; DevOps</div></footer>
+<script>
+function genSsh(){
+  if(!sshAlias.value.trim()||!sshHost.value.trim()){sshStatus.textContent='Enter a Host alias and HostName.';return}
+  let out='Host '+sshAlias.value.trim()+'\n    HostName '+sshHost.value.trim()+'\n';
+  if(sshUser.value.trim()) out+='    User '+sshUser.value.trim()+'\n';
+  if(sshPort.value.trim()) out+='    Port '+sshPort.value.trim()+'\n';
+  if(sshKey.value.trim()) out+='    IdentityFile '+sshKey.value.trim()+'\n';
+  if(sshJump.value.trim()) out+='    ProxyJump '+sshJump.value.trim()+'\n';
+  if(sshAlive.value.trim()) out+='    ServerAliveInterval '+sshAlive.value.trim()+'\n';
+  sshOutput.value=out; sshStatus.textContent='SSH config block generated.'; sshStatus.className='status success';
+} genSsh();
+</script>
+</body></html>
